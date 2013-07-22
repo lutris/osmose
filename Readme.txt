@@ -46,6 +46,10 @@ Dependancies to recompile:
 For Ubuntu / Debian:
 sudo apt-get install qt4-qmake libqt4-dev libasound2-dev
 
+For Fedora:
+
+sudo yum install qt-devel
+
 To build osmose, do from the source directory:
 ----------------
 qmake
