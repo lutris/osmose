@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
+ *
  *
  * File : OsmoseGUI.h
  *
@@ -56,27 +56,28 @@
 class OsmoseGUI : public QMainWindow, JoystickListener
 {
 	Q_OBJECT;
-	
+
 public:
 	OsmoseGUI(QWidget * parent = 0, Qt::WindowFlags flags = 0);
 	~OsmoseGUI();
-	
+
 	/* JoystickListener interface */
 	void buttonChanged(unsigned int button, bool pressed); /* True when pressed */
     void xAxisChanged(int value);
 	void yAxisChanged(int value);
 	void joystickError();
+	void loadTheROM(QString name);
 
 protected:
-	void closeEvent(QCloseEvent * );	
+	void closeEvent(QCloseEvent * );
 	void dropEvent(QDropEvent *e);
 	void dragEnterEvent(QDragEnterEvent *event);
-	
+
 protected slots:
-	void sizeX1(); 
-	void sizeX2(); 
-	void sizeX3(); 
-	void sizeX4(); 
+	void sizeX1();
+	void sizeX2();
+	void sizeX3();
+	void sizeX4();
 	void sizeX5();
 	void fullscreen();
 	void loadROM();
@@ -106,7 +107,7 @@ protected slots:
 	void setEuropean();
 	void toggleIrqHack();
 	void showLogWindow();
-	
+
 private:
 	bool paused;
 	QGLImage *glImage;
@@ -117,19 +118,18 @@ private:
 	QAction *ntscQAction;
 	QAction *palQAction;
 	QAction *japaneseQAction;
-	QAction *europeanQAction;	
+	QAction *europeanQAction;
 	QAction *codemasterMapperQAction;
 	QAction *segaMapperQAction;
 	QAction *koreanMapperQAction;
 	QAction *irqHackQAction;
-	
+
 	OsmoseConfigurationFile *configuration;
-	OsmoseCore *osmoseCore;	
+	OsmoseCore *osmoseCore;
 	int saveStateSlot;
 	pthread_mutex_t osmose_core_mutex;	// OsmoseCore access mutex.
-	
+
 	void updateMachineMenu();
-	void loadTheROM(QString name);
 	bool isFullscreen;
 	Joystick *js0;
 };
