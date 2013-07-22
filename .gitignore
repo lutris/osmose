@@ -1,0 +1,5 @@
+*.o
+moc_*.cpp
+ui_Configuration.h
+ui_LogWindow.h
+Osmose-0-9-96-QT
