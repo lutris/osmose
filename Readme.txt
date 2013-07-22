@@ -43,6 +43,9 @@ Dependancies to recompile:
 -QT 4.6 qqchose Qt-dev
 -Alsa libasound-dev
 
+For Ubuntu / Debian:
+sudo apt-get install qt4-qmake libqt4-dev libasound2-dev
+
 To build osmose, do from the source directory:
 ----------------
 qmake
@@ -61,7 +64,7 @@ Synchronisation is a matter of choice : High frames per second or Synchronisatio
 On my Ubuntu, the closed source driver provide an option in the tab performance:
 "Sync to VBlank". When selected the rendering is stable, without flickering. The
 CPU usage is a bit higher. Without this option, the Osmose rendering is sometime
-teared but uses lower CPU. I suppose that this option is available on all the 
+teared but uses lower CPU. I suppose that this option is available on all the
 drivers. Make your choice !
 
 
@@ -98,11 +101,11 @@ deeply tested.
 ____________________________________________________________________________________
 
 
-  |                                 |                                       _|       
-  __ \    __| _  /      _` |   __|  __|   _ \   __|  _ \   __ \    _ \     |     __| 
-  |   |  (      /      (   | \__ \  |     __/  |    (   |  |   |   __/     __|  |    
- _.__/  \___| ___| _) \__,_| ____/ \__| \___| _|   \___/   .__/  \___| _) _|   _|    
-                                                          _|                         
+  |                                 |                                       _|
+  __ \    __| _  /      _` |   __|  __|   _ \   __|  _ \   __ \    _ \     |     __|
+  |   |  (      /      (   | \__ \  |     __/  |    (   |  |   |   __/     __|  |
+ _.__/  \___| ___| _) \__,_| ____/ \__| \___| _|   \___/   .__/  \___| _) _|   _|
+                                                          _|
 ____________________________________________________________________________________
 
             This file has been downloaded from : http://bcz.asterope.fr/
