@@ -1,0 +1,4 @@
+-Handle sport paddle device !
+-Fix input problem when loading a rom, after game that uses sport paddle input device.
+-HTML doc, including screenshots.
+
