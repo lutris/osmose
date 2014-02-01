@@ -510,6 +510,7 @@ void OsmoseGUI::loadTheROM(QString filename)
 
 		QLogWindow::getInstance()->addSeparator();
 		QLogWindow::getInstance()->appendLog("Trying to load new ROM.");
+		QLogWindow::getInstance()->appendLog(rom_name);
 
 
 		// Build new Emulation thread.
