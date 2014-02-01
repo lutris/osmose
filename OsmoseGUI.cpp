@@ -901,21 +901,15 @@ void OsmoseGUI::buttonChanged(unsigned int button, bool pressed)
 
 void OsmoseGUI::xAxisChanged(int value)
 {
+    int sensitivity = 10000;
 	if (osmoseCore == NULL) return;
-	if (value == 0)
-	{
+	if (abs(value) < sensitivity) {
 		osmoseCore->P1RightChanged(false);
 		osmoseCore->P1LeftChanged(false);
-	}
-
-	if (value > 0)
-	{
+	} else if (value > sensitivity) {
 		osmoseCore->P1RightChanged(true);
 		osmoseCore->P1LeftChanged(false);
-	}
-
-	if (value < 0)
-	{
+	} else if (value < sensitivity * -1) {
 		osmoseCore->P1RightChanged(false);
 		osmoseCore->P1LeftChanged(true);
 	}
@@ -923,21 +917,15 @@ void OsmoseGUI::xAxisChanged(int value)
 
 void OsmoseGUI::yAxisChanged(int value)
 {
+    int sensitivity = 10000; // Duplicated from xAxisChanged
 	if (osmoseCore == NULL) return;
-	if (value == 0)
-	{
+	if (abs(value) < sensitivity) {
 		osmoseCore->P1UpChanged(false);
 		osmoseCore->P1DownChanged(false);
-	}
-
-	if (value > 0)
-	{
+	} else if (value > sensitivity) {
 		osmoseCore->P1UpChanged(false);
 		osmoseCore->P1DownChanged(true);
-	}
-
-	if (value < 0)
-	{
+	} else if (value < sensitivity * -1) {
 		osmoseCore->P1UpChanged(true);
 		osmoseCore->P1DownChanged(false);
 	}
