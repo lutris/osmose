@@ -34,5 +34,10 @@ int main(int argc, char *argv[])
         QString rom_file = argv[1];
         window.loadTheROM(rom_file);
     }
+    for (int i=0; i < argc; i++) {
+		if(QString(argv[i]) == "-fs" || QString(argv[i]) == "--fullscreen") {
+			window.fullscreen();
+		}
+    }
     return app.exec();
 }
