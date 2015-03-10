@@ -251,7 +251,6 @@ bool OsmoseCore::captureTiles()
     // Draw tiles there.
     for (int o=0; o<28;o++)
 	{
-		int tile = 0;
         for (int i=0; i<16;i++)
         {
             int tile = map_p;
@@ -261,7 +260,7 @@ bool OsmoseCore::captureTiles()
 	}
 	
 	/* Save the buffer. */
-	TGAWriter tgaFile((char *)oss.str().c_str(), 128, 224);
+    TGAWriter tgaFile(oss.str().c_str(), 128, 224);
 	if (tgaFile.isOk() == true)
 	{
 		for (int y=223; y>=0; y--)
@@ -350,7 +349,7 @@ bool OsmoseCore::captureScreen()
 	oss << configuration->getScreenshotPath() << "/" << game_name << "-" << screenshotNbr << ".tga";
 	screenshotNbr++;
 
-	TGAWriter tgaFile((char *)oss.str().c_str(), 256, 192);
+    TGAWriter tgaFile(oss.str().c_str(), 256, 192);
 	if (tgaFile.isOk() == true)
 	{
 		for (int y=191; y>=0; y--)
@@ -431,7 +430,7 @@ bool OsmoseCore::saveSaveState(int slot)
 
     save_state_name << configuration->getSaveStatePath() << "/" << mem->getROMName() << "_slot_" << slot <<".sta";
 
-    ofstream output_file((char *)save_state_name.str().c_str(), ios::out | ios::binary );
+    ofstream output_file(save_state_name.str().c_str(), ios::out | ios::binary );
     if (output_file.is_open() == false )
     {
 		string msg = "Cannot create save state file:" + save_state_name.str();
@@ -487,7 +486,7 @@ bool OsmoseCore::loadSaveState(int slot)
     ostringstream load_state_name;
     load_state_name << configuration->getSaveStatePath() << "/" << mem->getROMName() << "_slot_" << slot <<".sta";
 
-    ifstream input_file((char *)load_state_name.str().c_str(), ios::in | ios::binary);
+    ifstream input_file(load_state_name.str().c_str(), ios::in | ios::binary);
     if (input_file.is_open() == false )
     {
 		string msg = "Fail to load state from file : " + load_state_name.str();

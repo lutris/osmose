@@ -351,7 +351,7 @@ OsmoseGUI::OsmoseGUI(QWidget * parent, Qt::WindowFlags flags) : QMainWindow(pare
 	js0 = NULL;
 	try
 	{
-		js0 = new Joystick((char *)configuration->getJoystickDevice().c_str(), this);
+        js0 = new Joystick(configuration->getJoystickDevice().c_str(), this);
 		string msg = "Found Joystick :";
 		msg = msg + js0->getStrID();
 		QLogWindow::getInstance()->appendLog(msg);
@@ -685,7 +685,7 @@ void OsmoseGUI::selectSlot4()
 void OsmoseGUI::saveState()
 {
 	if (osmoseCore == NULL) return;
-	bool success = osmoseCore->saveSaveState(saveStateSlot);
+    osmoseCore->saveSaveState(saveStateSlot);
 }
 
 /**
@@ -693,7 +693,7 @@ void OsmoseGUI::saveState()
 void OsmoseGUI::loadState()
 {
 	if (osmoseCore == NULL) return;
-	bool success = osmoseCore->loadSaveState(saveStateSlot);
+    osmoseCore->loadSaveState(saveStateSlot);
 }
 
 /**
@@ -721,7 +721,7 @@ void OsmoseGUI::closeEvent(QCloseEvent * )
 void OsmoseGUI::saveVDPGFX()
 {
 	if (osmoseCore == NULL) return;
-	bool success = osmoseCore->captureTiles();
+    osmoseCore->captureTiles();
 }
 
 /**

@@ -95,7 +95,7 @@ int Thread::start(void *param)
 void *Thread::entryPoint(void *instance)
 {
 	Thread *myself = (Thread *)instance;
-	myself->run( myself->getArg());
+    return myself->run( myself->getArg());
 }
 
 /**

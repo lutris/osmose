@@ -32,7 +32,7 @@
 
 #include "TGAWriter.h"
 
-TGAWriter::TGAWriter(char *filename, int width, int height)
+TGAWriter::TGAWriter(const char *filename, int width, int height)
 {
 	/* Initialise TGA Header with the given informations.*/
 	header.identsize = 0;

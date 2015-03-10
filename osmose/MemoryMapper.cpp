@@ -764,7 +764,7 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
 
 	ostringstream oss;
 	oss << "Cartdrige contains " << (int)bank16Ko_nbr << " 16Ko banks.";
-	QLogWindow::getInstance()->appendLog((char *)oss.str().c_str());
+    QLogWindow::getInstance()->appendLog(oss.str().c_str());
     // Allocate RAM for the whole cartridge.
     if (rom_size < 65536)
     {
@@ -833,7 +833,7 @@ unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
 
 	ostringstream oss;
 	oss << "Cartdrige contains " << (int)bank16Ko_nbr << " 16Ko banks.";
-	QLogWindow::getInstance()->appendLog((char *)oss.str().c_str());
+    QLogWindow::getInstance()->appendLog(oss.str().c_str());
 	
     // Allocate RAM for the whole cartridge.
     if (rom_size < 65536)
@@ -877,7 +877,7 @@ void MemoryMapper::DisplayROMSize()
     {
         oss << "ROM size is " << rom_size << " bytes (" << ((rom_size * 8)/1024)<< " kbits).";
     }
-	QLogWindow::getInstance()->appendLog((char *)oss.str().c_str());
+    QLogWindow::getInstance()->appendLog(oss.str().c_str());
 }
 
 /*------------------------------------------------------------*/

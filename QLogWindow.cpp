@@ -43,7 +43,7 @@ QLogWindow *QLogWindow::getInstance(QWidget *parent)
 	return self;
 }
 
-void QLogWindow::appendLog(char *str)
+void QLogWindow::appendLog(const char *str)
 {
 	QString msg(str);
 	QString time = getTimePrefix();	

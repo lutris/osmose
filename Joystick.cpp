@@ -34,6 +34,8 @@
 
 #include <unistd.h>
 #include "Joystick.h"
+#include <sys/types.h>
+#include <unistd.h>
 
 /**
  * Constructor. Throw an exception in case of failure.
@@ -42,10 +44,8 @@
  * Param2 : The JoystickListener that will be notified with jostick events
  *
  */
-Joystick::Joystick(char *dev_name, JoystickListener *lstnr)
+Joystick::Joystick(const char *dev_name, JoystickListener *lstnr)
 {
-	mutex = PTHREAD_MUTEX_INITIALIZER;
-
     // Try to open the device.
     joystickFD = ::open(dev_name, O_RDONLY | O_NONBLOCK);
     if (joystickFD < 0)
@@ -119,7 +119,7 @@ bool Joystick::readDevice(struct js_event *jse)
 {
 	int bytes_read;
 
-	bytes_read = read(joystickFD, jse, sizeof(*jse));
+    bytes_read = ::read(joystickFD, jse, sizeof(*jse));
 
 	// Handle errors !!!
 	if (bytes_read == -1)

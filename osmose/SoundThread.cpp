@@ -61,6 +61,8 @@ SoundThread::~SoundThread()
  */
 void* SoundThread::run(void *p)
 {
+    (void)p;
+
 	SoundThreadState local_state_copy;
 
 	{
