@@ -3,8 +3,8 @@ QT += core gui opengl
 TARGET = osmose
 TEMPLATE = app
 
-DEPENDPATH += . cpu osmose unzip
-INCLUDEPATH += . cpu osmose unzip
+DEPENDPATH += . cpu core unzip
+INCLUDEPATH += . cpu core unzip
 
 LIBS += -lz -lasound
 
@@ -27,27 +27,27 @@ HEADERS += EmulationThread.h \
            WhiteNoiseEmulationThread.h \
            cpu/BasicTypes.h \
            cpu/Z80.h \
-           osmose/AnsiColorTerminal.h \
-           osmose/Bits.h \
-           osmose/DebugEventListener.h \
-           osmose/DebugEventThrower.h \
-           osmose/Definitions.h \
-           osmose/FIFOSoundBuffer.h \
-           osmose/IOMapper.h \
-           osmose/IOMapper_GG.h \
-           osmose/MemoryMapper.h \
-           osmose/Options.h \
-           osmose/OsmoseCore.h \
-           osmose/RomSpecificOption.h \
-           osmose/SaveState.h \
-           osmose/SmsDebugger.h \
-           osmose/SmsEnvironment.h \
-           osmose/SN76489.h \
-           osmose/SoundThread.h \
-           osmose/VDP.h \
-           osmose/VDP_GG.h \
-           osmose/Version.h \
-           osmose/WaveWriter.h \
+           core/AnsiColorTerminal.h \
+           core/Bits.h \
+           core/DebugEventListener.h \
+           core/DebugEventThrower.h \
+           core/Definitions.h \
+           core/FIFOSoundBuffer.h \
+           core/IOMapper.h \
+           core/IOMapper_GG.h \
+           core/MemoryMapper.h \
+           core/Options.h \
+           core/OsmoseCore.h \
+           core/RomSpecificOption.h \
+           core/SaveState.h \
+           core/SmsDebugger.h \
+           core/SmsEnvironment.h \
+           core/SN76489.h \
+           core/SoundThread.h \
+           core/VDP.h \
+           core/VDP_GG.h \
+           core/Version.h \
+           core/WaveWriter.h \
            unzip/crypt.h \
            unzip/ioapi.h \
            unzip/unzip.h
@@ -73,20 +73,20 @@ SOURCES += EmulationThread.cpp \
            cpu/Opc_fdcb.cpp \
            cpu/Opc_std.cpp \
            cpu/Z80.cpp \
-           osmose/DebugEventThrower.cpp \
-           osmose/FIFOSoundBuffer.cpp \
-           osmose/IOMapper.cpp \
-           osmose/IOMapper_GG.cpp \
-           osmose/MemoryMapper.cpp \
-           osmose/Options.cpp \
-           osmose/OsmoseCore.cpp \
-           osmose/RomSpecificOption.cpp \
-           osmose/SmsEnvironment.cpp \
-           osmose/SN76489.cpp \
-           osmose/SoundThread.cpp \
-           osmose/VDP.cpp \
-           osmose/VDP_GG.cpp \
-           osmose/WaveWriter.cpp \
+           core/DebugEventThrower.cpp \
+           core/FIFOSoundBuffer.cpp \
+           core/IOMapper.cpp \
+           core/IOMapper_GG.cpp \
+           core/MemoryMapper.cpp \
+           core/Options.cpp \
+           core/OsmoseCore.cpp \
+           core/RomSpecificOption.cpp \
+           core/SmsEnvironment.cpp \
+           core/SN76489.cpp \
+           core/SoundThread.cpp \
+           core/VDP.cpp \
+           core/VDP_GG.cpp \
+           core/WaveWriter.cpp \
            unzip/ioapi.c \
            unzip/unzip.c
 
