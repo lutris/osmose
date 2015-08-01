@@ -67,7 +67,7 @@ public:
 	void yAxisChanged(int value);
 	void joystickError();
 	void loadTheROM(QString name);
-	void fullscreen();
+    void toggleFullscreen();
 
 protected:
 	void closeEvent(QCloseEvent * );
@@ -80,6 +80,7 @@ protected slots:
 	void sizeX3();
 	void sizeX4();
 	void sizeX5();
+    void fullscreen();
 	void loadROM();
 	void pauseResumeEmulation();
 	void resetEmulation();

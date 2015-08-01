@@ -453,6 +453,11 @@ void OsmoseGUI::sizeX5()
  */
 void OsmoseGUI::fullscreen()
 {
+    toggleFullscreen();
+}
+
+void OsmoseGUI::toggleFullscreen()
+{
 	isFullscreen ^= 1;
 
 	if (isFullscreen)

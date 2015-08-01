@@ -30,14 +30,13 @@ int main(int argc, char *argv[])
     OsmoseGUI window;
     window.resize(512, 384 + MENU_HEIGHT);
     window.show();
-    if(argc > 1) {
-        QString rom_file = argv[1];
-        window.loadTheROM(rom_file);
-    }
-    for (int i=0; i < argc; i++) {
-		if(QString(argv[i]) == "-fs" || QString(argv[i]) == "--fullscreen") {
-			window.fullscreen();
-		}
+    for (int i=1; i < argc; i++) {
+		if(QString(argv[i]) == "-f" || QString(argv[i]) == "--fullscreen") {
+			window.toggleFullscreen();
+		} else {
+            QString rom_file = argv[i];
+            window.loadTheROM(rom_file);
+        }
     }
     return app.exec();
 }
