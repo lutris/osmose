@@ -55,6 +55,9 @@ To build osmose, do from the source directory:
 qmake
 make
 
+To build with the system's minizip library instead of the bundled unzip code,
+configure the build with: qmake CONFIG+=system-minizip
+
 
 Vertical synchronisation:
 -------------------------
