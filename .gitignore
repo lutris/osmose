@@ -3,3 +3,4 @@ moc_*.cpp
 ui_Configuration.h
 ui_LogWindow.h
 osmose
+Makefile
