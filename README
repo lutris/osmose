@@ -22,54 +22,55 @@ classes :-)
 What's new:
 -----------
 
-Osmose now owns a clean graphical user interface based on QT. QT was the first
-GUI lib powerfull enough to refresh display at 60hz. So no more SDL is used now.
+Osmose now owns a clean graphical user interface based on Qt. Qt was the first
+GUI lib powerful enough to refresh display at 60 Hz. So SDL is no longer used now.
 
--Switch sound system to use ALSA
--GUI development using QT.
--Rendering / Key mapping adapted to QTopenGL.
--Configuration system rewritten.
-
-
-Dependancies to run:
---------------------
--QT 4.6
--Alsa
+- Switch sound system to use ALSA.
+- GUI development using Qt.
+- Rendering / Key mapping adapted to QtOpenGL.
+- Configuration system rewritten.
 
 
-Dependancies to recompile:
---------------------------
+Dependencies:
+-------------
+- Qt 5.x or >= 4.6
+- Alsa
 
--QT 4.6 qqchose Qt-dev
--Alsa libasound-dev
+Development headers for these libraries are needed to compile from the source.
 
-For Ubuntu / Debian:
-sudo apt-get install qt4-qmake libqt4-dev libasound2-dev
+For Ubuntu/Debian (Qt5):
+    sudo apt-get install qt5-qmake qtbase5-dev libqt5opengl5-dev libasound2-dev
 
-For Fedora:
+For Fedora (Qt5):
+    sudo yum install qt5-qtbase-devel alsa-lib-devel
 
-sudo yum install qt-devel
+
+Compilation:
+------------
 
 To build osmose, do from the source directory:
-----------------
-qmake
-make
+    qmake
+    make
+
+To build with the system's minizip library instead of the bundled unzip code,
+configure the build with:
+    qmake CONFIG+=system-minizip
 
 
 Vertical synchronisation:
 -------------------------
 
 Osmose uses double buffering to avoid tearing image on the screen, but this does
-not guaranty that the rendering will be synchronized with the screen rendering.
+not guarantee that the rendering will be synchronized with the screen rendering.
 
-Keep in mind that Osmose uses openGL for rendering and filtering.
+Keep in mind that Osmose uses OpenGL for rendering and filtering.
 
-Synchronisation is a matter of choice : High frames per second or Synchronisation.
+Synchronisation is a matter of choice: High frames per second or Synchronisation.
 On my Ubuntu, the closed source driver provide an option in the tab performance:
 "Sync to VBlank". When selected the rendering is stable, without flickering. The
 CPU usage is a bit higher. Without this option, the Osmose rendering is sometime
 teared but uses lower CPU. I suppose that this option is available on all the
-drivers. Make your choice !
+drivers. Make your choice!
 
 
 Sound:
@@ -77,29 +78,29 @@ Sound:
 
 Osmose uses ALSA for the sound system. It has been reported that concurrent
 application using the sound channel can inhibit osmose sound rendering. So,
-avoid watching videos while playing with osmose !
+avoid watching videos while playing with Osmose!
 
 
 Features:
 --------
 
--SMS: Good compatibility. At this stage, the emulator can run* 96% of commercial
- games and public demos, except games that relies on codemaster mapper, which
- work  but does not have proper video mode emulated.
--Game Gear: Good compatibility. At this stage, the emulator can run 98.0%* of
- game gear ROMS.
--SN76489 Sound is supported.
--support. for .zip .sms  and .gg format.
--Video filters: bilinear or nearest neighbour (default)
--Pad(keyboard or joystick mapped) emulation.
--PAL/NTSC Timing.
--Japanese/Export console.
--In game Screenshots, GFX rip, sound shot.
--Configurable keyboard configuration.
--Joystick support, congigurable button assignement.
--Drag and drop your ROMS into the emulator window to run games.
+- SMS: Good compatibility. At this stage, the emulator can run* 96% of commercial
+  games and public demos, except games that relies on codemaster mapper, which
+  works but does not have proper video mode emulation.
+- Game Gear: Good compatibility. At this stage, the emulator can run 98.0%* of
+  Game Gear ROMs.
+- SN76489 Sound is supported.
+- Support for .zip, .sms and .gg format.
+- Video filters: bilinear or nearest neighbour (default).
+- Pad (keyboard or joystick mapped) emulation.
+- PAL/NTSC Timing.
+- Japanese/Export console.
+- In-game screenshots, GFX rip, sound shot.
+- Customisable keyboard configuration.
+- Joystick support, congigurable button assignement.
+- Drag and drop your ROMs into the emulator window to run games.
 
-*Due to the huge number of game gear/sms (around 1300) roms, games have not been
+* Due to the huge number of Game Gear/SMS ROMs (around 1300), games have not been
 deeply tested.
 
 ____________________________________________________________________________________
@@ -112,10 +113,8 @@ ________________________________________________________________________________
                                                           _|
 ____________________________________________________________________________________
 
-            This file has been downloaded from : http://bcz.asterope.fr/
+            This file has been downloaded from: http://bcz.asterope.fr/
 ____________________________________________________________________________________
 
-    Need more information or contact with author  : See contact page on the site
+    Need more information or contact with author: See contact page on the site
     or send an email to bruno@asterope.fr
-
-

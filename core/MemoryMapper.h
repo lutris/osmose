@@ -36,13 +36,18 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
-#include "unzip/unzip.h"
 #include "Options.h"
 #include "Definitions.h"
 #include "DebugEventThrower.h"
 #include "SaveState.h"
 #include "OsmoseConfigurationFile.h"
 #include "QLogWindow.h"
+
+#ifdef SYSTEM_MINIZIP
+#include <minizip/unzip.h>
+#else
+#include "unzip/unzip.h"
+#endif // SYSTEM_MINIZIP
 
 extern Options opt;
 

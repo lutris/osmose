@@ -3,10 +3,23 @@ QT += core gui opengl
 TARGET = osmose
 TEMPLATE = app
 
-DEPENDPATH += . cpu core unzip
-INCLUDEPATH += . cpu core unzip
+DEPENDPATH += . cpu core
+INCLUDEPATH += . cpu core
 
 LIBS += -lz -lasound
+
+system-minizip {
+    LIBS += -lminizip
+    DEFINES += SYSTEM_MINIZIP
+} else {
+    DEPENDPATH += unzip
+    INCLUDEPATH += unzip
+    HEADERS += unzip/crypt.h \
+               unzip/ioapi.h \
+               unzip/unzip.h
+    SOURCES += unzip/ioapi.c \
+               unzip/unzip.c
+}
 
 FLAGS = -Wall -Wextra -Wunused -Wcast-qual
 QMAKE_CXXFLAGS += -std=c++11 $$FLAGS
@@ -47,10 +60,7 @@ HEADERS += EmulationThread.h \
            core/VDP.h \
            core/VDP_GG.h \
            core/Version.h \
-           core/WaveWriter.h \
-           unzip/crypt.h \
-           unzip/ioapi.h \
-           unzip/unzip.h
+           core/WaveWriter.h
 
 SOURCES += EmulationThread.cpp \
            Joystick.cpp \
@@ -86,8 +96,6 @@ SOURCES += EmulationThread.cpp \
            core/SoundThread.cpp \
            core/VDP.cpp \
            core/VDP_GG.cpp \
-           core/WaveWriter.cpp \
-           unzip/ioapi.c \
-           unzip/unzip.c
+           core/WaveWriter.cpp
 
 FORMS += Configuration.ui LogWindow.ui
