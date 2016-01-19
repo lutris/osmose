@@ -21,8 +21,8 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-// These for definitions should be coherent !
-#define __OSMOSE_VERSION__ "OsmOse 0.9.96"
+// These four definitions should be coherent!
+#define __OSMOSE_VERSION__ "Osmose 0.9.96"
 #define MAJOR  0
 #define MIDDLE 9
 #define MINOR  96
