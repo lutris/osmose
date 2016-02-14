@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Osmose
+GenericName=Sega consoles emulator
+Comment=A Sega Master System/Game Gear emulator
+Exec=osmose
+Icon=osmose
+Terminal=false
+Type=Application
+Categories=Game;Emulator;
