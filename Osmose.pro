@@ -105,9 +105,14 @@ isEmpty(PREFIX) {
     PREFIX = /usr/local
 }
 
-target.path = $$PREFIX/games
+isEmpty(ICONDIR) {
+    ICONDIR = $$PREFIX/share/icons/hicolor/128x128/apps
+}
+DEFINES += ICONDIR=\\\"$$ICONDIR\\\"
 
-icon.path = $$PREFIX/share/icons/hicolor/128x128/apps/
+target.path = $$PREFIX/games/
+
+icon.path = $$ICONDIR/
 icon.files = osmose.png
 
 desktop.path = $$PREFIX/share/applications/
