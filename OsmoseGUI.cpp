@@ -44,6 +44,7 @@ OsmoseGUI::OsmoseGUI(QWidget * parent, Qt::WindowFlags flags) : QMainWindow(pare
 	osmose_core_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 	this->setWindowTitle(__OSMOSE_VERSION__);
+	this->setWindowIcon(QIcon(QString(ICONDIR) + "/osmose.png"));
 
 	QLogWindow::getInstance()->appendLog("Starting Osmose emulator.");
 

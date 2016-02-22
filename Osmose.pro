@@ -99,3 +99,23 @@ SOURCES += EmulationThread.cpp \
            emulator/WaveWriter.cpp
 
 FORMS += Configuration.ui LogWindow.ui
+
+# Installation
+isEmpty(PREFIX) {
+    PREFIX = /usr/local
+}
+
+isEmpty(ICONDIR) {
+    ICONDIR = $$PREFIX/share/icons/hicolor/128x128/apps
+}
+DEFINES += ICONDIR=\\\"$$ICONDIR\\\"
+
+target.path = $$PREFIX/games/
+
+icon.path = $$ICONDIR/
+icon.files = osmose.png
+
+desktop.path = $$PREFIX/share/applications/
+desktop.files = osmose.desktop
+
+INSTALLS += target icon desktop
