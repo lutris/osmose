@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 #ifndef VERSION_H
 #define VERSION_H
 
 // These four definitions should be coherent!
-#define __OSMOSE_VERSION__ "Osmose 0.9.96"
+#define __OSMOSE_VERSION__ "Osmose 0.9.97"
 #define MAJOR  0
 #define MIDDLE 9
-#define MINOR  96
+#define MINOR  97
 #endif
