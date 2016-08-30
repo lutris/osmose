@@ -22,7 +22,7 @@
  *
  * Description: This class implements Z80 cpu emulator. It's table driven, and all
  * opcodes are supported. Not that undocumented flags are not totaly supported.
- * In these files are defined almost all ALU, and Shift operations. Adress mode
+ * In these files are defined almost all ALU, and Shift operations. Address mode
  * getters and setters are define in Z80.h as statics methods.
  *
  * Author: Vedder Bruno

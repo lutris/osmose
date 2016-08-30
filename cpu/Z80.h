@@ -48,7 +48,7 @@
 #define     XF 0x08		/* Undoc flag 	*/
 #define     VF 0x04		/* Overflow 	*/
 #define     PF 0x04		/* Parity	*/
-#define     NF 0x02		/* Add substract*/
+#define     NF 0x02		/* Add subtract */
 #define     CF 0x01		/* Carry 	*/
 
 /* Save state data structure. */
@@ -89,7 +89,7 @@ class Z80Environment
             return 0xFF;
         }
 
-        /* 8 bits write operation adress, value. */
+        /* 8 bits write operation address, value. */
         virtual void wr8( u16 , u8 )
         {
         }
@@ -116,7 +116,7 @@ class Z80Environment
             return 0xFF;
         }
 
-        /* 8 bits write IO operation adress, value. */
+        /* 8 bits write IO operation address, value. */
         virtual void out( u16 , u8  )
         {
         }
@@ -145,7 +145,7 @@ class Z80 : public DebugEventThrower, public ImplementsSaveState
         u8 Rbit7;                   /* Use to store bit 7 of R  */
         u8 IM;                      /* Interrupt mode */
         u16 PC,IX,IY,SP;            /* PC,Stack, indexes registers. 	*/
-        u16 IXd, IYd;               /* Used for XY+d adressing mode. */
+        u16 IXd, IYd;               /* Used for XY+d addressing mode. */
         bool IFF1,IFF2;             /* NMI/IRQ interrupt flip flop. */
         bool cpuHalted;             /* CPU state vs Halt instruction.*/
         u32 cycleCount;             /* Increase when running CPU. 	 */
@@ -297,7 +297,7 @@ class Z80 : public DebugEventThrower, public ImplementsSaveState
             env.wr8(getHL(),val);    /* write u8 in (HL) */
         }
 
-        /* 8 bit read/write throught (IX+d) and (IY+d). Warning: PC is not incremented !  */
+        /* 8 bit read/write through (IX+d) and (IY+d). Warning: PC is not incremented! */
         u8    getIXdi()
         {
             return env.rd8((u16)(IX + (s8)env.rd8(PC)));

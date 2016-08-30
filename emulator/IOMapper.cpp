@@ -217,7 +217,7 @@ void IOMapper::out8(unsigned port, unsigned char value)
         }
     }
 #ifdef VDP_VERBOSE
-    cout << "Unkown port "<< hex << setw(2) << setfill('0') << (int)port << " written with value " << hex << setw(2) << setfill('0') << (int)value << endl;
+    cout << "Unknown port "<< hex << setw(2) << setfill('0') << (int)port << " written with value " << hex << setw(2) << setfill('0') << (int)value << endl;
 #endif
 
 }
@@ -244,14 +244,14 @@ unsigned char IOMapper::in8(unsigned port)
         if (port & BIT0) 	// Read H counter port.
         {
 //#ifdef VDP_VERBOSE
-            cout << "NOT IMPLEMENTED: VDP port H COUTNER 0x7F read."<< endl;
+            cout << "NOT IMPLEMENTED: VDP port H COUNTER 0x7F read."<< endl;
 //#endif
             return 0xFF;
         }
         else 			// Read on VDP Vertical counter
         {
 #ifdef VDP_VERBOSE
-            cout << "VDP, port V COUTNER 0x7E read."<< endl;
+            cout << "VDP, port V COUNTER 0x7E read."<< endl;
 #endif
             return vdp.v_counter;
         }
@@ -306,5 +306,5 @@ unsigned char IOMapper::in8(unsigned port)
         }
         return portPAD1;
     }
-    cout << "Unkown port "<< hex << setw(2) << setfill('0') << (int)port << " read."<< endl;
+    cout << "Unknown port "<< hex << setw(2) << setfill('0') << (int)port << " read."<< endl;
 }

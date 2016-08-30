@@ -32,7 +32,7 @@
 #include "Bits.h"
 //#include <stdio.h>
 
-/* Values ripped from MEKA. They've been controled against a real SMS.*/
+/* Values ripped from MEKA. They've been controlled against a real SMS.*/
 const u16 SN76489::volume_table[16] = {892*5, 892*5, 892*5, 760*5, 623*5, 497*5, 404*5, 323*5, 257*5, 198*5, 159*5, 123*5,  96*5,  75*5,  60*5, 0};
 
 #define MAX_OUTPUT 0x7FFF
@@ -70,7 +70,7 @@ void SN76489::writePort(u8 value)
         }
         else
         {
-            /* Like said in Maxim's doc, immediatly update tone registers.*/
+            /* Like said in Maxim's doc, immediately update tone registers.*/
             freqDiv_[channel] = (freqDiv_[channel] & 0x3F0) | (value & 0xF);
 
             /*
@@ -146,7 +146,7 @@ void SN76489::writePort(u8 value)
 
 
 /*-------------------------------------------------------------*/
-/* This method resets the PSG to it's intial values            */
+/* This method resets the PSG to it's initial values            */
 /*-------------------------------------------------------------*/
 void SN76489::reset()
 {

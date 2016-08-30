@@ -39,7 +39,7 @@
  * Tiny utility class to benefit from C++ auto destruction of objects.
  * Creating a LOCAL Mutex object will lock the mutex. Leaving the method
  * will destroy the object automatically and free the mutex. So in order
- * to get a method thread safe, simply add at the begining :
+ * to get a method thread safe, simply add at the beginning:
  * MutexLocker(the_mutex);
  */
 class MutexLocker

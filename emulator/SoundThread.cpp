@@ -84,7 +84,7 @@ void* SoundThread::run(void *p)
 				struct timespec rqtp;
 				rqtp.tv_sec = 0;
 				rqtp.tv_nsec = 1000000; // 1 millisecond.
-				nanosleep(&rqtp, NULL);	// NULL = dont care about remaining time if interrupted.
+				nanosleep(&rqtp, NULL);	// NULL = don't care about remaining time if interrupted.
 			break;
 
 			default:

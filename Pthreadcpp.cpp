@@ -89,7 +89,7 @@ int Thread::start(void *param)
 /**
  * This static method is here because pthread_create cannot take member function
  * as start_routine, except if it's static. So we made a private static that can
- * only be called by non static member start(). EntryPoint method recieved a this
+ * only be called by non static member start(). EntryPoint method received a this
  * pointer, and use it to call the runnable run() method.
  */
 void *Thread::entryPoint(void *instance)
