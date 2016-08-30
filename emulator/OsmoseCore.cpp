@@ -118,7 +118,7 @@ OsmoseCore::OsmoseCore(const char *rom_f,  unsigned int *output, OsmoseConfigura
 		catch(string error)
 		{
 			QLogWindow::getInstance()->appendLog(error);
-			QLogWindow::getInstance()->appendLog("Sound disabled. Sound recording wont work.");
+			QLogWindow::getInstance()->appendLog("Sound disabled. Sound recording won't work.");
 			sndThread = NULL;
 			emu_opt.sound = false;
 		}
