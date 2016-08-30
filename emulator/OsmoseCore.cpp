@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@
  *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #include "OsmoseCore.h"
 
 
@@ -111,7 +111,7 @@ OsmoseCore::OsmoseCore(const char *rom_f,  unsigned int *output, OsmoseConfigura
 		try
 		{
 			sndThread = new SoundThread("plughw:0,0", p->getFIFOSoundBuffer());
-			sndThread->start(); 	// Start thread, not playing !		
+			sndThread->start(); 	// Start thread, not playing !
 			string msg = "Creating SoundThread";
 			QLogWindow::getInstance()->appendLog(msg);
 		}
@@ -137,7 +137,7 @@ OsmoseCore::~OsmoseCore()
 	delete mem;
 	delete env;
 	delete iom;
-	delete cpu;	
+	delete cpu;
 }
 
 /*--------------------------------------------------------------------*/
@@ -164,14 +164,14 @@ void OsmoseCore::reset()
 /*--------------------------------------------------------------------*/
 void OsmoseCore::run_frame()
 {
-	MutexLocker lock(osmose_core_mutex);	
+	MutexLocker lock(osmose_core_mutex);
 
     bool drawline    = true;
     bool played      = false;
     float snd_update = 0;
     int scanline_number;
     unsigned int over_cycles = 0;
-	
+
     scanline_number = (opt.ntsc == true) ? 262 : 313; // NTSC or PAL
 
     if (nmi == true)
@@ -179,7 +179,7 @@ void OsmoseCore::run_frame()
         cpu->nmi();
         nmi = false;
     }
-			
+
     for (v->line=0; v->line < scanline_number; v->line++)
     {
         over_cycles = cpu->run(CPU_CYCLES_PER_LINE - over_cycles);
@@ -218,7 +218,7 @@ void OsmoseCore::run_frame()
         if (!p->getFIFOSoundBuffer()->spaceAvailable())
         {
             snd_started = true;
-			sndThread->resume();	
+			sndThread->resume();
         }
     }
 
@@ -237,8 +237,8 @@ void OsmoseCore::run_frame()
 /*--------------------------------------------------------------------*/
 bool OsmoseCore::captureTiles()
 {
-	MutexLocker lock(osmose_core_mutex);	
-	
+	MutexLocker lock(osmose_core_mutex);
+
 	ostringstream oss;
 	oss << configuration->getTileCapturePath() << "/" << game_name << "-" << tileshotNbr << "_Tiles_Rip.tga";
 	tileshotNbr++;
@@ -246,7 +246,7 @@ bool OsmoseCore::captureTiles()
 	/* Allocate 128x224 buffer */
 	unsigned int *local_buffer = new unsigned int[128*224];
 	unsigned int map_p = 0;
-	
+
 	/* Render tiles into the buffer. */
     // Draw tiles there.
     for (int o=0; o<28;o++)
@@ -256,9 +256,9 @@ bool OsmoseCore::captureTiles()
             int tile = map_p;
             displayTiles(local_buffer, v, tile, i<<3, o<<3);
             map_p++;
-        }	
+        }
 	}
-	
+
 	/* Save the buffer. */
     TGAWriter tgaFile(oss.str().c_str(), 128, 224);
 	if (tgaFile.isOk() == true)
@@ -273,7 +273,7 @@ bool OsmoseCore::captureTiles()
 				b = (d >> 16) & 0xFF;
 				g = (d >> 8) & 0xFF;
 				r = d & 0xFF;
-				tgaFile.writePixel(r, g, b);					
+				tgaFile.writePixel(r, g, b);
 			}
 		}
 	}
@@ -281,10 +281,10 @@ bool OsmoseCore::captureTiles()
 	{
 		return false;
 	}
-	
+
 	/* Deallocate buffer. */
 	delete[] local_buffer;
-	
+
 	return true;
 }
 
@@ -344,7 +344,7 @@ void sndCallback(void *, unsigned char *s, int len)
 bool OsmoseCore::captureScreen()
 {
 	MutexLocker lock(osmose_core_mutex);
-	
+
 	ostringstream oss;
 	oss << configuration->getScreenshotPath() << "/" << game_name << "-" << screenshotNbr << ".tga";
 	screenshotNbr++;
@@ -362,7 +362,7 @@ bool OsmoseCore::captureScreen()
 				b = (d >> 16) & 0xFF;
 				g = (d >> 8) & 0xFF;
 				r = d & 0xFF;
-				tgaFile.writePixel(r, g, b);					
+				tgaFile.writePixel(r, g, b);
 			}
 		}
 		return true;
@@ -382,7 +382,7 @@ bool OsmoseCore::captureScreen()
 bool OsmoseCore::startRecordingSounds()
 {
 	MutexLocker lock(osmose_core_mutex);
-	
+
 	bool retValue = false;
 	ostringstream oss;
 
@@ -407,7 +407,7 @@ bool OsmoseCore::startRecordingSounds()
 void OsmoseCore::stopRecordingSounds()
 {
 	MutexLocker lock(osmose_core_mutex);
-	
+
     wavW->close();
     delete wavW; // To avoid memory leak.
 	wavW = NULL;
@@ -425,7 +425,7 @@ void OsmoseCore::stopRecordingSounds()
 bool OsmoseCore::saveSaveState(int slot)
 {
 	MutexLocker lock(osmose_core_mutex);
-	
+
     ostringstream save_state_name;
 
     save_state_name << configuration->getSaveStatePath() << "/" << mem->getROMName() << "_slot_" << slot <<".sta";
@@ -482,7 +482,7 @@ bool OsmoseCore::saveSaveState(int slot)
 bool OsmoseCore::loadSaveState(int slot)
 {
 	MutexLocker lock(osmose_core_mutex);
-	
+
     ostringstream load_state_name;
     load_state_name << configuration->getSaveStatePath() << "/" << mem->getROMName() << "_slot_" << slot <<".sta";
 
@@ -490,7 +490,7 @@ bool OsmoseCore::loadSaveState(int slot)
     if (input_file.is_open() == false )
     {
 		string msg = "Fail to load state from file : " + load_state_name.str();
-		QLogWindow::getInstance()->appendLog(msg);	
+		QLogWindow::getInstance()->appendLog(msg);
         return false;
     }
 
@@ -498,7 +498,7 @@ bool OsmoseCore::loadSaveState(int slot)
     if (!cpu->loadState( input_file ) )
     {
 		string msg = "CPU load failed.";
-		QLogWindow::getInstance()->appendLog(msg);		
+		QLogWindow::getInstance()->appendLog(msg);
         return false;
     }
 
@@ -506,7 +506,7 @@ bool OsmoseCore::loadSaveState(int slot)
     if (!mem->loadState( input_file ) )
     {
 		string msg = "Mem Mapper load failed.";
-		QLogWindow::getInstance()->appendLog(msg);	
+		QLogWindow::getInstance()->appendLog(msg);
 		return false;
     }
 
@@ -814,11 +814,11 @@ void OsmoseCore::PauseButtonChanged(bool pressed)
 void OsmoseCore::StartButtonChanged(bool pressed)
 {
 	// SMS has no start button !
-	if (opt.MachineType != GAMEGEAR) 
+	if (opt.MachineType != GAMEGEAR)
 	{
 		return;
 	}
-	
+
 	if (pressed)
 	{
 		iom->port0x0 &= BIT7_MASK;

@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
+ *
  *
  * File : OsmoseConfigurationFile.cpp
  *
@@ -39,7 +39,7 @@ OsmoseConfigurationFile::OsmoseConfigurationFile()
 }
 
 /**
- * Return the user's home directory. It first checks into the pw 
+ * Return the user's home directory. It first checks into the pw
  * structure and then in HOME envirnoment variable. If $HOME exists
  * it is taken first.
  */
@@ -47,14 +47,14 @@ string OsmoseConfigurationFile::getHomeDirectory()
 {
 	struct passwd *pw = getpwuid(getuid());
 	string homeDirectory = string(pw->pw_dir);
-	
+
 	// If $HOME variable exists, override homeDirectory with its content.
 	string user_home_directory = string (getenv("HOME"));
 	if (!user_home_directory.empty())
 	{
 		homeDirectory = string(user_home_directory.c_str());
 	}
-	
+
 	return homeDirectory;
 }
 
@@ -71,7 +71,7 @@ OsmoseConfigurationFile::~OsmoseConfigurationFile()
  */
 void OsmoseConfigurationFile::load()
 {
-	string fullname = homeDir + "/.osmose2.ini";	
+	string fullname = homeDir + "/.osmose2.ini";
 	ifstream file(fullname.c_str(), ios::in);
 
 	if (file.is_open() == false )
@@ -80,7 +80,7 @@ void OsmoseConfigurationFile::load()
 		msg = msg + fullname + "' configuration file.";
         throw string(msg);
 	}
-	
+
 	// Parse the config file and update members.
 	string line;
     while ( file.good() )
@@ -100,11 +100,11 @@ void OsmoseConfigurationFile::parseLine(string &line)
 {
 	// Remove beginning space and control char if any.
 	while((line[0] <= ' ') && (line.length() != 0)) line.erase(0, 1);
-	
+
 	// Remove all after '#' char if any.
 	size_t pos = line.find('#', 0);
 	if (pos != string::npos) line.erase(pos);
-	
+
 	// Remove all control chars in the string.
 	pos = 0;
 	while ((pos < line.length()) && (line.length() > 0))
@@ -115,21 +115,21 @@ void OsmoseConfigurationFile::parseLine(string &line)
 		}
 		pos++;
 	}
-	
+
 	// Extract identifier from line[0] to char '='.
 	pos = line.find('=', 0);
 	if (pos == string::npos) return; 	// No '=' char found.
-	
+
 	string identifier = line.substr(0, pos);
-	
+
 	// Extract value between two simple quotes.
 	pos = line.find('\'', 0);
-	if (pos == string::npos) return; 	// No '\'' char found. 
+	if (pos == string::npos) return; 	// No '\'' char found.
 	pos++; // Index of first char after '
-	
+
 	size_t pos2 = line.find('\'', pos);
-	if (pos2 == string::npos) return; 	// No second '\'' char found. 
-	
+	if (pos2 == string::npos) return; 	// No second '\'' char found.
+
 	string value = line.substr(pos, pos2-pos);
 	updateItem(identifier, value);
 }
@@ -176,7 +176,7 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 		joystickDevice = value;
 		return;
 	}
-	
+
 	// At this point, value is interepreted only as ascii int.
 	// Basic verification.
 	for (unsigned int i=0; i < value.length(); i++)
@@ -190,11 +190,11 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 			throw string(msg);
 		}
 	}
-	
+
 	istringstream iss(value, istringstream::in);
 	int int_value;
 	iss >> int_value;
-	
+
 	if (identifier == "Player1Up")
 	{
 		setPad(0, UP, int_value);
@@ -211,7 +211,7 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 	{
 		setPad(0, LEFT, int_value);
 		return;
-	}	
+	}
 	else
 	if (identifier == "Player1Right")
 	{
@@ -223,14 +223,14 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 	{
 		setPad(0, BUTTON_A, int_value);
 		return;
-	}	
+	}
 	else
 	if (identifier == "Player1ButtonB")
 	{
 		setPad(0, BUTTON_B, int_value);
 		return;
-	}	
-	
+	}
+
 	if (identifier == "Player2Up")
 	{
 		setPad(1, UP, int_value);
@@ -247,7 +247,7 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 	{
 		setPad(1, LEFT, int_value);
 		return;
-	}	
+	}
 	else
 	if (identifier == "Player2Right")
 	{
@@ -259,20 +259,20 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 	{
 		setPad(1, BUTTON_A, int_value);
 		return;
-	}	
+	}
 	else
 	if (identifier == "Player2ButtonB")
 	{
 		setPad(1, BUTTON_B, int_value);
 		return;
-	}	
+	}
 	else
 	if (identifier == "Pause")
 	{
 		pauseButton = int_value;
-		
+
 		return;
-	}	
+	}
 	else
 	if (identifier == "Start")
 	{
@@ -290,19 +290,19 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 	{
 		joystick0Button[1] = (padKey)int_value;
 		return;
-	}	
+	}
 	else
 	if (identifier == "Joy0Button2")
 	{
 		joystick0Button[2] = (padKey)int_value;
 		return;
-	}	
+	}
 	else
 	if (identifier == "Joy0Button3")
 	{
 		joystick0Button[3] = (padKey)int_value;
 		return;
-	}	
+	}
 	else
 	if (identifier == "Joy0Button4")
 	{
@@ -314,25 +314,25 @@ void OsmoseConfigurationFile::updateItem(string &identifier, string &value)
 	{
 		joystick0Button[5] = (padKey)int_value;
 		return;
-	}	
+	}
 	else
 	if (identifier == "Joy0Button6")
 	{
 		joystick0Button[6] = (padKey)int_value;
 		return;
-	}	
+	}
 	else
 	if (identifier == "Joy0Button7")
 	{
 		joystick0Button[7] = (padKey)int_value;
 		return;
-	}	
-	
+	}
+
 	// At this point identifier is unknown !
 	string msg = "Unknown identifier :";
 	msg = msg + identifier;
-	throw string(msg);	
-	
+	throw string(msg);
+
 }
 
 
@@ -350,7 +350,7 @@ void OsmoseConfigurationFile::save()
 			string msg = "Unable to write '";
 			msg = msg + fullname + "' configuration file.";
             throw string(msg);
-        
+
         }
         else // Default ini file creation
         {
@@ -362,7 +362,7 @@ void OsmoseConfigurationFile::save()
 			file << "SoundCapturePath     = '" << soundCapturePath << "'" << endl;
 			file << "TileCapturePath      = '" << tileCapturePath << "'" << endl;
 			file << "BatteryBackedRAMPath = '" << BBRPath << "'" << endl << endl;
-			
+
 			file << "#" << endl << "# Played 1 Pad:" << endl << "#" << endl << endl;
 			file << "Player1Up      = '" << (int) pad1[UP] << "'" << endl;
 			file << "Player1Down    = '" << (int) pad1[DOWN] << "'" << endl;
@@ -378,7 +378,7 @@ void OsmoseConfigurationFile::save()
 			file << "Player2Right   = '" << (int) pad2[RIGHT] << "'" << endl;
 			file << "Player2ButtonA = '" << (int) pad2[BUTTON_A] << "'" << endl;
 			file << "Player2ButtonB = '" << (int) pad2[BUTTON_B] << "'" << endl << endl;
-			
+
 			file << "#" << endl << "# Pause, Gamer Gear Start :" << endl << "#" << endl << endl;
 			file << "Pause      = '" << (int) pauseButton << "'" << endl;
 			file << "Start      = '" << (int) startButton << "'" << endl << endl;
@@ -386,11 +386,11 @@ void OsmoseConfigurationFile::save()
 			file << "#" << endl << "# Joystick 0 buttons assignations :" << endl << "#" << endl << endl;
 			for (int i=0; i < MAX_JOYSTICK_BUTTON ; i++)
 			{
-				file << "Joy0Button" << (int) i << " = '"<< (int) joystick0Button[i] << "'" << endl;			
+				file << "Joy0Button" << (int) i << " = '"<< (int) joystick0Button[i] << "'" << endl;
 			}
-			
+
 			file << endl << "#" << endl << "# Joystick Linux device :" << endl << "#" << endl << endl;
-			file << "JoystickDevice = '" << joystickDevice << "'" << endl;			
+			file << "JoystickDevice = '" << joystickDevice << "'" << endl;
 		}
 		file << endl << endl;
 		file.close();
@@ -406,7 +406,7 @@ void OsmoseConfigurationFile::resetToDefault()
 	tileCapturePath = homeDir;
 	BBRPath			= homeDir;
 	screenshotPath	= homeDir;
-	
+
 	pad1[UP]    = 16777235;		// Up arrow.
 	pad1[DOWN]  = 16777237;		// Down arrow.
 	pad1[LEFT]  = 16777234;		// Left arrow.
@@ -420,10 +420,10 @@ void OsmoseConfigurationFile::resetToDefault()
 	pad2[RIGHT] = 54;			// KeyPad/Keyboard 6.
 	pad2[BUTTON_A] = 48;		// KeyPad/Keyboard 0.
 	pad2[BUTTON_B] = 16777221;	//KeyPad/Keyboard Enter.
-	
+
 	startButton = 83; 			// S key.
 	pauseButton = 80;  			// P key.
-	
+
 	joystick0Button[0] = P1BUTTON_A;
 	joystick0Button[1] = P1BUTTON_B;
 	joystick0Button[2] = START_GG;
@@ -432,7 +432,7 @@ void OsmoseConfigurationFile::resetToDefault()
 	joystick0Button[5] = UNKNOWN;
 	joystick0Button[6] = UNKNOWN;
 	joystick0Button[7] = UNKNOWN;
-	
+
 	joystickDevice = string(DEFAULT_JOYSTICK_DEVICE);
 }
 
@@ -456,7 +456,7 @@ void OsmoseConfigurationFile::setPad(int padNumber, padInput i, unsigned int key
 {
 	if (padNumber == 0)
 	{
-		pad1[i] = key;		
+		pad1[i] = key;
 	}
 	else
 	{
@@ -504,7 +504,7 @@ padKey OsmoseConfigurationFile::getJoyButtonAssignation(int button)
 	return UNKNOWN;
 }
 
-/** 
+/**
  * This method convert the key pressed to SMS/GG key pad, depending on
  * the actual configuration.
  */
@@ -516,7 +516,7 @@ padKey OsmoseConfigurationFile::keyToKeyPad(int key)
 	if (key == pad1[3]) return P1RIGHT;
 	if (key == pad1[4]) return P1BUTTON_A;
 	if (key == pad1[5]) return P1BUTTON_B;
-	
+
 	if (key == pad2[0]) return P2UP;
 	if (key == pad2[1]) return P2DOWN;
 	if (key == pad2[2]) return P2LEFT;
@@ -526,7 +526,7 @@ padKey OsmoseConfigurationFile::keyToKeyPad(int key)
 
 	if (key == pauseButton) return PAUSE_NMI;
 	if (key == startButton) return START_GG;
-	
+
 	return UNKNOWN;
 }
 

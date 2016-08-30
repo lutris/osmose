@@ -1,7 +1,7 @@
 /**
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -58,13 +58,13 @@ public:
 	void stop();
 	void pause();
 	void resume();
-	
+
 	~SoundThread();
 
 protected:
-	
+
 	void* run(void *p);
-	
+
 private:
 
 	char deviceName[DEVICE_NAME_LENGTH];

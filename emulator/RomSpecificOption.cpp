@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@
  *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #include "RomSpecificOption.h"
 #include "MemoryMapper.h"
 
@@ -96,7 +96,7 @@ unsigned int SpecificRomOptionDatabase::getOptions(unsigned int rom_crc32, Optio
     {
         op->mapperType = CodemasterMapper;
 		string msg =" * Using Codemaster mapper.";
-		QLogWindow::getInstance()->appendLog(msg);		
+		QLogWindow::getInstance()->appendLog(msg);
     }
 
     if (option & KOREAN_MAPPER)
@@ -110,21 +110,21 @@ unsigned int SpecificRomOptionDatabase::getOptions(unsigned int rom_crc32, Optio
     {
         op->ntsc = false;
 		string msg =" * Using PAL video mode.";
-		QLogWindow::getInstance()->appendLog(msg);		
+		QLogWindow::getInstance()->appendLog(msg);
     }
 
     if (option & SPORT_PADDLE_INPUT)
     {
         op->inputType = PADDLE;
 		string msg =" * Using SPORT PADDLE input device.";
-		QLogWindow::getInstance()->appendLog(msg);	
+		QLogWindow::getInstance()->appendLog(msg);
     }
 
     if (option & JAPANESE_MACHINE)
     {
         op->WorldVersion = JAPAN;
 		string msg =" * Using JAPANESE SMS.";
-		QLogWindow::getInstance()->appendLog(msg);		
+		QLogWindow::getInstance()->appendLog(msg);
     }
     return option;
 }

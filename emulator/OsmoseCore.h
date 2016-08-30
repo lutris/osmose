@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@
  *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #ifndef OSMOSE_CORE_H
 #define OSMOSE_CORE_H
 
@@ -77,18 +77,18 @@ class OsmoseCore : public DebugEventThrower
         OsmoseCore(const char *rom_f, unsigned int *output, OsmoseConfigurationFile *c, pthread_mutex_t *ocm);	// Constructor.
         ~OsmoseCore();
 		void run_frame();				// Run one Frame.
-        
+
         void Reshape(int x, int y);
         void reset();					// Reset all components.
 
 		void P1UpChanged(bool pressed);
-		void P1DownChanged(bool pressed);		
+		void P1DownChanged(bool pressed);
 		void P1LeftChanged(bool pressed);
 		void P1RightChanged(bool pressed);
 		void P1AButtonChanged(bool pressed);
 		void P1BButtonChanged(bool pressed);
 		void P2UpChanged(bool pressed);
-		void P2DownChanged(bool pressed);		
+		void P2DownChanged(bool pressed);
 		void P2LeftChanged(bool pressed);
 		void P2RightChanged(bool pressed);
 		void P2AButtonChanged(bool pressed);
@@ -104,7 +104,7 @@ class OsmoseCore : public DebugEventThrower
 
 		void forceMemoryMapper(Mapper m);
 		void forceNTSCTiming(bool);
-		
+
 		private:
 
         unsigned int        *buffer;     // SMS screen, without modification 256x192.
@@ -134,7 +134,7 @@ class OsmoseCore : public DebugEventThrower
         bool snd_started;
 
         void save_bbr();				// Save Battery Backed Ram.
-        
+
         void displayTiles(unsigned int *s, VDP *vd, int tile, int x, int y);
 		SoundThread *sndThread;
 		OsmoseConfigurationFile *configuration;

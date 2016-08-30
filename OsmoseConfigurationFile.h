@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
+ *
  *
  * File : OsmoseConfigurationFile.h
  *
@@ -80,27 +80,27 @@ typedef enum
 
 class OsmoseConfigurationFile
 {
-	
 
-	
+
+
 public:
-	
+
 	OsmoseConfigurationFile();
 	void save();
 	void load();
 	void createDefautConfigurationFile();
 	void resetToDefault();
 	padKey keyToKeyPad(int key);
-	
+
 	static string getHomeDirectory();
 	~OsmoseConfigurationFile();
-	
+
 	// Button setters.
 	void setPad(int padNumber, padInput i, unsigned int key);
 	void setPause(unsigned int key){pauseButton = key;}
 	void setStart(unsigned int key){startButton = key;}
 	void assignJoyButton(int button, padKey assignation);
-	
+
 	// Path setters.
 	void setScreenshotPath(string path) {screenshotPath = path;}
 	void setSoundCapturePath(string path) {soundCapturePath = path;}
@@ -109,8 +109,8 @@ public:
 	void setSaveStatePath(string path) {saveStatePath = path;};
 
 	// Joystick device setter :
-	void setJoystickDevice(string device) { joystickDevice = device; }	
-	
+	void setJoystickDevice(string device) { joystickDevice = device; }
+
 	// Button getters.
 	int getPad(int padNumber, padInput i);
 	int getPause() {return pauseButton;}
@@ -123,10 +123,10 @@ public:
 	string getTileCapturePath() {return tileCapturePath;}
 	string getBBRPath() {return BBRPath;}
 	string getSaveStatePath() {return saveStatePath;}
-	
+
 	// Joystick device getter :
 	string getJoystickDevice() { return joystickDevice; }
-	
+
 protected:
 
 private:
@@ -143,7 +143,7 @@ private:
 	int startButton; 		// Keyboard Mapping for Start
 	int pauseButton;		// Keyboard Mapping for Pause
 	padKey joystick0Button[MAX_JOYSTICK_BUTTON]; // Joystick button assignation.
-	
+
 	void parseLine(string &l);
 	void updateItem(string &identifier, string &value);
 	string joystickDevice;

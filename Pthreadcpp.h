@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
+ *
  *
  * File : Pthreadcpp.h
  *
@@ -55,7 +55,7 @@ class MutexLocker
 
 
 
-/**	
+/**
  *
  * Description : This class is the most basic pthread C++ encapsulation.
  * It's used to handle JOINABLE / UNDETACHED posix threads.
@@ -72,18 +72,18 @@ class MutexLocker
 class Thread
 {
 public:
-   
+
 	Thread();
     int start(void *param = NULL);
 	int join(void **retVal);
-	virtual ~Thread();  
-	
+	virtual ~Thread();
+
 protected:
-	
+
 	virtual void* run(void *p) = 0;	/* Override this with your own. */
-	
+
 private:
-	
+
 	bool _created;
 	bool _joined;
 	pthread_t _thread;

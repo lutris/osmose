@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@
  *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #include "WaveWriter.h"
 #include <cstdlib>
 

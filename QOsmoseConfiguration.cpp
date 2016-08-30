@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
+ *
  *
  * File : QOsmoseConfiguration.cpp
  *
@@ -73,7 +73,7 @@ void QOsmoseConfiguration::selectBBRPath()
                                                  | QFileDialog::DontResolveSymlinks);
 
 	if (dir.isEmpty() || dir.isNull()) return;
-	bbrPathLineEdit->setText(dir);                               
+	bbrPathLineEdit->setText(dir);
 }
 
 
@@ -92,7 +92,7 @@ void QOsmoseConfiguration::selectScreenshotPath()
                                                  | QFileDialog::DontResolveSymlinks);
 
 	if (dir.isEmpty() || dir.isNull()) return;
-	screenshotsPathLineEdit->setText(dir);                               
+	screenshotsPathLineEdit->setText(dir);
 }
 
 
@@ -111,7 +111,7 @@ void QOsmoseConfiguration::selectSaveStatePath()
                                                  | QFileDialog::DontResolveSymlinks);
 
 	if (dir.isEmpty() || dir.isNull()) return;
-	saveStatePathLineEdit->setText(dir);                               
+	saveStatePathLineEdit->setText(dir);
 }
 
 
@@ -122,7 +122,7 @@ void QOsmoseConfiguration::selectSaveStatePath()
  * selection dialog to get an existing directory to store ripped tiles.
  * The corresponding QLineEdit is also updated with the chosen path.
  */
-void QOsmoseConfiguration::selectTileRipPath()	
+void QOsmoseConfiguration::selectTileRipPath()
 {
 	QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                  homeDirectory,
@@ -130,7 +130,7 @@ void QOsmoseConfiguration::selectTileRipPath()
                                                  | QFileDialog::DontResolveSymlinks);
 
 	if (dir.isEmpty() || dir.isNull()) return;
-	tileSavePathLineEdit->setText(dir);                               
+	tileSavePathLineEdit->setText(dir);
 }
 
 
@@ -149,7 +149,7 @@ void QOsmoseConfiguration::selectSoundRipPath()
                                                  | QFileDialog::DontResolveSymlinks);
 
 	if (dir.isEmpty() || dir.isNull()) return;
-	soundSavePathLineEdit->setText(dir);                               
+	soundSavePathLineEdit->setText(dir);
 }
 
 /**
@@ -164,7 +164,7 @@ void QOsmoseConfiguration::completeConnections()
 	QObject::connect(saveStateSelectPath, SIGNAL(clicked()), this, SLOT(selectSaveStatePath()));
 	QObject::connect(tileSaveSelectPath, SIGNAL(clicked()), this, SLOT(selectTileRipPath()));
 	QObject::connect(soundSaveSelectPath, SIGNAL(clicked()), this, SLOT(selectSoundRipPath()));
-	
+
 	// Connect player 1 pad redefine buttons.
 	QObject::connect(changeP1UpButton, SIGNAL(clicked()), this, SLOT(redefineP1Up()));
 	QObject::connect(changeP1DownButton, SIGNAL(clicked()), this, SLOT(redefineP1Down()));
@@ -172,42 +172,42 @@ void QOsmoseConfiguration::completeConnections()
 	QObject::connect(changeP1RightButton, SIGNAL(clicked()), this, SLOT(redefineP1Right()));
 	QObject::connect(changeP1AButton, SIGNAL(clicked()), this, SLOT(redefineP1A()));
 	QObject::connect(changeP1BButton, SIGNAL(clicked()), this, SLOT(redefineP1B()));
-	
+
 	// Connect player 2 pad redefine buttons.
 	QObject::connect(changeP2UpButton, SIGNAL(clicked()), this, SLOT(redefineP2Up()));
 	QObject::connect(changeP2DownButton, SIGNAL(clicked()), this, SLOT(redefineP2Down()));
 	QObject::connect(changeP2LeftButton, SIGNAL(clicked()), this, SLOT(redefineP2Left()));
 	QObject::connect(changeP2RightButton, SIGNAL(clicked()), this, SLOT(redefineP2Right()));
 	QObject::connect(changeP2AButton, SIGNAL(clicked()), this, SLOT(redefineP2A()));
-	QObject::connect(changeP2BButton, SIGNAL(clicked()), this, SLOT(redefineP2B()));	
+	QObject::connect(changeP2BButton, SIGNAL(clicked()), this, SLOT(redefineP2B()));
 
 	// Connect Pause/Start redefine buttons.
 	QObject::connect(changeStartButton, SIGNAL(clicked()), this, SLOT(redefineStart()));
 	QObject::connect(changePauseButton, SIGNAL(clicked()), this, SLOT(redefinePause()));
-	
+
 	// Connect save config button.
-	QObject::connect(saveButton, SIGNAL(clicked()), this, SLOT(saveConfiguration()));	
-	QObject::connect(applyButton, SIGNAL(clicked()), this, SLOT(applyConfiguration()));	
-	
+	QObject::connect(saveButton, SIGNAL(clicked()), this, SLOT(saveConfiguration()));
+	QObject::connect(applyButton, SIGNAL(clicked()), this, SLOT(applyConfiguration()));
+
 	// Connect Joystick 0 combobox to button assignations routines.
-	QObject::connect(button1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button1Assigned(int)));	
-	QObject::connect(button2ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button2Assigned(int)));	
-	QObject::connect(button3ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button3Assigned(int)));	
-	QObject::connect(button4ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button4Assigned(int)));	
-	QObject::connect(button5ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button5Assigned(int)));	
-	QObject::connect(button6ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button6Assigned(int)));	
-	QObject::connect(button7ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button7Assigned(int)));	
-	QObject::connect(button8ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button8Assigned(int)));	
-	
+	QObject::connect(button1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button1Assigned(int)));
+	QObject::connect(button2ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button2Assigned(int)));
+	QObject::connect(button3ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button3Assigned(int)));
+	QObject::connect(button4ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button4Assigned(int)));
+	QObject::connect(button5ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button5Assigned(int)));
+	QObject::connect(button6ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button6Assigned(int)));
+	QObject::connect(button7ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button7Assigned(int)));
+	QObject::connect(button8ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(joy0Button8Assigned(int)));
+
 	// Queued connection for QLabel background color because joystick event come from a different thread.
-	QObject::connect(this, SIGNAL(joyButton1Event(bool)), this, SLOT(joyButton1Changed(bool)), Qt::QueuedConnection);	
-	QObject::connect(this, SIGNAL(joyButton2Event(bool)), this, SLOT(joyButton2Changed(bool)), Qt::QueuedConnection);	
-	QObject::connect(this, SIGNAL(joyButton3Event(bool)), this, SLOT(joyButton3Changed(bool)), Qt::QueuedConnection);	
-	QObject::connect(this, SIGNAL(joyButton4Event(bool)), this, SLOT(joyButton4Changed(bool)), Qt::QueuedConnection);	
-	QObject::connect(this, SIGNAL(joyButton5Event(bool)), this, SLOT(joyButton5Changed(bool)), Qt::QueuedConnection);	
-	QObject::connect(this, SIGNAL(joyButton6Event(bool)), this, SLOT(joyButton6Changed(bool)), Qt::QueuedConnection);	
-	QObject::connect(this, SIGNAL(joyButton7Event(bool)), this, SLOT(joyButton7Changed(bool)), Qt::QueuedConnection);	
-	QObject::connect(this, SIGNAL(joyButton8Event(bool)), this, SLOT(joyButton8Changed(bool)), Qt::QueuedConnection);	
+	QObject::connect(this, SIGNAL(joyButton1Event(bool)), this, SLOT(joyButton1Changed(bool)), Qt::QueuedConnection);
+	QObject::connect(this, SIGNAL(joyButton2Event(bool)), this, SLOT(joyButton2Changed(bool)), Qt::QueuedConnection);
+	QObject::connect(this, SIGNAL(joyButton3Event(bool)), this, SLOT(joyButton3Changed(bool)), Qt::QueuedConnection);
+	QObject::connect(this, SIGNAL(joyButton4Event(bool)), this, SLOT(joyButton4Changed(bool)), Qt::QueuedConnection);
+	QObject::connect(this, SIGNAL(joyButton5Event(bool)), this, SLOT(joyButton5Changed(bool)), Qt::QueuedConnection);
+	QObject::connect(this, SIGNAL(joyButton6Event(bool)), this, SLOT(joyButton6Changed(bool)), Qt::QueuedConnection);
+	QObject::connect(this, SIGNAL(joyButton7Event(bool)), this, SLOT(joyButton7Changed(bool)), Qt::QueuedConnection);
+	QObject::connect(this, SIGNAL(joyButton8Event(bool)), this, SLOT(joyButton8Changed(bool)), Qt::QueuedConnection);
 }
 
 /**
@@ -216,12 +216,12 @@ void QOsmoseConfiguration::completeConnections()
 void QOsmoseConfiguration::synchronizeWithConfiguration()
 {
 	// Synchronize paths.
-	screenshotsPathLineEdit->setText(ocf->getScreenshotPath().c_str());  
+	screenshotsPathLineEdit->setText(ocf->getScreenshotPath().c_str());
 	bbrPathLineEdit->setText(ocf->getBBRPath().c_str());
 	saveStatePathLineEdit->setText(ocf->getSaveStatePath().c_str());
 	tileSavePathLineEdit->setText(ocf->getTileCapturePath().c_str());
 	soundSavePathLineEdit->setText(ocf->getSoundCapturePath().c_str());
-	
+
 	// Synchronize PAD1.
 	p1UpLabel->setText(KeyMapper::getKeyDescription(ocf->getPad(0, UP)));
 	p1DownLabel->setText(KeyMapper::getKeyDescription(ocf->getPad(0, DOWN)));
@@ -236,12 +236,12 @@ void QOsmoseConfiguration::synchronizeWithConfiguration()
 	p2LeftLabel->setText(KeyMapper::getKeyDescription(ocf->getPad(1, LEFT)));
 	p2RightLabel->setText(KeyMapper::getKeyDescription(ocf->getPad(1, RIGHT)));
 	p2ALabel->setText(KeyMapper::getKeyDescription(ocf->getPad(1, BUTTON_A)));
-	p2BLabel->setText(KeyMapper::getKeyDescription(ocf->getPad(1, BUTTON_B)));	
+	p2BLabel->setText(KeyMapper::getKeyDescription(ocf->getPad(1, BUTTON_B)));
 
 	// Synchronize Start/Pause.
 	pauseLabel->setText(KeyMapper::getKeyDescription(ocf->getPause()));
 	startLabel->setText(KeyMapper::getKeyDescription(ocf->getStart()));
-	
+
 	// Synchronise Joystick0 button.
 	button1ComboBox->setCurrentIndex(buttonAssignationToComboBox(ocf->getJoyButtonAssignation(0)));
 	button2ComboBox->setCurrentIndex(buttonAssignationToComboBox(ocf->getJoyButtonAssignation(1)));
@@ -260,18 +260,18 @@ void QOsmoseConfiguration::synchronizeWithConfiguration()
  * Convert given padKey  to joystick button combo box index.
  */
 int QOsmoseConfiguration::buttonAssignationToComboBox(padKey k)
-{	
+{
 	int ret;
-	
+
 	switch(k)
 	{
 		case START_GG: ret = 4; break;
 		case PAUSE_NMI: ret = 3; break;
 		case P1BUTTON_A: ret = 1; break;
 		case P1BUTTON_B: ret = 2; break;
-		default : ret = 0; break;		
+		default : ret = 0; break;
 	}
-	
+
 	return ret;
 }
 
@@ -281,16 +281,16 @@ int QOsmoseConfiguration::buttonAssignationToComboBox(padKey k)
 padKey QOsmoseConfiguration::comboBoxToButtonAssignation(int index)
 {
 	padKey ret;
-	
+
 	switch(index)
 	{
 		case 4: ret = START_GG; break;
 		case 3: ret = PAUSE_NMI; break;
 		case 1: ret = P1BUTTON_A; break;
 		case 2: ret = P1BUTTON_B; break;
-		default : ret = UNKNOWN; break;		
+		default : ret = UNKNOWN; break;
 	}
-	
+
 	return ret;
 }
 
@@ -560,7 +560,7 @@ void KeyGrabber::keyPressEvent(QKeyEvent *evt)
 {
 	evt->accept();
 	keyPressed = evt->key();
-	//cout << keyPressed << endl;	
+	//cout << keyPressed << endl;
 	setVisible(false);
 }
 

@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,14 +16,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
+ *
  *
  * File : Joystick.h
  *
  * Description : This class inherits from Thread and read, every
  * polling period, the device file given to it's constructor. If events
  * are detected, the listener joystickChanged method will be called.
- * Note that several events will generate several call to joystick 
+ * Note that several events will generate several call to joystick
  * changed. There's only one listener at a time.
  *
  * Author : B.Vedder
@@ -67,7 +67,7 @@ public:
 class Joystick : public Thread
 {
 public:
-    
+
     Joystick(const char *dev_name, JoystickListener *l);
     const char * getStrID() { return joystickID;  }
     const char * getDeviceName() { return deviceName; }
@@ -78,26 +78,26 @@ public:
 	unsigned int getButtonNumber() { return (unsigned int)buttonNbr; }
 	unsigned int getDriverVersion() {return driverVersion; }
     ~Joystick();
-    
+
 protected:
-    
+
 	void *run(void *);
-    
+
 private:
-    
+
 	char deviceName[MAX_DEVNAME_LEN];
     char joystickID[MAX_JOYID_LEN];
     int  joystickFD;
 	unsigned char axisNbr;
 	unsigned char buttonNbr;
 	unsigned int  driverVersion; // Unused-Major-Minor-Lower 8 bits packed.
-	
+
     JoystickListener *listener;
     int pollingPeriod;
 	bool done;
 
 	bool readDevice(struct js_event *jse);
-	
+
 };
 
 #endif	// JOYSTICK_H

@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
+ *
  *
  * File : QOsmoseConfiguration.h
  *
@@ -47,7 +47,7 @@ Q_OBJECT
 public:
 	KeyGrabber(QWidget *parent = 0);
 	unsigned int getKeyPressed() {return keyPressed;}
-	
+
 protected:
 	void keyPressEvent(QKeyEvent *e);
 	unsigned int keyPressed;
@@ -62,14 +62,14 @@ public:
 
 	QOsmoseConfiguration(OsmoseConfigurationFile *conf, const char *joyName, QWidget *parent = 0);
 	void synchronizeWithConfiguration();
-	
+
 	// Joystick listener interface.
 	void buttonChanged(unsigned int button, bool pressed); /* True when pressed */
     void xAxisChanged(int value);
 	void yAxisChanged(int value);
-	void joystickError();	
-	
-	
+	void joystickError();
+
+
 	~QOsmoseConfiguration();
 
 protected:
@@ -77,9 +77,9 @@ protected:
 public slots:
 	void selectBBRPath();
 	void selectScreenshotPath();
-	void selectSaveStatePath();	
-	void selectTileRipPath();	
-	void selectSoundRipPath();	
+	void selectSaveStatePath();
+	void selectTileRipPath();
+	void selectSoundRipPath();
 
 	void redefineP1Up();
 	void redefineP1Down();
@@ -94,10 +94,10 @@ public slots:
 	void redefineP2Right();
 	void redefineP2A();
 	void redefineP2B();
-	
+
 	void redefinePause();
 	void redefineStart();
-	
+
 	void saveConfiguration();
 	void applyConfiguration();
 
@@ -109,7 +109,7 @@ public slots:
 	void joy0Button6Assigned(int assign);
 	void joy0Button7Assigned(int assign);
 	void joy0Button8Assigned(int assign);
-	
+
 	void joyButton1Changed(bool pressed);
 	void joyButton2Changed(bool pressed);
 	void joyButton3Changed(bool pressed);
@@ -118,17 +118,17 @@ public slots:
 	void joyButton6Changed(bool pressed);
 	void joyButton7Changed(bool pressed);
 	void joyButton8Changed(bool pressed);
-	
+
 signals:
 	void joyButton1Event(bool pressed);
 	void joyButton2Event(bool pressed);
-	void joyButton3Event(bool pressed);	
+	void joyButton3Event(bool pressed);
 	void joyButton4Event(bool pressed);
-	void joyButton5Event(bool pressed);	
-	void joyButton6Event(bool pressed);	
-	void joyButton7Event(bool pressed);	
+	void joyButton5Event(bool pressed);
+	void joyButton6Event(bool pressed);
+	void joyButton7Event(bool pressed);
 	void joyButton8Event(bool pressed);
-	
+
 private:
 	void completeConnections();
 	unsigned int pickupKey(QLabel *label);

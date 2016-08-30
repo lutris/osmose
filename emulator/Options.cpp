@@ -1,7 +1,7 @@
 /*****************************************************************************
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -34,8 +34,8 @@
 #include <cstring>
 
 // Global emulator options instance.
-Options opt; 
-EmulatorOptions      emu_opt; 
+Options opt;
+EmulatorOptions      emu_opt;
 
 void Options::reset()
 {
