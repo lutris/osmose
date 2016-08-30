@@ -120,7 +120,7 @@ void SoundThread::play()
 	{
 		if (frames_to_deliver == -EPIPE)
 		{
-			fprintf (stderr, "an xrun occured\n");
+			fprintf (stderr, "an xrun occurred\n");
 		}
 
 		else
