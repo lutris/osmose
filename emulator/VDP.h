@@ -124,7 +124,7 @@ class VDP : public DebugEventThrower, public ImplementsSaveState
         unsigned char  vdp_status;                     // used with portBF read.
         unsigned char  v_counter;                      // Vertical scanline ctr.
         unsigned char *v_cnt;		           		   // point ntsc/pal vcount values.
-        int line;                                      // Line actualy drawn.
+        int line;                                      // Line actually drawn.
         unsigned char     i_counter;                   // Interrupt Line counter.
         unsigned char  rd_data_port_buffer;		   	   // Buffer used in read data port.
         bool irq_line_pending;

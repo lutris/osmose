@@ -594,7 +594,7 @@ void SmsDebugger::exec_cmd(char *cmd, int param1, int  param2)
 
 void SmsDebugger::unknownCommand()
 {
-    cout << "Unkown command." << endl;
+    cout << "Unknown command." << endl;
 }
 
 void SmsDebugger::setScanlineBreakpoint(int scanline)

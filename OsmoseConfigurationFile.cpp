@@ -397,7 +397,7 @@ void OsmoseConfigurationFile::save()
 }
 
 /**
- * Restore Osmose default configuration of Pathes and key mapping.
+ * Restore Osmose default configuration of Paths and key mapping.
  */
 void OsmoseConfigurationFile::resetToDefault()
 {
@@ -437,7 +437,7 @@ void OsmoseConfigurationFile::resetToDefault()
 }
 
 /**
- * Restore Osmose default configuration of Pathes and key mapping and save
+ * Restore Osmose default configuration of Paths and key mapping and save
  * the configuration file.
  */
 void OsmoseConfigurationFile::createDefautConfigurationFile()

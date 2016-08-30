@@ -41,7 +41,7 @@
 extern Options opt;
 
 /*--------------------------------------------------------------------*/
-/* Class constructor. It immediatly load a given rom, and updates     */
+/* Class constructor. It immediately load a given rom, and updates    */
 /* Memory mapper variables.					      */
 /*--------------------------------------------------------------------*/
 MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
@@ -248,7 +248,7 @@ void MemoryMapper::reset()
 void MemoryMapper::dump(unsigned char bank_n)
 {
 
-    int adress = 0;
+    int address = 0;
     if (bank_n >= bank_nbr)
     {
         cout << "Warning, cannot dump bank " << bank_n << " This bank does not exists." << endl;
@@ -261,7 +261,7 @@ void MemoryMapper::dump(unsigned char bank_n)
         cout << hex << setw(4) << setfill('0') << (i*16)  << ": ";
         for (int o=0;o<16;o++)
         {
-            cout << hex << setw(2) << setfill('0') <<(int) read_map[bank_n][adress++] << " ";
+            cout << hex << setw(2) << setfill('0') <<(int) read_map[bank_n][address++] << " ";
         }
         cout << endl;
     }
@@ -274,7 +274,7 @@ void MemoryMapper::dump(unsigned char bank_n)
 /*------------------------------------------------------------*/
 void MemoryMapper::dump_page(unsigned char bank_n)
 {
-    int adress = 0;
+    int address = 0;
     if (bank_n > 2)
     {
         cout << "Warning, cannot dump page " << bank_n << " This page does not exists." << endl;
@@ -287,7 +287,7 @@ void MemoryMapper::dump_page(unsigned char bank_n)
         cout << hex << setw(4) << setfill('0') << (i*16)  << ": ";
         for (int o=0;o<8;o++)
         {
-            cout << hex << setw(2) << setfill('0') <<(int) read_map[bank_n][adress++] << " ";
+            cout << hex << setw(2) << setfill('0') <<(int) read_map[bank_n][address++] << " ";
         }
         cout << endl;
     }
@@ -914,7 +914,7 @@ void MemoryMapper::save_battery_backed_memory(string filename)
 /*------------------------------------------------------------*/
 /* This method computes CRC32 calculation on an uncompressed  */
 /* ROM. It will be use for ROM that need special options, e.g */
-/* -cm CodeMaster Mapper ect...								  */
+/* -cm CodeMaster Mapper etc...                               */
 /*------------------------------------------------------------*/
 unsigned int MemoryMapper::getCRC32(unsigned char *buffer, unsigned int len)
 {

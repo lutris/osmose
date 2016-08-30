@@ -63,7 +63,7 @@ QOsmoseConfiguration::~QOsmoseConfiguration()
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store Battery Backed RAM.
- * The corresponding QLineEdit is also updated with the choosen path.
+ * The corresponding QLineEdit is also updated with the chosen path.
  */
 void QOsmoseConfiguration::selectBBRPath()
 {
@@ -82,7 +82,7 @@ void QOsmoseConfiguration::selectBBRPath()
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store screenshots.
- * The corresponding QLineEdit is also updated with the choosen path.
+ * The corresponding QLineEdit is also updated with the chosen path.
  */
 void QOsmoseConfiguration::selectScreenshotPath()
 {
@@ -101,7 +101,7 @@ void QOsmoseConfiguration::selectScreenshotPath()
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store save states.
- * The corresponding QLineEdit is also updated with the choosen path.
+ * The corresponding QLineEdit is also updated with the chosen path.
  */
 void QOsmoseConfiguration::selectSaveStatePath()
 {
@@ -120,7 +120,7 @@ void QOsmoseConfiguration::selectSaveStatePath()
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store ripped tiles.
- * The corresponding QLineEdit is also updated with the choosen path.
+ * The corresponding QLineEdit is also updated with the chosen path.
  */
 void QOsmoseConfiguration::selectTileRipPath()	
 {
@@ -139,7 +139,7 @@ void QOsmoseConfiguration::selectTileRipPath()
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store ripped sounds.
- * The corresponding QLineEdit is also updated with the choosen path.
+ * The corresponding QLineEdit is also updated with the chosen path.
  */
 void QOsmoseConfiguration::selectSoundRipPath()
 {
@@ -215,7 +215,7 @@ void QOsmoseConfiguration::completeConnections()
  */
 void QOsmoseConfiguration::synchronizeWithConfiguration()
 {
-	// Synchronize pathes.
+	// Synchronize paths.
 	screenshotsPathLineEdit->setText(ocf->getScreenshotPath().c_str());  
 	bbrPathLineEdit->setText(ocf->getBBRPath().c_str());
 	saveStatePathLineEdit->setText(ocf->getSaveStatePath().c_str());

@@ -63,7 +63,7 @@ enum Mapper
     KoreanMapper
 };
 
-/* Enumeration of adressing space areas types that could be read/written. */
+/* Enumeration of addressing space areas types that could be read/written. */
 enum Area_type
 {
     Cartridge,
@@ -75,8 +75,8 @@ enum Area_type
 /*---------------------------------------------------------------------------*/
 /*              Structure to save Memory mapper state.                       */
 /* It's necessary to save paging registers, but it's Also required to save   */
-/* the bank mapping, instead of doing fake wr8 on adress 0xFFFC-0xFFFF to    */
-/* get the correct mapping (order dependant for FFFC). As RAM pointer are    */
+/* the bank mapping, instead of doing fake wr8 on address 0xFFFC-0xFFFF to   */
+/* get the correct mapping (order dependent for FFFC). As RAM pointer are    */
 /* not identical from different process, we save the area type of memory     */
 /* plus the bloc (8Ko) number inside the area.                               */
 /* e.g: read_map[0] pointing to cartridge 0x2000 will be saved as :          */
