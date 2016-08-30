@@ -17,15 +17,18 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
- * File : WhiteNoiseEmulationThread.cpp
  *
- * Description : This fake emulation thread is used to generate
+ * File: WhiteNoiseEmulationThread.cpp
+ *
+ * Project: Osmose emulator
+ *
+ * Description: This fake emulation thread is used to generate
  * white noise when no ROM is loaded.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Sat Nov 13 11:38:27 2010
  *
- * Date : Sat Nov 13 11:38:27 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #include "WhiteNoiseEmulationThread.h"

@@ -1,4 +1,4 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
  *
  * This file is part of Osmose, a Sega Master System/Game Gear software
@@ -17,13 +17,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: SaveState.h
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class provide an interface for Savestate.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 27.11.2006 10:31:16
  *
  * URL: http://bcz.asterope.fr

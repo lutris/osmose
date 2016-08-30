@@ -17,14 +17,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
- *
  * File: BasicTypes.cpp
  *
- * Project: Osmose.
+ * Project: Osmose emulator
  *
  * Description: This file define shorter types used in Osmose.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 20/03/2006, 21h30 Malaisia.
  *
  * URL: http://bcz.asterope.fr/

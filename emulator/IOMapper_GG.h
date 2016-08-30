@@ -1,4 +1,4 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
  *
  * This file is part of Osmose, a Sega Master System/Game Gear software
@@ -17,17 +17,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: IOMapper_GG.h
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class will handle GAMEGEAR emulator input/output operation.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 08/10/2004, 18h00
  *
  * URL: http://bcz.asterope.fr
  */
+
 #ifndef IO_MAPPER_GG_H
 #define IO_MAPPER_GG_H
 

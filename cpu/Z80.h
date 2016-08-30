@@ -1,4 +1,4 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
  *
  * This file is part of Osmose, a Sega Master System/Game Gear software
@@ -16,15 +16,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
  * File: Z80.h
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class defines Z80 cpu emulator. It's table driven, and all
  * opcodes are supported. Not that undocumented flags are not totaly supported.
  *
- *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 10/01/2006, Thailand, Laos Cambodia :-)
  *
  * URL: http://bcz.asterope.fr

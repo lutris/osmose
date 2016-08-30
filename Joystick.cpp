@@ -18,18 +18,20 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : Joystick.cpp
+ * File: Joystick.cpp
  *
- * Description : This class inherits from Thread and read, every
+ * Project: Osmose emulator
+ *
+ * Description: This class inherits from Thread and read, every
  * polling period, the device file given to it's constructor. If events
  * are detected, the listener joystickChanged method will be called.
  * Note that several events will generate several call to joystick
  * changed. There's only one listener at a time.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Wed Dec 29 08:36:46 2010
  *
- * Date : Wed Dec 29 08:36:46 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #include <unistd.h>

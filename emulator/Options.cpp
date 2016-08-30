@@ -1,4 +1,4 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
  *
  * This file is part of Osmose, a Sega Master System/Game Gear software
@@ -17,18 +17,20 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: Options.cpp
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This file contains resets function for Options, and
  * emulator options. It's nothing else than default values.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 11/01/2005, 18h40
  *
  * URL: http://bcz.asterope.fr
- *****************************************************************************/
+ */
+
 #include "Options.h"
 #include "MemoryMapper.h"
 #include <cstring>

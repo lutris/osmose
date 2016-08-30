@@ -18,14 +18,16 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : QLogWindow.h
+ * File: QLogWindow.h
  *
- * Description :
+ * Project: Osmose emulator
  *
- * Author : B.Vedder
+ * Description:
  *
- * Date : Sun Dec 12 08:33:30 2010
+ * Author: Bruno Vedder
+ * Date: Sun Dec 12 08:33:30 2010
  *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef QLOGWINDOW_H

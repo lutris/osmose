@@ -1,4 +1,4 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
  *
  * This file is part of Osmose, a Sega Master System/Game Gear software
@@ -17,14 +17,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: OsmoseCore.h
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This file contains Osmose main loop, handling keyboard,
  * event, and hardware emulation.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 23/01/2005, 14h13
  *
  * URL: http://bcz.asterope.fr

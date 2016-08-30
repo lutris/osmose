@@ -1,4 +1,4 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
  *
  * This file is part of Osmose, a Sega Master System/Game Gear software
@@ -17,14 +17,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: waveWriter.h
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class declares waveWriter class used by Osmose for
  * saving sound. It's only designed to handle 16 bits mono 22050hz samples.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 25/11/2004, 14h00
  *
  * URL: http://bcz.asterope.fr

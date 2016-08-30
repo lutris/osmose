@@ -18,9 +18,11 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : EmulationThread.cpp
+ * File: EmulationThread.cpp
  *
- * Description : This class provide basic EmulationThread feature. It can start
+ * Project: Osmose emulator
+ *
+ * Description: This class provide basic EmulationThread feature. It can start
  * pause, resume the rendering code that is provided in emulateOneFrame() pure
  * virtual method. The setRefreshingPeriod() set the number of frame per second
  * that is wanted. emulatOneframe() is called accordingly. The setResolution()
@@ -31,10 +33,10 @@
  * emulateOneFrame() function, which perform emulation task and fill the video
  * buffer.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Fri May 21 14:05:52 2010
  *
- * Date : Fri May 21 14:05:52 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #include "EmulationThread.h"

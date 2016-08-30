@@ -18,14 +18,16 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : EmulationThread.h
+ * File: EmulationThread.h
  *
- * Description :
+ * Project: Osmose emulator
  *
- * Author : B.Vedder
+ * Description:
  *
- * Date : Fri May 21 14:05:52 2010
+ * Author: Bruno Vedder
+ * Date: Fri May 21 14:05:52 2010
  *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef EMULATIONTHREAD_H

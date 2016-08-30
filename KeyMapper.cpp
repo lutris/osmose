@@ -18,15 +18,17 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : KeyMapper.cpp
+ * File: KeyMapper.cpp
  *
- * Description : This singleton is used to convert Qt::Key into const char *
+ * Project: Osmose emulator
+ *
+ * Description: This singleton is used to convert Qt::Key into const char *
  * representing the key. getKeyDescription (Qt::0x20) returns const char * ='space'.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Fri Nov 26 10:55:13 2010
  *
- * Date : Fri Nov 26 10:55:13 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #include "KeyMapper.h"

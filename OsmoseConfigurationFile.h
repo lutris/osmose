@@ -18,14 +18,16 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : OsmoseConfigurationFile.h
+ * File: OsmoseConfigurationFile.h
  *
- * Description : This class handle $HOME .osmose.ini file.
+ * Project: Osmose emulator
  *
- * Author : B.Vedder
+ * Description: This class handle $HOME .osmose.ini file.
  *
- * Date : Fri Nov 26 15:50:00 2010
+ * Author: Bruno Vedder
+ * Date: Fri Nov 26 15:50:00 2010
  *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef OSMOSECONFIGURATIONFILE_H

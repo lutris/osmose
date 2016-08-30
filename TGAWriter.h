@@ -18,15 +18,16 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- *
  * File: TGAWriter.h
- * Project: Osmose
+ *
+ * Project: Osmose emulator
  *
  * Description: This file handle creation, and write into an uncompressed TGA
  * 24bits imagefile. No more formats supported.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 12/12/2007
+ *
  * URL: http://bcz.asterope.fr
  */
 

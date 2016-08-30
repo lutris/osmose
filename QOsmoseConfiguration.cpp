@@ -18,14 +18,16 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : QOsmoseConfiguration.cpp
+ * File: QOsmoseConfiguration.cpp
  *
- * Description :
+ * Project: Osmose emulator
  *
- * Author : B.Vedder
+ * Description:
  *
- * Date : Sun Nov 21 16:21:21 2010
+ * Author: Bruno Vedder
+ * Date: Sun Nov 21 16:21:21 2010
  *
+ * URL: http://bcz.asterope.fr
  */
 
 #include "QOsmoseConfiguration.h"

@@ -16,7 +16,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ *
+ *
+ * File: Bits.h
+ *
+ * Project: Osmose emulator
+ *
+ * Description:
+ *
+ * Author: Bruno Vedder
+ * Date:
+ *
+ * URL: http://bcz.asterope.fr/
+ */
 
 #ifndef BITS_H
 #define BITS_H

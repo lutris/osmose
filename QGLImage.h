@@ -18,10 +18,12 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : QGLImage.h
+ * File: QGLImage.h
  *
- * Description : This Object is used to display image on an OpenGL
- * textured quad . If the QGLImage size changes, the texture will be stretched
+ * Project: Osmose emulator
+ *
+ * Description: This Object is used to display image on an OpenGL
+ * textured quad. If the QGLImage size changes, the texture will be stretched
  * to fit the Quad. The texture dimension can be changed, but should not
  * be done every frame, for performances reasons. Note that texture
  * format is fixed to 32 bits RGBA.
@@ -30,10 +32,10 @@
  * resolutionChanged slot may be called during paintEvent. The blit() method
  * expect the source buffer to be of the current texture resolution.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Wed May 19 17:55:00 2010
  *
- * Date : Wed May 19 17:55:00 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef QGLIMAGE_H

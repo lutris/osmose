@@ -18,14 +18,16 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : Pthreadcpp.h
+ * File: Pthreadcpp.h
  *
- * Description : This class provide basic Mutex and Thread C++ encapsulation.
+ * Project: Osmose emulator
  *
- * Author : B.Vedder
+ * Description: This class provide basic Mutex and Thread C++ encapsulation.
  *
- * Date : Fri Dec 17 07:44:27 2010
+ * Author: Bruno Vedder
+ * Date: Fri Dec 17 07:44:27 2010
  *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef PTHREADCPP_H
