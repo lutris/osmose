@@ -18,6 +18,16 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
+ * File: main.cpp
+ *
+ * Project: Osmose emulator
+ *
+ * Description:
+ *
+ * Author: Bruno Vedder
+ * Date:
+ *
+ * URL: http://bcz.asterope.fr
  */
 
 #include <QApplication>

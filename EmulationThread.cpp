@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,25 +16,27 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
  *
- * File : EmulationThread.cpp
  *
- * Description : This class provide basic EmulationThread feature. It can start
+ * File: EmulationThread.cpp
+ *
+ * Project: Osmose emulator
+ *
+ * Description: This class provide basic EmulationThread feature. It can start
  * pause, resume the rendering code that is provided in emulateOneFrame() pure
  * virtual method. The setRefreshingPeriod() set the number of frame per second
  * that is wanted. emulatOneframe() is called accordingly. The setResolution()
- * method emits a newResolution() signal to the QGLimage object to inform it 
+ * method emits a newResolution() signal to the QGLimage object to inform it
  * of a resolution change (e.g. emulated video mode switch). The texture buffer
  * videoBuffer is allocated accordingly.
- * This class MUST be inherited, and the derived class MUST provide the 
+ * This class MUST be inherited, and the derived class MUST provide the
  * emulateOneFrame() function, which perform emulation task and fill the video
  * buffer.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Fri May 21 14:05:52 2010
  *
- * Date : Fri May 21 14:05:52 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #include "EmulationThread.h"
@@ -49,7 +51,7 @@ EmulationThread::EmulationThread(QGLImage *qglimage) : screen(qglimage)
 	QObject::connect(this, SIGNAL(newResolution(int, int)), qglimage, SLOT(resolutionChanged(int, int)));
 	setResolution(qglimage->getTextureWidth(), qglimage->getTextureHeight());
 	emulationState = EMULATION_STOPPED;
-	
+
 	// Set default refresh slow arbitrary frequency.
 	setRefreshFrequency(1.0f);
 	done = false;
@@ -65,7 +67,7 @@ EmulationThread::~EmulationThread()
 
 /**
  * This method overrides QThread run(). It's the thread main method.
- * 
+ *
  * Return : None.
  */
 void EmulationThread::run()
@@ -73,7 +75,7 @@ void EmulationThread::run()
 	struct timeval t0, t1;
 	struct timespec rqtp, rmtp;
 	unsigned int deltaT_micros, remainingT;
-	
+
 	while(!done)
 	{
 		emulationStateQMutex.lockForRead();
@@ -82,46 +84,46 @@ void EmulationThread::run()
 			case EMULATION_STOPPED:
 				// Free QMutex.
 				emulationStateQMutex.unlock();
-				
+
 				// Sleep 20ms.
 				rqtp.tv_sec = 0;
-				rqtp.tv_nsec = 20 * 1000 * 1000; // 20 millisecond.	
+				rqtp.tv_nsec = 20 * 1000 * 1000; // 20 millisecond.
 				nanosleep(&rqtp, &rmtp);
 			break;
 
 			case EMULATION_RUNNING:
 				// Free QMutex.
 				emulationStateQMutex.unlock();
-				
+
 				// Execute one emulation frame, blit texture into openGL
 				// and calculate the duration of these operations.
-				gettimeofday(&t0, NULL);		
+				gettimeofday(&t0, NULL);
 				emulateOneFrame();
 				screen->blit(videoBuffer);
 				gettimeofday(&t1, NULL);
-				
+
 				// Compute duration.
 				deltaT_micros = ((t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec));
-				
+
 				// Compute remaining time to achieve the good regreshing period.
 				remainingT = (deltaT_micros < refreshingPeriod) ? refreshingPeriod - deltaT_micros : 1;
 
 				// Sleep the remaining time.
 				rqtp.tv_sec = 0;
-				rqtp.tv_nsec = remainingT * 1000; // microsecond to nanoseconds				
+				rqtp.tv_nsec = remainingT * 1000; // microsecond to nanoseconds
 				nanosleep(&rqtp, &rmtp);
-				//cout << "Loop takes :" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;		
+				//cout << "Loop takes :" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;
 			break;
-			
+
 			case EMULATION_ABORTED:
 				done = true;
-				emulationStateQMutex.unlock();	
+				emulationStateQMutex.unlock();
 			break;
-			
+
 			default:
 				// Free QMutex.
 				emulationStateQMutex.unlock();
-				
+
 			break;
 		}
 	}
@@ -131,9 +133,9 @@ void EmulationThread::run()
 /**
  * This method will abort Emulation. This will cause the emulation thread
  * to die.
- * 
+ *
  * Return : None.
- * 
+ *
  */
 void EmulationThread::abortEmulation()
 {
@@ -145,9 +147,9 @@ void EmulationThread::abortEmulation()
 /**
  * This method will start Emulation. If emulation is already started, it
  * does nothing.
- * 
+ *
  * Return : None.
- * 
+ *
  */
 void EmulationThread::startEmulation()
 {
@@ -159,22 +161,22 @@ void EmulationThread::startEmulation()
 /**
  * This method will suspends Emulation. To continue, one should call
  * resume() method.
- * 
+ *
  * Return : None.
  *
  */
 void EmulationThread::pauseEmulation()
 {
 	QWriteLocker lock(&emulationStateQMutex);
-	emulationState = EMULATION_STOPPED;	
+	emulationState = EMULATION_STOPPED;
 }
 
 /**
  * This method will resume Emulation that has previously been stopped
  * using pauseEmulation();
- * 
+ *
  * Return : None.
- * 
+ *
  */
 void EmulationThread::resumeEmulation()
 {
@@ -183,11 +185,11 @@ void EmulationThread::resumeEmulation()
 }
 
 /**
- * This method will reset/restart Emulation. It's equivalent to a 
+ * This method will reset/restart Emulation. It's equivalent to a
  * hardware reset.
- * 
+ *
  * Return : None.
- * 
+ *
  */
 void EmulationThread::resetEmulation()
 {
@@ -197,13 +199,13 @@ void EmulationThread::resetEmulation()
  * This method set the refreshing period of the emulation thread.
  * Important note : The QThread::run method will call repeatly the
  * emulateOneFrame() methods which should perform emulation stuff for
- * exactly one frame. The execution time of emulateOneFrame() is 
+ * exactly one frame. The execution time of emulateOneFrame() is
  * calculated, and the remaining time to reach the refreshing period
  * is wasted in nanosleep.
- * 
- * Param 1 : The refresh frequency in Hertz of the emulation. This value 
+ *
+ * Param 1 : The refresh frequency in Hertz of the emulation. This value
  * should be the display original emulated refresh display.
- * 
+ *
  * Return : None.
  */
 void EmulationThread::setRefreshFrequency(float f)
@@ -215,23 +217,23 @@ void EmulationThread::setRefreshFrequency(float f)
 
 /**
  * This method will change the textureSize that is mapped on the GL QUAD. It
- * usually happens on emulated video mode change. The texture buffer is 
+ * usually happens on emulated video mode change. The texture buffer is
  * deleted and reallocated, and a signal emitted to inform QGLimage of this
  * event.
  *
  * Param 1 : new texture width.
- * 
+ *
  * Param 2 : new texture height.
  *
  * Return : None.
- * 
+ *
  */
 void EmulationThread::setResolution(int w, int h)
 {
 	delete []videoBuffer;
 	int s = w * h;
 	videoBuffer = new unsigned int[s];
-	memset(videoBuffer, 0, s * sizeof(unsigned int));	
+	memset(videoBuffer, 0, s * sizeof(unsigned int));
 	emit newResolution(w, h);
 }
 
@@ -240,10 +242,10 @@ void EmulationThread::setResolution(int w, int h)
  * as a slot in order to avoid slot connection/deconnection on ROM change.
  * To implement a different behaviour from the default one, simply override
  * this method.
- * 
+ *
  * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
- * 
- * Return : None. 
+ *
+ * Return : None.
  */
 void EmulationThread::keyPressed(padKey)
 {
@@ -256,10 +258,10 @@ void EmulationThread::keyPressed(padKey)
  * as a slot in order to avoid slot connection/deconnection on ROM change.
  * To implement a different behaviour from the default one, simply override
  * this method.
- * 
+ *
  * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
- * 
- * Return : None. 
+ *
+ * Return : None.
  */
 void EmulationThread::keyReleased(padKey)
 {

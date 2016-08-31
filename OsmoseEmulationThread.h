@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,17 +16,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
  *
- * File : OsmoseEmulationThread.h
  *
- * Description :
+ * File: OsmoseEmulationThread.h
  *
- * Author : B.Vedder
+ * Project: Osmose emulator
  *
- * Date : Thu May 27 14:20:27 2010
+ * Description:
  *
+ * Author: Bruno Vedder
+ * Date: Thu May 27 14:20:27 2010
+ *
+ * URL: http://bcz.asterope.fr
  */
+
 #ifndef OSMOSE_EMULATION_THREAD_H
 #define OSMOSE_EMULATION_THREAD_H
 
@@ -48,7 +51,7 @@ public:
 	void keyPressed(padKey key);
 	void keyReleased(padKey key);
 	OsmoseCore *getCore() {return core;}
-	
+
 protected:
 
 private:

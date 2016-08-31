@@ -1,7 +1,7 @@
-/**
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -17,14 +17,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
- * File : SoundThread.h
  *
- * Description :
+ * File: SoundThread.h
  *
- * Author : B.Vedder
+ * Description:
  *
- * Date : Wed Dec 15 07:43:05 2010
+ * Author: Bruno Vedder
+ * Date: Wed Dec 15 07:43:05 2010
  *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef SOUNDTHREAD_H
@@ -58,13 +59,13 @@ public:
 	void stop();
 	void pause();
 	void resume();
-	
+
 	~SoundThread();
 
 protected:
-	
+
 	void* run(void *p);
-	
+
 private:
 
 	char deviceName[DEVICE_NAME_LENGTH];

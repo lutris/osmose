@@ -1,7 +1,7 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -17,18 +17,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: FIFOSoundBuffer.cpp
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class implements Circular sound buffer utility.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 12/07/2006, 20h00 Chile, 'Detroit de Magellan'
  *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #include "FIFOSoundBuffer.h"
 #include <stdio.h>
 

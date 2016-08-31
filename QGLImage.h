@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,24 +16,26 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
  *
- * File : QGLImage.h
  *
- * Description : This Object is used to display image on an OpenGL
- * textured quad . If the QGLImage size changes, the texture will be stretched
+ * File: QGLImage.h
+ *
+ * Project: Osmose emulator
+ *
+ * Description: This Object is used to display image on an OpenGL
+ * textured quad. If the QGLImage size changes, the texture will be stretched
  * to fit the Quad. The texture dimension can be changed, but should not
  * be done every frame, for performances reasons. Note that texture
  * format is fixed to 32 bits RGBA.
  *
- * The textureBuffer is protected by a mutex because blit() or 
+ * The textureBuffer is protected by a mutex because blit() or
  * resolutionChanged slot may be called during paintEvent. The blit() method
  * expect the source buffer to be of the current texture resolution.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Wed May 19 17:55:00 2010
  *
- * Date : Wed May 19 17:55:00 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef QGLIMAGE_H
@@ -48,7 +50,7 @@
 class QGLImage : public QGLWidget
 {
 	Q_OBJECT;
-	
+
 public:
 	QGLImage(QWidget *parent = 0, int w = 320, int h = 240, QGL::FormatOptions f = QGL::DirectRendering);
 	~QGLImage();
@@ -57,13 +59,13 @@ public:
 	int getTextureHeight() { return textureHeight;}
 	bool isBilinearFiltering() { return bilinearFiltering;}
 	bool isNearestNeighboorFiltering() { return (!bilinearFiltering);}
-	
+
 public slots:
 	void resolutionChanged(int newx, int newy);
 	void bilinearFilteringOn();
 	void nearestNeighboorFilteringOn();
 
-	
+
 protected:
 	void resizeGL(int width, int height);
 	void paintGL();
@@ -80,7 +82,7 @@ private:
 	float glTextCoordX;
 	float glTextCoordY;
 	bool bilinearFiltering;
-	
+
 	// Texture used to render the Quad.
 	QMutex textureBufferMutex;
 	GLuint textureName[1];

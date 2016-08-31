@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,21 +16,23 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
  *
- * File : Pthreadcpp.cpp
  *
- * Description :
+ * File: Pthreadcpp.cpp
  *
- * Author : B.Vedder
+ * Project: Osmose emulator
  *
- * Date : Fri Dec 17 07:44:27 2010
+ * Description:
  *
+ * Author: Bruno Vedder
+ * Date: Fri Dec 17 07:44:27 2010
+ *
+ * URL: http://bcz.asterope.fr
  */
 
 #include "Pthreadcpp.h"
 
-/**	
+/**
  * Description : This class is the most basic pthread C++ encapsulation.
  * It's used to handle JOINABLE / UNDETACHED posix threads.
  * To create a thread, simply inherit this class, and override the run()
@@ -59,8 +61,8 @@ Thread::Thread()
  * Destructor.
  */
 Thread::~Thread()
-{  
-    /*	
+{
+    /*
 		Posix pthread_join() says :
 		When  a	joinable  thread  terminates,  its  memory  resources  (thread
 		descriptor and stack) are not deallocated until another thread performs

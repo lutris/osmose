@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,17 +16,18 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
  *
  *
  * File: TGAWriter.h
- * Project: Osmose
+ *
+ * Project: Osmose emulator
  *
  * Description: This file handle creation, and write into an uncompressed TGA
  * 24bits imagefile. No more formats supported.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 12/12/2007
+ *
  * URL: http://bcz.asterope.fr
  */
 
@@ -40,7 +41,7 @@ using namespace std;
 
 #define INTERNAL_CACHE_SIZE 4096
 
- struct TGAHeader 
+ struct TGAHeader
 {
     unsigned char  identsize;    	// size of ID field that follows 18 byte header (0 usually)
     unsigned char  colourmaptype;	// type of colour map 0=none, 1=has palette

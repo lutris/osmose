@@ -1,7 +1,7 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -17,19 +17,20 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: MemoryMapper.cpp
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class will handle emulator read/write and bank
  * switching during emulation.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 02/10/2004, 18h00
  *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #include "MemoryMapper.h"
 #include "Options.h"
 #include "RomSpecificOption.h"
@@ -86,7 +87,7 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
             else
             {
 				string error_message = "Unknown file extension:" + ext + ". \nKnown extensions supported by Osmose are: .sms .gg or .zip";
-				throw error_message;				
+				throw error_message;
             }
 
     /* Print the ROM CRC. */
@@ -116,7 +117,7 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
 	{
 		ram[i] = 0;
 	}
-   
+
 
     // Allocate 32Ko RAM banks, (2*16 opt banks) for games that use it.
     sram = new unsigned char[0x8000];
@@ -146,7 +147,7 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
 			sram[i] = 0x0;
 		}
 	}
-    
+
     //dump_smem(0, 16*20);
     // Allocate 8Ko of ram for writes in rom.
     null_rom = new unsigned char[0x2000];
@@ -669,7 +670,7 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
     if (ret != UNZ_OK)
     {
         string error_msg = "unzGoToFirstFile() call failed.";
-        throw error_msg;		
+        throw error_msg;
     }
 
     do
@@ -687,11 +688,11 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
             {
 				string msg ="File in zip archive is ";
 				msg = msg + filename;
-				QLogWindow::getInstance()->appendLog(msg);				
+				QLogWindow::getInstance()->appendLog(msg);
                 smsArchiveFound = true;
                 opt.MachineType = SMS;
 				msg ="Switching emulator to SMS mode.";
-				QLogWindow::getInstance()->appendLog(msg);				
+				QLogWindow::getInstance()->appendLog(msg);
             }
             if ((strncasecmp(&filename[strlen(filename)-3],".gg", 3)== 0))
             {
@@ -708,7 +709,7 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
         else
         {
 			string error_msg = "unzGetCurrentFileInfo() call failed.";
-			throw error_msg;			
+			throw error_msg;
         }
 
         if (smsArchiveFound != true && file_nbr <  zip_global_info.number_entry)
@@ -717,7 +718,7 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
             if (ret != UNZ_OK)
             {
 				string error_msg = "unzGoToNextFile() call failed.";
-				throw error_msg;				
+				throw error_msg;
             }
         }
 
@@ -735,7 +736,7 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
     if (ret != UNZ_OK)
     {
 		string error_msg = "Unable to open file from zip archive.";
-		throw error_msg;		
+		throw error_msg;
     }
 
     // Some rom seems to have a 512byte header. Skip it.
@@ -748,7 +749,7 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
         if (ret < 0)
         {
 			string error_msg = "Unable read 512 bytes from zip archive.";
-			throw error_msg;	
+			throw error_msg;
         }
         rom_size -= 512;
     }
@@ -785,7 +786,7 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
 		string error_msg = "Unable to load cartridge from zip archive.";
 		throw error_msg;
     }
-    
+
     unzClose(myZip);
     delete []dummy;
 
@@ -814,7 +815,7 @@ unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
     if ((rom_size %1024) == 512)
     {
 		string msg = "512 bytes ROM header Skipped.";
-		QLogWindow::getInstance()->appendLog(msg);		
+		QLogWindow::getInstance()->appendLog(msg);
         file.seekg(512, ios::beg);
         rom_size -= 512;
     }
@@ -834,7 +835,7 @@ unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
 	ostringstream oss;
 	oss << "Cartdrige contains " << (int)bank16Ko_nbr << " 16Ko banks.";
     QLogWindow::getInstance()->appendLog(oss.str().c_str());
-	
+
     // Allocate RAM for the whole cartridge.
     if (rom_size < 65536)
     {
@@ -867,7 +868,7 @@ unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
 void MemoryMapper::DisplayROMSize()
 {
 	ostringstream oss;
-    
+
 	/* 128 is equivalent (romsize*8)/1024 */
     if ((rom_size/128)> 1024)
     {
@@ -907,7 +908,7 @@ void MemoryMapper::save_battery_backed_memory(string filename)
         file.flush();
         file.close();
 		string msg = "Battery Backed Ram saved.";
-		QLogWindow::getInstance()->appendLog(msg);		
+		QLogWindow::getInstance()->appendLog(msg);
     }
 }
 
@@ -1075,7 +1076,7 @@ bool MemoryMapper::loadState( ifstream &ifs)
 				{
 					string msg ="Warning : Wrong area_type for write_map !";
 					QLogWindow::getInstance()->appendLog(msg);
-                }				
+                }
                 break;
 
             case Ram:
@@ -1094,7 +1095,7 @@ bool MemoryMapper::loadState( ifstream &ifs)
 				{
 					string msg ="Warning : Unknown area_type for write_map !";
 					QLogWindow::getInstance()->appendLog(msg);
-                }					
+                }
                 break;
         }
         write_map[i] = base_ptr + (block_in_wr_area[i] * 0x2000);

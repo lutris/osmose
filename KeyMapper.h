@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,17 +16,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
  *
- * File : KeyMapper.h
  *
- * Description : This singleton is used to convert Qt::Key into const char *
+ * File: KeyMapper.h
+ *
+ * Project: Osmose emulator
+ *
+ * Description: This singleton is used to convert Qt::Key into const char *
  * representing the key. Qt::0x20 returns 'space'.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Fri Nov 26 10:55:13 2010
  *
- * Date : Fri Nov 26 10:55:13 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef KEYMAPPER_H
@@ -54,7 +56,7 @@ private:
 	static const key_map keymap[KEY_NBR];
 	static KeyMapper *instance;
 	KeyMapper();
-	
+
 };
 
 #endif	// KEYMAPPER_H

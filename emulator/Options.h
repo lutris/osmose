@@ -1,7 +1,7 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -17,18 +17,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: Options.h
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class is just a global variable receptor.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 11/01/2005, 18h40
  *
  * URL: http://bcz.asterope.fr/
  */
- 
+
 #ifndef OPTIONS_H
 #define OPTIONS_H
 

@@ -1,7 +1,7 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -17,18 +17,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
+ *
  * File: VDP.cpp
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class will handle VDP (Video Display Processor)operation.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 11/10/2004, 08h30
  *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #include "VDP.h"
 
 extern Options opt;
@@ -164,7 +165,7 @@ unsigned int VDP::colorSMS8BitsToColor32Bits(unsigned char data)
     g = g_col[(data >> 2) &3];
     b = b_col[(data >> 4) &3];
 	out = (unsigned int) (0xFF000000 | (b << 16) | (g << 8) | r);
-    return out; 
+    return out;
 }
 
 /*---------------------------------------------------------------*/
@@ -359,7 +360,7 @@ void VDP::reset()
         b_col[1] = 0x55;
         b_col[2] = 0xAA;
         b_col[3] = 0xFF;
-  
+
   }
 
     for (int i=0; i<VDP_REGISTER_NBR; i++)
@@ -629,7 +630,7 @@ void VDP::traceBackGroundLine(unsigned int *s)
         // endianness
         unsigned int *cst = (unsigned int *) &VRAM[c];
         p = *cst;
-        
+
         // Patch for PowerPC indianess.
         //p = (p >> 24) | ((p & 0x00FF0000) >> 8) | ((p & 0x0000FF00)<< 8) | (( p &0xFF)<<24);
         c += 4;

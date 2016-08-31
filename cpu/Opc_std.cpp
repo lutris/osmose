@@ -1,7 +1,7 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,9 +16,11 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
  * File: Opc_std.cpp
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class implements all opcodes without prefixes.
  * Timing is 100% Mame compliant. Methods here should be used through the jump table
@@ -26,7 +28,7 @@
  *
  * Note: This table has no exec() method since cpu uses directly it's jump table.
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 10/01/2006, Thailand, Laos Cambodia :-)
  *
  * URL: http://bcz.asterope.fr

@@ -1,7 +1,7 @@
 /*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,25 +16,28 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
- *	
  *
- * File : QGLImage.cpp
  *
- * Description : This Object is used to display image on an OpenGL
- * textured quad . If the QGLImage size changes, the texture will be stretched
+ * File: QGLImage.cpp
+ *
+ * Project: Osmose emulator
+ *
+ * Description: This Object is used to display image on an OpenGL
+ * textured quad. If the QGLImage size changes, the texture will be stretched
  * to fit the Quad. The texture dimension can be changed, but should not
  * be done every frame, for performances reasons. Note that texture
  * format is fixed to 32 bits RGBA.
  *
- * The textureBuffer is protected by a mutex because blit() or 
+ * The textureBuffer is protected by a mutex because blit() or
  * resolutionChanged slot may be called during paintEvent. The blit() method
  * expect the source buffer to be of the current texture resolution.
- * 
+ *
  * The texture is refreshed using the blit() method, which call update().
- * Author : B.Vedder
  *
- * Date : Wed May 19 17:55:00 2010
+ * Author: Bruno Vedder
+ * Date: Wed May 19 17:55:00 2010
  *
+ * URL: http://bcz.asterope.fr
  */
 
 #include "QGLImage.h"
@@ -44,7 +47,7 @@ using namespace std;
 
 /**
  * Constructor.
- * 
+ *
  * Param1 : Parent QWidget.
  *
  * Param2 : texture Width.
@@ -56,7 +59,7 @@ QGLImage::QGLImage(QWidget *parent, int w, int h, QGL::FormatOptions f) : QGLWid
 {
 	textureBuffer = NULL;
 	viewPortWidth = 1;
-	viewPortHeight = 1;	
+	viewPortHeight = 1;
 	adjustTextureDimension(w, h);
 	bilinearFiltering = false;
 }
@@ -73,7 +76,7 @@ QGLImage::~QGLImage()
 /**
  * This slot is called when an object signals a resolution of the
  * textureBuffer change. Note that the depth is FIXED an cannot be changed.
- * 
+ *
  * Return : None.
  */
 void QGLImage::resolutionChanged(int newWidth, int newHeight)
@@ -84,7 +87,7 @@ void QGLImage::resolutionChanged(int newWidth, int newHeight)
 
 /**
  * This method is called on resize event.
- * 
+ *
  * Return : None.
  */
 void QGLImage::resizeGL(int width, int height)
@@ -96,13 +99,13 @@ void QGLImage::resizeGL(int width, int height)
 
 /**
  * This method is called on paint event.
- * 
+ *
  * Return : None.
  */
 void QGLImage::paintGL()
 {
 	QMutexLocker locker(& textureBufferMutex);
-	
+
 	setupViewport(viewPortWidth, viewPortHeight);
     glLoadIdentity();
     glBindTexture(GL_TEXTURE_2D, textureName[0]);
@@ -127,14 +130,14 @@ void QGLImage::paintGL()
 
 /**
  * This method is when opengl initialisation is needed by QT.
- * 
+ *
  * Return : None.
  */
 void QGLImage::initializeGL()
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
     glEnable(GL_TEXTURE_2D);
-    
+
     /* Delete previous texture if any. OGL ignores free on non alloc. textures */
     glDeleteTextures(1, textureName);
     glGenTextures(1,textureName);
@@ -150,19 +153,19 @@ void QGLImage::initializeGL()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);            
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 }
 
 
 /**
  * This method setup viewport in order to get  0,0 coord into upper
- * left corner, and width, height in bottom right with a given 
+ * left corner, and width, height in bottom right with a given
  * dimension width, height.
- * 
+ *
  * Param 1: openGL viewPort width.
  *
  * Param 2: openGL viewPort height.
- * 
+ *
  * Return : None.
  */
 void QGLImage::setupViewport(int width, int height)
@@ -171,9 +174,9 @@ void QGLImage::setupViewport(int width, int height)
 	glViewport(0,0,width,height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0f,width,height,0.0f,-1.0f,1.0f);				
+	glOrtho(0.0f,width,height,0.0f,-1.0f,1.0f);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();	
+	glLoadIdentity();
 }
 
 
@@ -181,11 +184,11 @@ void QGLImage::setupViewport(int width, int height)
  * This method compute texture dimension and coordinate to fit the widget
  * dimension despite OpenGL texture constraints (size power of two).
  * Note that textureBuffer is allocated, with the adjusted texture size.
- * Before drawing, the original picture must be blitted into the 
+ * Before drawing, the original picture must be blitted into the
  * adjusted texture.
  *
  * Param 1: image source width.
- * 
+ *
  * Param 2: image source height.
  *
  * Return : None.
@@ -215,9 +218,9 @@ void QGLImage::adjustTextureDimension(int w, int h)
 /**
  * This image blit original pixel buffer to the size adjusted openGL
  * texture.
- * 
+ *
  * Param 1: image source pixel data (RGBA 32bits).
- * 
+ *
  * Return : None.
  */
 
@@ -233,7 +236,7 @@ void QGLImage::blit(unsigned int *source)
 		source += textureWidth;
 		scaledTexture += adjustedTextureWidth;
 	}
-	
+
 	// Ask for refresh !
 	update();
 }
@@ -243,17 +246,17 @@ void QGLImage::blit(unsigned int *source)
  * OpenGL texture only accepts power of two size.
  * The QGLImage object will not have such limitation, and will hide a
  * work around to use any texture size as image source. This is done
- * by allocation the next bigger size which is a power of two, and 
+ * by allocation the next bigger size which is a power of two, and
  * adjust texture coordinate accodingly, to fill the object surface.
  *
  * This method calculate the nearest greater power of two texture size
  * for the given image size. e.g : image size is 259 pixel, the texture
  * size allocated will be 512.
- * 
+ *
  * Param 1: Original image resolution.
- * 
+ *
  * Return : The nearest greater size power of two.
- */ 
+ */
 int QGLImage::getNearestGreaterPowerOfTwo(int size)
 {
 	if (size <= 2) return 2;
@@ -272,7 +275,7 @@ int QGLImage::getNearestGreaterPowerOfTwo(int size)
 
 /**
  * This slot is called when an bilinear filtering is turned ON.
- * 
+ *
  * Return : None.
  */
 void QGLImage::bilinearFilteringOn()
@@ -286,7 +289,7 @@ void QGLImage::bilinearFilteringOn()
 
 /**
  * This slot is called when an bilinear filtering is turned OFF.
- * 
+ *
  * Return : None.
  */
 void QGLImage::nearestNeighboorFilteringOn()

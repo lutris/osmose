@@ -18,15 +18,17 @@
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
  *
- * File : OsmoseGUI.h
+ * File: OsmoseGUI.h
  *
- * Description : This class is the main Application class. It contains
+ * Project: Osmose emulator
+ *
+ * Description: This class is the main Application class. It contains
  * all QT objects and signal slots that are needed.
  *
- * Author : B.Vedder
+ * Author: Bruno Vedder
+ * Date: Fri May 14 14:53:24 2010
  *
- * Date : Fri May 14 14:53:24 2010
- *
+ * URL: http://bcz.asterope.fr
  */
 
 #ifndef OSMOSE_GUI_H

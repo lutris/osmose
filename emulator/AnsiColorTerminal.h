@@ -1,7 +1,7 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -17,8 +17,10 @@
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
  *
- * File: AnsiTer,inalColors.h
- * Project: Osmose emulator.
+ *
+ * File: AnsiTerminalColors.h
+ *
+ * Project: Osmose emulator
  *
  * Description: These MACROS allows the program to output colored strings on
  * the terminal. Note that only basic coloring is handled, not the full escape
@@ -28,11 +30,12 @@
  * Note that USE_ISO_IEC_6429 must be define in order to work. Undefine this
  * setting for non ISO6429 compliant terminal (ms win).
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 12/12/2007
+ *
  * URL: http://bcz.asterope.fr
  */
- 
+
 #ifndef ANSI_TERMINAL_COLORS_H
 #define ANSI_TERMINAL_COLORS_H
 

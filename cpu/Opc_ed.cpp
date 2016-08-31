@@ -1,7 +1,7 @@
-/*****************************************************************************
+/*
  * Copyright 2001-2011 Vedder Bruno.
- *	
- * This file is part of Osmose, a Sega Master System/Game Gear software 
+ *
+ * This file is part of Osmose, a Sega Master System/Game Gear software
  * emulator.
  *
  * Osmose is free software: you can redistribute it and/or modify
@@ -16,14 +16,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Osmose.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
  * File: Opc_ed.cpp
  *
- * Project: Osmose emulator.
+ * Project: Osmose emulator
  *
  * Description: This class implements all opcodes with 0xed prefixes.
  * Timing is not 100% Mame compliant (RETN RETI are not certain).
  *
- * Author: Vedder Bruno
+ * Author: Bruno Vedder
  * Date: 10/01/2006, Thailand, Laos Cambodia :-)
  *
  * URL: http://bcz.asterope.fr/
