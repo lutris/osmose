@@ -68,7 +68,7 @@ EmulationThread::~EmulationThread()
 /**
  * This method overrides QThread run(). It's the thread main method.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::run()
 {
@@ -112,7 +112,7 @@ void EmulationThread::run()
                 rqtp.tv_sec = 0;
                 rqtp.tv_nsec = remainingT * 1000; // microsecond to nanoseconds
                 nanosleep(&rqtp, &rmtp);
-                //cout << "Loop takes :" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;
+                //cout << "Loop takes:" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;
             break;
 
             case EMULATION_ABORTED:
@@ -134,7 +134,7 @@ void EmulationThread::run()
  * This method will abort Emulation. This will cause the emulation thread
  * to die.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::abortEmulation()
@@ -148,7 +148,7 @@ void EmulationThread::abortEmulation()
  * This method will start Emulation. If emulation is already started, it
  * does nothing.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::startEmulation()
@@ -162,7 +162,7 @@ void EmulationThread::startEmulation()
  * This method will suspends Emulation. To continue, one should call
  * resume() method.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::pauseEmulation()
@@ -175,7 +175,7 @@ void EmulationThread::pauseEmulation()
  * This method will resume Emulation that has previously been stopped
  * using pauseEmulation();
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::resumeEmulation()
@@ -188,7 +188,7 @@ void EmulationThread::resumeEmulation()
  * This method will reset/restart Emulation. It's equivalent to a
  * hardware reset.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::resetEmulation()
@@ -197,16 +197,16 @@ void EmulationThread::resetEmulation()
 
 /**
  * This method set the refreshing period of the emulation thread.
- * Important note : The QThread::run method will call repeatly the
+ * Important note: The QThread::run method will call repeatly the
  * emulateOneFrame() methods which should perform emulation stuff for
  * exactly one frame. The execution time of emulateOneFrame() is
  * calculated, and the remaining time to reach the refreshing period
  * is wasted in nanosleep.
  *
- * Param 1 : The refresh frequency in Hertz of the emulation. This value
+ * Param 1: The refresh frequency in Hertz of the emulation. This value
  * should be the display original emulated refresh display.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::setRefreshFrequency(float f)
 {
@@ -221,11 +221,11 @@ void EmulationThread::setRefreshFrequency(float f)
  * deleted and reallocated, and a signal emitted to inform QGLimage of this
  * event.
  *
- * Param 1 : new texture width.
+ * Param 1: new texture width.
  *
- * Param 2 : new texture height.
+ * Param 2: new texture height.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::setResolution(int w, int h)
@@ -243,9 +243,9 @@ void EmulationThread::setResolution(int w, int h)
  * To implement a different behaviour from the default one, simply override
  * this method.
  *
- * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
+ * Param 1: QT key() value of the QKeyEvent that signal keyPressed.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::keyPressed(padKey)
 {
@@ -259,9 +259,9 @@ void EmulationThread::keyPressed(padKey)
  * To implement a different behaviour from the default one, simply override
  * this method.
  *
- * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
+ * Param 1: QT key() value of the QKeyEvent that signal keyPressed.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::keyReleased(padKey)
 {

@@ -81,9 +81,9 @@ void OsmoseEmulationThread::resetEmulation()
  * conversion from Emulator key mapping and user configuration occurs
  * here.
  *
- * Param 1 : SMS/GG key.
+ * Param 1: SMS/GG key.
  *
- * Return : None.
+ * Return: None.
  */
 void OsmoseEmulationThread::keyPressed(padKey key)
 {
@@ -118,9 +118,9 @@ void OsmoseEmulationThread::keyPressed(padKey key)
  * conversion from Emulator key mapping and user configuration occurs
  * here.
  *
- * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
+ * Param 1: QT key() value of the QKeyEvent that signal keyPressed.
  *
- * Return : None.
+ * Return: None.
  */
 void OsmoseEmulationThread::keyReleased(padKey key)
 {

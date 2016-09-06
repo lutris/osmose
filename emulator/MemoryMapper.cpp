@@ -124,7 +124,7 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
 
     bool restored_old_bbr = false;
 
-    // Are there any battery backed memory save ?
+    // Are there any battery backed memory save?
     ostringstream oss;
     oss << configuration->getBBRPath() << "/" << rom_name << ".bbr";
 
@@ -898,7 +898,7 @@ void MemoryMapper::save_battery_backed_memory(string filename)
         ofstream file(filename.c_str(), ios::out | ios::binary);
         if (file.is_open() == false )
         {
-            string msg = "Unable to create .bbr file !";
+            string msg = "Unable to create .bbr file!";
             QLogWindow::getInstance()->appendLog(msg);
             return;
         }
@@ -1050,14 +1050,14 @@ bool MemoryMapper::loadState( ifstream &ifs)
             case Null:
                 // Everything is readable!
                 {
-                    string msg ="Warning : Wrong area_type for read_map !";
+                    string msg ="Warning: Wrong area_type for read_map!";
                     QLogWindow::getInstance()->appendLog(msg);
                 }
                 break;
 
             default:
                 {
-                    string message ="Warning : Unknown area_type for read_map !";
+                    string message ="Warning: Unknown area_type for read_map!";
                     QLogWindow::getInstance()->appendLog(message);
                 }
                 break;
@@ -1072,9 +1072,9 @@ bool MemoryMapper::loadState( ifstream &ifs)
         switch (wr_area_type[i])
         {
             case Cartridge:
-                // Cartridge are read only !
+                // Cartridge are read only!
                 {
-                    string msg ="Warning : Wrong area_type for write_map !";
+                    string msg ="Warning: Wrong area_type for write_map!";
                     QLogWindow::getInstance()->appendLog(msg);
                 }
                 break;
@@ -1093,7 +1093,7 @@ bool MemoryMapper::loadState( ifstream &ifs)
 
             default:
                 {
-                    string msg ="Warning : Unknown area_type for write_map !";
+                    string msg ="Warning: Unknown area_type for write_map!";
                     QLogWindow::getInstance()->appendLog(msg);
                 }
                 break;

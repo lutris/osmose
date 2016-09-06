@@ -50,7 +50,7 @@ void VDP_GG::writeDataPort(unsigned char data) // Port 0xBE written
 
     rd_data_port_buffer = data; // CMD docs says that write, load buffer with its value.
 
-    // destination is VRAM or CRAM ?
+    // destination is VRAM or CRAM?
     if (cmd_type == 3)
     {
         if (!(addr & 0x1))

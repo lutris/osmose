@@ -33,15 +33,15 @@
 #include "Pthreadcpp.h"
 
 /**
- * Description : This class is the most basic pthread C++ encapsulation.
+ * Description: This class is the most basic pthread C++ encapsulation.
  * It's used to handle JOINABLE / UNDETACHED posix threads.
  * To create a thread, simply inherit this class, and override the run()
  * method, and call the start method with input argument if any. Finally
  * call Join(...) to wait the Thread if needed.
  *
- * Author : B.Vedder
+ * Author: B.Vedder
  *
- * Date : Wed Dec 15 15:44:04 2010
+ * Date: Wed Dec 15 15:44:04 2010
  *
  */
 
@@ -63,7 +63,7 @@ Thread::Thread()
 Thread::~Thread()
 {
     /*
-        Posix pthread_join() says :
+        Posix pthread_join() says:
         When  a  joinable  thread  terminates,  its  memory  resources  (thread
         descriptor and stack) are not deallocated until another thread performs
         pthread_join on it. Therefore, pthread_join must  be  called  once  for

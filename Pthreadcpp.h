@@ -59,15 +59,15 @@ class MutexLocker
 
 /**
  *
- * Description : This class is the most basic pthread C++ encapsulation.
+ * Description: This class is the most basic pthread C++ encapsulation.
  * It's used to handle JOINABLE / UNDETACHED posix threads.
  * To create a thread, simply inherit this class, and override the run()
  * method, and call the start method with input argument if any. Finally
  * call Join(...) to wait the Thread if needed.
  *
- * Author : B.Vedder
+ * Author: B.Vedder
  *
- * Date : Wed Dec 15 15:44:04 2010
+ * Date: Wed Dec 15 15:44:04 2010
  *
  */
 

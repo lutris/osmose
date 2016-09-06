@@ -503,7 +503,7 @@ void SmsDebugger::exec_cmd(char *cmd, int param1)
 
     if (strcmp(cmd,"slbp")==0 )
     {
-        cout << "Scanline breakpoint on scanline : 0x" << hex << scanlineBreakpoint << "." << endl;
+        cout << "Scanline breakpoint on scanline: 0x" << hex << scanlineBreakpoint << "." << endl;
         return;
     }
 
@@ -629,7 +629,7 @@ void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
                         if ( breakpoints[i] == (int)cpu->PC )
                         {
                             end_session = false;
-                            cout <<"Reach Breakpoint at :" << hex << cpu->PC << endl;
+                            cout <<"Reach Breakpoint at:" << hex << cpu->PC << endl;
                             enter();
                         }
                     }
@@ -638,7 +638,7 @@ void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
             break;
 
         case DbgEvtUserTrigger:
-            cout << "DBG EVT from " << source <<" : " << message << endl;
+            cout << "DBG EVT from " << source <<": " << message << endl;
             end_session = false;
             enter();
             break;
@@ -647,7 +647,7 @@ void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
             // Check scanline breakpoint.
             if (v->line == scanlineBreakpoint)
             {
-                cout << "DBG EVT from " << source <<" : " << message << endl;
+                cout << "DBG EVT from " << source <<": " << message << endl;
                 end_session = false;
                 enter();
             }
@@ -656,7 +656,7 @@ void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
         case DbgEvtCpuIrqAsserted:
             if (breakpoint_on_irq)
             {
-                cout << "DBG EVT from " << source <<" : " << message << endl;
+                cout << "DBG EVT from " << source <<": " << message << endl;
                 end_session = false;
                 enter();
             }
@@ -665,7 +665,7 @@ void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
         case DbgEvtCpuDisableInterrupt:
             if (breakpoint_on_disable_interrupt)
             {
-                cout << "DBG EVT from " << source <<" : " << message << endl;
+                cout << "DBG EVT from " << source <<": " << message << endl;
                 end_session = false;
                 enter();
             }
@@ -674,21 +674,21 @@ void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
         case DbgEvtCpuEnableInterrupt:
             if (breakpoint_on_enable_interrupt)
             {
-                cout << "DBG EVT from " << source <<" : " << message << endl;
+                cout << "DBG EVT from " << source <<": " << message << endl;
                 end_session = false;
                 enter();
             }
             break;
 
         case DbgEvtGeneric:
-            cout << "DBG EVT from " << source <<" : " << message << endl;
+            cout << "DBG EVT from " << source <<": " << message << endl;
             end_session = false;
             enter();
             break;
 
 
         default:
-            cout << "UNKNOWN DBG EVT from " << source <<" : " << message << endl;
+            cout << "UNKNOWN DBG EVT from " << source <<": " << message << endl;
             end_session = false;
             break;
     }

@@ -763,7 +763,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Joystick found :</string>
+               <string>Joystick found:</string>
               </property>
              </widget>
             </item>

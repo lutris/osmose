@@ -42,8 +42,8 @@
 /**
  * Constructor. Throw an exception in case of failure.
  *
- * Param1 : The device name to read from. e.g: /dev/input/js0
- * Param2 : The JoystickListener that will be notified with jostick events
+ * Param1: The device name to read from. e.g: /dev/input/js0
+ * Param2: The JoystickListener that will be notified with jostick events
  *
  */
 Joystick::Joystick(const char *dev_name, JoystickListener *lstnr)
@@ -54,7 +54,7 @@ Joystick::Joystick(const char *dev_name, JoystickListener *lstnr)
     {
         string err = "Unable to open device '";
         err = err + dev_name;
-        err = err + "' : ";
+        err = err + "': ";
         err = err + strerror(errno);
         throw err;
     }
@@ -100,7 +100,7 @@ Joystick::Joystick(const char *dev_name, JoystickListener *lstnr)
 /**
  * setPollingPeriod:
  *
- * Param1 : the delay between two non blocking read on the device file.
+ * Param1: the delay between two non blocking read on the device file.
  * Unit is millisecond. If value is negative or equal to zero, the default
  * polling period will be used.
  *
@@ -113,7 +113,7 @@ void Joystick::setPollingPeriod(int pp_ms)
 /**
  * This method reads the joystick file descriptor for new events.
  * return true if an event has been read, false otherwise. Unfortunatelly,
- * no data, and joystick unplugged return the same error 11 :
+ * no data, and joystick unplugged return the same error 11:
  * 'Resource temporarily unavailable'. We cannot simply detect if joystick
  * is present or not.
  */
@@ -133,7 +133,7 @@ bool Joystick::readDevice(struct js_event *jse)
 
 
 /**
- * Thread main loop :
+ * Thread main loop:
  * This is the polling routine of the joystick handler.
  */
 void *Joystick::run(void *)

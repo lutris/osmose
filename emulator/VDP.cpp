@@ -113,7 +113,7 @@ VDP::VDP(Z80 *c, bool ntsc)
     }
     else
     {
-        cerr << RED("Unable to allocate memory for ROM banks !") << endl;
+        cerr << RED("Unable to allocate memory for ROM banks!") << endl;
         cerr << RED("Exiting.") << endl;
         ::exit(-1);
     }
@@ -129,7 +129,7 @@ void VDP::writeDataPort(unsigned char data) // Port 0xBE written
 
     rd_data_port_buffer = data; // CMD docs says that write, load buffer with it's value.
 
-    // destination is VRAM or CRAM ?
+    // destination is VRAM or CRAM?
     if (cmd_type == 3)
     {
         CRAM[addr & 0x1F] = data; // data not anded with 1f. It's done with rgb rate.
@@ -154,7 +154,7 @@ void VDP::writeDataPort(unsigned char data) // Port 0xBE written
 }
 
 /*---------------------------------------------------------------*/
-/* This method convert 8bit xxRRGGBB to the 32 bits :            */
+/* This method convert 8bit xxRRGGBB to the 32 bits:             */
 /* 11111111BBBBBBBGGGGGGGGRRRRRRRR colors .                      */
 /*---------------------------------------------------------------*/
 unsigned int VDP::colorSMS8BitsToColor32Bits(unsigned char data)

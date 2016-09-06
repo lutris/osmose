@@ -471,7 +471,7 @@ bool OsmoseCore::saveSaveState(int slot)
         return false;
     }
     output_file.close();
-    string msg = "State saved in file :" + save_state_name.str();
+    string msg = "State saved in file:" + save_state_name.str();
     QLogWindow::getInstance()->appendLog(msg);
     return true;
 }
@@ -490,7 +490,7 @@ bool OsmoseCore::loadSaveState(int slot)
     ifstream input_file(load_state_name.str().c_str(), ios::in | ios::binary);
     if (input_file.is_open() == false )
     {
-        string msg = "Fail to load state from file : " + load_state_name.str();
+        string msg = "Fail to load state from file: " + load_state_name.str();
         QLogWindow::getInstance()->appendLog(msg);
         return false;
     }
@@ -527,7 +527,7 @@ bool OsmoseCore::loadSaveState(int slot)
         return false;
     }
     input_file.close();
-    string msg = "State loaded from file : " + load_state_name.str();
+    string msg = "State loaded from file: " + load_state_name.str();
     QLogWindow::getInstance()->appendLog(msg);
     return true;
 }

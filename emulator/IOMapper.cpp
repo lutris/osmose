@@ -151,7 +151,7 @@ void IOMapper::out8(unsigned port, unsigned char value)
 
             if (value & BIT4)
             {
-                cout << "Work Ram Disable (For battery backed RAM ?)." << endl;
+                cout << "Work Ram Disable (For battery backed RAM?)." << endl;
             }
             else
             {

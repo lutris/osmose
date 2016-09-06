@@ -86,7 +86,7 @@ void Z80::Opc_std_06()
     B = env.rd8( PC++ );
 }
 
-/*  RLCA  & FF necessary ?*/
+/*  RLCA  & FF necessary?*/
 void Z80::Opc_std_07()
 {
     cycleCount += 4;
@@ -149,7 +149,7 @@ void Z80::Opc_std_0e()
     C = env.rd8( PC++ );
 }
 
-/*  RRCA & FF necessary ?*/
+/*  RRCA & FF necessary?*/
 void Z80::Opc_std_0f()
 {
     cycleCount += 4;

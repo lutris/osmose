@@ -48,11 +48,11 @@ using namespace std;
 /**
  * Constructor.
  *
- * Param1 : Parent QWidget.
+ * Param1: Parent QWidget.
  *
- * Param2 : texture Width.
+ * Param2: texture Width.
  *
- * Param3 : texture Height.
+ * Param3: texture Height.
  *
  */
 QGLImage::QGLImage(QWidget *parent, int w, int h, QGL::FormatOptions f) : QGLWidget(QGLFormat(f), parent)
@@ -77,18 +77,18 @@ QGLImage::~QGLImage()
  * This slot is called when an object signals a resolution of the
  * textureBuffer change. Note that the depth is FIXED an cannot be changed.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::resolutionChanged(int newWidth, int newHeight)
 {
-    //cout << "New resolution :" << newWidth << "x" << newHeight << endl;
+    //cout << "New resolution:" << newWidth << "x" << newHeight << endl;
     adjustTextureDimension(newWidth, newHeight);
 }
 
 /**
  * This method is called on resize event.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::resizeGL(int width, int height)
 {
@@ -100,7 +100,7 @@ void QGLImage::resizeGL(int width, int height)
 /**
  * This method is called on paint event.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::paintGL()
 {
@@ -131,7 +131,7 @@ void QGLImage::paintGL()
 /**
  * This method is when opengl initialisation is needed by QT.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::initializeGL()
 {
@@ -166,7 +166,7 @@ void QGLImage::initializeGL()
  *
  * Param 2: openGL viewPort height.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::setupViewport(int width, int height)
 {
@@ -191,7 +191,7 @@ void QGLImage::setupViewport(int width, int height)
  *
  * Param 2: image source height.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::adjustTextureDimension(int w, int h)
 {
@@ -221,7 +221,7 @@ void QGLImage::adjustTextureDimension(int w, int h)
  *
  * Param 1: image source pixel data (RGBA 32bits).
  *
- * Return : None.
+ * Return: None.
  */
 
 void QGLImage::blit(unsigned int *source)
@@ -237,7 +237,7 @@ void QGLImage::blit(unsigned int *source)
         scaledTexture += adjustedTextureWidth;
     }
 
-    // Ask for refresh !
+    // Ask for refresh!
     update();
 }
 
@@ -250,12 +250,12 @@ void QGLImage::blit(unsigned int *source)
  * adjust texture coordinate accodingly, to fill the object surface.
  *
  * This method calculate the nearest greater power of two texture size
- * for the given image size. e.g : image size is 259 pixel, the texture
+ * for the given image size. e.g: image size is 259 pixel, the texture
  * size allocated will be 512.
  *
  * Param 1: Original image resolution.
  *
- * Return : The nearest greater size power of two.
+ * Return: The nearest greater size power of two.
  */
 int QGLImage::getNearestGreaterPowerOfTwo(int size)
 {
@@ -276,7 +276,7 @@ int QGLImage::getNearestGreaterPowerOfTwo(int size)
 /**
  * This slot is called when an bilinear filtering is turned ON.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::bilinearFilteringOn()
 {
@@ -290,7 +290,7 @@ void QGLImage::bilinearFilteringOn()
 /**
  * This slot is called when an bilinear filtering is turned OFF.
  *
- * Return : None.
+ * Return: None.
  */
 void QGLImage::nearestNeighboorFilteringOn()
 {

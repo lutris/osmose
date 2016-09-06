@@ -337,7 +337,7 @@ OsmoseGUI::OsmoseGUI(QWidget * parent, Qt::WindowFlags flags) : QMainWindow(pare
     catch(string error)
     {
         // Unable to load or create configuration file. Display a message.
-        error = error + "\nCreating default configuration in user's directory.\nPlease configure path or you will save everything in your home directory !";
+        error = error + "\nCreating default configuration in user's directory.\nPlease configure path or you will save everything in your home directory!";
         QMessageBox::critical(this, "No configuration file found", error.c_str());
 
         // Unable to load configuration file, try to create a new one.
@@ -357,14 +357,14 @@ OsmoseGUI::OsmoseGUI(QWidget * parent, Qt::WindowFlags flags) : QMainWindow(pare
     try
     {
         js0 = new Joystick(configuration->getJoystickDevice().c_str(), this);
-        string msg = "Found Joystick :";
+        string msg = "Found Joystick:";
         msg = msg + js0->getStrID();
         QLogWindow::getInstance()->appendLog(msg);
     }
     catch(string &err)
     {
         js0 = NULL;
-        string msg = "No joystick found (device : ";
+        string msg = "No joystick found (device: ";
         msg = msg + configuration->getJoystickDevice();
         msg = msg + ").";
         QLogWindow::getInstance()->appendLog(msg);
@@ -373,7 +373,7 @@ OsmoseGUI::OsmoseGUI(QWidget * parent, Qt::WindowFlags flags) : QMainWindow(pare
     // Enable Drop events.
     setAcceptDrops(true);
 
-    // Start emulation thread. It does not means that emulation is started !
+    // Start emulation thread. It does not means that emulation is started!
     emuThread->start();
     emuThread->startEmulation();
 }
@@ -509,7 +509,7 @@ void OsmoseGUI::loadTheROM(QString filename)
         bool killed = emuThread->wait(1000); // Wait for thread end for 1 second.
         if (!killed)
         {
-            string msg = "Warning : could not kill emulation thread !";
+            string msg = "Warning: could not kill emulation thread!";
             QLogWindow::getInstance()->appendLog(msg);
         }
         delete emuThread;
@@ -528,8 +528,8 @@ void OsmoseGUI::loadTheROM(QString filename)
         emuThread = osm;
         emuThread->start();
         emuThread->startEmulation();
-        QLogWindow::getInstance()->appendLog("Starting emulation !");
-        osmoseCore = osm->getCore(); // Tmp is OsmoseEmuThread, not just EmuThread !
+        QLogWindow::getInstance()->appendLog("Starting emulation!");
+        osmoseCore = osm->getCore(); // Tmp is OsmoseEmuThread, not just EmuThread!
 
         // Disconnect / reconnect pause SLOT.
         QObject::disconnect(pauseResume, SIGNAL(triggered()), this, SLOT(pauseResumeEmulation()));
@@ -712,7 +712,7 @@ void OsmoseGUI::exitApplication()
 {
     emuThread->abortEmulation();
     bool killed = emuThread->wait(1000); // Wait for thread end for 1 second.
-    if (!killed) cerr << "Warning : could not kill emulation thread !" << endl;
+    if (!killed) cerr << "Warning: could not kill emulation thread!" << endl;
     delete emuThread;
     qApp->quit();
 }
@@ -961,7 +961,7 @@ void OsmoseGUI::dropEvent(QDropEvent *event)
 
 
 /*
-    On ubuntu 10.04 Drop formats received are :
+    On ubuntu 10.04 Drop formats received are:
     x-special/gnome-icon-list
     text/uri-list
     UTF8_STRING

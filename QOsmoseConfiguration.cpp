@@ -61,7 +61,7 @@ QOsmoseConfiguration::~QOsmoseConfiguration()
 
 
 /**
- * selectBBRPath slot :
+ * selectBBRPath slot:
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store Battery Backed RAM.
@@ -80,7 +80,7 @@ void QOsmoseConfiguration::selectBBRPath()
 
 
 /**
- * selectScreenshotPath slot :
+ * selectScreenshotPath slot:
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store screenshots.
@@ -99,7 +99,7 @@ void QOsmoseConfiguration::selectScreenshotPath()
 
 
 /**
- * selectSaveStatePath slot :
+ * selectSaveStatePath slot:
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store save states.
@@ -118,7 +118,7 @@ void QOsmoseConfiguration::selectSaveStatePath()
 
 
 /**
- * selectTileRipPath slot :
+ * selectTileRipPath slot:
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store ripped tiles.
@@ -137,7 +137,7 @@ void QOsmoseConfiguration::selectTileRipPath()
 
 
 /**
- * selectTileRipPath slot :
+ * selectTileRipPath slot:
  *
  * This slot is called when the tool button is clicked. It then open a file
  * selection dialog to get an existing directory to store ripped sounds.
@@ -155,7 +155,7 @@ void QOsmoseConfiguration::selectSoundRipPath()
 }
 
 /**
- * completeConnections() :
+ * completeConnections():
  * This method perform the SLOT/SIGNAL connections.
  */
 void QOsmoseConfiguration::completeConnections()
