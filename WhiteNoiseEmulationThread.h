@@ -39,9 +39,9 @@
 class WhiteNoiseEmulationThread : public EmulationThread
 {
 public:
-	WhiteNoiseEmulationThread(QGLImage *qglimage);
-	~WhiteNoiseEmulationThread();
-	void emulateOneFrame();
+    WhiteNoiseEmulationThread(QGLImage *qglimage);
+    ~WhiteNoiseEmulationThread();
+    void emulateOneFrame();
 
 protected:
 
@@ -49,4 +49,4 @@ private:
 
 };
 
-#endif	// WHITE_NOISE_EMULATION_THREAD_H
+#endif    // WHITE_NOISE_EMULATION_THREAD_H

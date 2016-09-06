@@ -59,7 +59,7 @@ using namespace std;
 
 enum Mapper
 {
-    SegaMapper =0,
+    SegaMapper = 0,
     CodemasterMapper,
     KoreanMapper
 };
@@ -70,7 +70,7 @@ enum Area_type
     Cartridge,
     Ram,
     SRam,
-    Null    // Rom write attemps are redirected to null.
+    Null // Rom write attemps are redirected to null.
 };
 
 /*---------------------------------------------------------------------------*/
@@ -85,7 +85,7 @@ enum Area_type
 /*---------------------------------------------------------------------------*/
 typedef struct
 {
-    unsigned char paging_regs[4];       // Paging registers.
+    unsigned char paging_regs[4]; // Paging registers.
     Area_type rd_area_type[8];
     unsigned int block_in_rd_area[8];
     Area_type wr_area_type[8];
@@ -122,26 +122,26 @@ class MemoryMapper : public DebugEventThrower, public ImplementsSaveState
 
     private:
 
-        bool	    	have_bbr;		    // Battery backed ram flag presence
-        string 	    	rom_name;		    // Rom name without extension.
-        unsigned 	    rom_size;		    // ROM size in bytes
-        unsigned        bank_nbr;		    // How much 8k block in our rom
-        unsigned        bank16Ko_nbr;	    // How much 16k bank in our rom
-        unsigned char   *null_rom;		    // Ptr on Garbage (use for ROM writes).
-        unsigned char   *sram;			    // Ptr on Optionnal SRAM
-        unsigned char   *ram;			    // Central RAM
-        unsigned char   *cartridge;		    // Ptr on ROM cartridge.
+        bool            have_bbr;           // Battery backed ram flag presence
+        string          rom_name;           // Rom name without extension.
+        unsigned        rom_size;           // ROM size in bytes
+        unsigned        bank_nbr;           // How much 8k block in our rom
+        unsigned        bank16Ko_nbr;       // How much 16k bank in our rom
+        unsigned char   *null_rom;          // Ptr on Garbage (use for ROM writes).
+        unsigned char   *sram;              // Ptr on Optionnal SRAM
+        unsigned char   *ram;               // Central RAM
+        unsigned char   *cartridge;         // Ptr on ROM cartridge.
         unsigned char   paging_regs[4];     // Paging registers.
 
-        unsigned char   *write_map[8];	    // 8ko bank ptr for CPU writes.
-        Area_type wr_area_type[8];          // actual wr_map area type.
-        unsigned int block_in_wr_area[8];   // 8ko block inside the area.
+        unsigned char   *write_map[8];      // 8ko bank ptr for CPU writes.
+        Area_type       wr_area_type[8];    // actual wr_map area type.
+        unsigned int    block_in_wr_area[8];// 8ko block inside the area.
 
-        unsigned char   *read_map[8];	    // 8ko bank ptr for CPU reads.
-        Area_type rd_area_type[8];          // actual read_map area type.
-        unsigned int block_in_rd_area[8];   // 8ko block inside the area.
+        unsigned char   *read_map[8];       // 8ko bank ptr for CPU reads.
+        Area_type       rd_area_type[8];    // actual read_map area type.
+        unsigned int    block_in_rd_area[8];// 8ko block inside the area.
 
-        bool save_bbr;			// Flag for Battery Backed Memory.
+        bool save_bbr;                      // Flag for Battery Backed Memory.
         Mapper mapperType;
 
         unsigned int LoadZippedRom(const char *rom_file);
@@ -155,6 +155,6 @@ class MemoryMapper : public DebugEventThrower, public ImplementsSaveState
         void DisplayROMSize();
         unsigned int getCRC32(unsigned char *buffer, unsigned int len);
         void (MemoryMapper::*wr8_method)(unsigned int add, unsigned char data);
-		OsmoseConfigurationFile *configuration;
+        OsmoseConfigurationFile *configuration;
 };
 #endif

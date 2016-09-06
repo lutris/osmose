@@ -38,47 +38,47 @@ QLogWindow *QLogWindow::self = NULL;
 
 QLogWindow *QLogWindow::getInstance(QWidget *parent)
 {
-	if (self == NULL)
-	{
-		self = new QLogWindow(parent);
-	}
-	return self;
+    if (self == NULL)
+    {
+        self = new QLogWindow(parent);
+    }
+    return self;
 }
 
 void QLogWindow::appendLog(const char *str)
 {
-	QString msg(str);
-	QString time = getTimePrefix();
-	time.append(msg);
-	logQPlainTextEdit->appendPlainText(time);
+    QString msg(str);
+    QString time = getTimePrefix();
+    time.append(msg);
+    logQPlainTextEdit->appendPlainText(time);
 }
 
 
 void QLogWindow::appendLog(string &str)
 {
-	QString msg(str.c_str());
-	QString time = getTimePrefix();
-	time.append(msg);
-	logQPlainTextEdit->appendPlainText(time);
+    QString msg(str.c_str());
+    QString time = getTimePrefix();
+    time.append(msg);
+    logQPlainTextEdit->appendPlainText(time);
 }
 
 void QLogWindow::addSeparator()
 {
-	logQPlainTextEdit->appendPlainText("________________________________________________________________\n");
+    logQPlainTextEdit->appendPlainText("________________________________________________________________\n");
 }
 
 
 QString QLogWindow::getTimePrefix()
 {
-	QString ascii_time = "[";
-	ascii_time.append(QTime::currentTime().toString());
-	ascii_time.append("] ");
-	return ascii_time;
+    QString ascii_time = "[";
+    ascii_time.append(QTime::currentTime().toString());
+    ascii_time.append("] ");
+    return ascii_time;
 }
 
 void QLogWindow::clearLogs()
 {
-	logQPlainTextEdit->clear();
+    logQPlainTextEdit->clear();
 }
 
 /**
@@ -86,9 +86,9 @@ void QLogWindow::clearLogs()
  */
 QLogWindow::QLogWindow(QWidget *p) : QWidget(p)
 {
-	setupUi((QWidget*)this);
-	QObject::connect(hideButton, SIGNAL(clicked()), this, SLOT(hideWindow()));
-	QObject::connect(clearLogsButton, SIGNAL(clicked()), this, SLOT(clearLogs()));
+    setupUi((QWidget*)this);
+    QObject::connect(hideButton, SIGNAL(clicked()), this, SLOT(hideWindow()));
+    QObject::connect(clearLogsButton, SIGNAL(clicked()), this, SLOT(clearLogs()));
 }
 
 /**
@@ -101,7 +101,5 @@ QLogWindow::~QLogWindow()
 
 void QLogWindow::hideWindow()
 {
-	self->setVisible(false);
+    self->setVisible(false);
 }
-
-

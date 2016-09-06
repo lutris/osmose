@@ -37,8 +37,8 @@
 #include <iomanip>
 #include "Bits.h"
 
-#define JAPAN	0
-#define EXPORT	1
+#define JAPAN  0
+#define EXPORT 1
 
 #define DEFAULT_ACCELERATION 0.5
 
@@ -46,7 +46,7 @@ enum
 {
     DEFAULT_PAD = 0,
     PADDLE      = 1,
-    JOYSTICK	= 2
+    JOYSTICK    = 2
 };
 
 // Video Filters Enumeration.
@@ -69,14 +69,14 @@ class Options
 {
     public:
 
-        bool WorldVersion;	// 0 is Jap, 1 Export machine.
+        bool WorldVersion;  // 0 is Jap, 1 Export machine.
         int  MachineType;   // SMS or GameGear ?
-        int inputType;		// Input device type.
+        int inputType;      // Input device type.
         float acceleration; // Paddle acceleration.
-        int mapperType;		// Use Sega/Codemaster/Korean Mapper.
-        bool ntsc;			// true = ntsc false = pal/secam.
+        int mapperType;     // Use Sega/Codemaster/Korean Mapper.
+        bool ntsc;          // true = ntsc false = pal/secam.
         bool irq_hack;
-        int videoFilter;	//
+        int videoFilter;    //
         void reset();
 };
 
@@ -84,12 +84,12 @@ class EmulatorOptions
 {
     public:
 
-        bool bright_palette;	// Bright palette or not ?
-        bool fullscreen_flag;	// Emu must run in fullscreen.
-        bool sound;			// Emu must emulate SN76489.
-        bool default_config;	// Does the emulator use default conf ?
-        bool display_fps;	        // FPS in Title bar option.
-        char ini_file[512];         // For name of file containing conf.
+        bool bright_palette;  // Bright palette or not ?
+        bool fullscreen_flag; // Emu must run in fullscreen.
+        bool sound;           // Emu must emulate SN76489.
+        bool default_config;  // Does the emulator use default conf ?
+        bool display_fps;     // FPS in Title bar option.
+        char ini_file[512];   // For name of file containing conf.
         bool tracejoy;
         void reset();
 };

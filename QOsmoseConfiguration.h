@@ -47,12 +47,12 @@ class KeyGrabber : public QDialog
 Q_OBJECT
 
 public:
-	KeyGrabber(QWidget *parent = 0);
-	unsigned int getKeyPressed() {return keyPressed;}
+    KeyGrabber(QWidget *parent = 0);
+    unsigned int getKeyPressed() {return keyPressed;}
 
 protected:
-	void keyPressEvent(QKeyEvent *e);
-	unsigned int keyPressed;
+    void keyPressEvent(QKeyEvent *e);
+    unsigned int keyPressed;
 };
 
 class QOsmoseConfiguration : public QDialog, public JoystickListener, private Ui::Configuration
@@ -62,82 +62,82 @@ Q_OBJECT
 
 public:
 
-	QOsmoseConfiguration(OsmoseConfigurationFile *conf, const char *joyName, QWidget *parent = 0);
-	void synchronizeWithConfiguration();
+    QOsmoseConfiguration(OsmoseConfigurationFile *conf, const char *joyName, QWidget *parent = 0);
+    void synchronizeWithConfiguration();
 
-	// Joystick listener interface.
-	void buttonChanged(unsigned int button, bool pressed); /* True when pressed */
+    // Joystick listener interface.
+    void buttonChanged(unsigned int button, bool pressed); // True when pressed
     void xAxisChanged(int value);
-	void yAxisChanged(int value);
-	void joystickError();
+    void yAxisChanged(int value);
+    void joystickError();
 
 
-	~QOsmoseConfiguration();
+    ~QOsmoseConfiguration();
 
 protected:
 
 public slots:
-	void selectBBRPath();
-	void selectScreenshotPath();
-	void selectSaveStatePath();
-	void selectTileRipPath();
-	void selectSoundRipPath();
+    void selectBBRPath();
+    void selectScreenshotPath();
+    void selectSaveStatePath();
+    void selectTileRipPath();
+    void selectSoundRipPath();
 
-	void redefineP1Up();
-	void redefineP1Down();
-	void redefineP1Left();
-	void redefineP1Right();
-	void redefineP1A();
-	void redefineP1B();
+    void redefineP1Up();
+    void redefineP1Down();
+    void redefineP1Left();
+    void redefineP1Right();
+    void redefineP1A();
+    void redefineP1B();
 
-	void redefineP2Up();
-	void redefineP2Down();
-	void redefineP2Left();
-	void redefineP2Right();
-	void redefineP2A();
-	void redefineP2B();
+    void redefineP2Up();
+    void redefineP2Down();
+    void redefineP2Left();
+    void redefineP2Right();
+    void redefineP2A();
+    void redefineP2B();
 
-	void redefinePause();
-	void redefineStart();
+    void redefinePause();
+    void redefineStart();
 
-	void saveConfiguration();
-	void applyConfiguration();
+    void saveConfiguration();
+    void applyConfiguration();
 
-	void joy0Button1Assigned(int assign);
-	void joy0Button2Assigned(int assign);
-	void joy0Button3Assigned(int assign);
-	void joy0Button4Assigned(int assign);
-	void joy0Button5Assigned(int assign);
-	void joy0Button6Assigned(int assign);
-	void joy0Button7Assigned(int assign);
-	void joy0Button8Assigned(int assign);
+    void joy0Button1Assigned(int assign);
+    void joy0Button2Assigned(int assign);
+    void joy0Button3Assigned(int assign);
+    void joy0Button4Assigned(int assign);
+    void joy0Button5Assigned(int assign);
+    void joy0Button6Assigned(int assign);
+    void joy0Button7Assigned(int assign);
+    void joy0Button8Assigned(int assign);
 
-	void joyButton1Changed(bool pressed);
-	void joyButton2Changed(bool pressed);
-	void joyButton3Changed(bool pressed);
-	void joyButton4Changed(bool pressed);
-	void joyButton5Changed(bool pressed);
-	void joyButton6Changed(bool pressed);
-	void joyButton7Changed(bool pressed);
-	void joyButton8Changed(bool pressed);
+    void joyButton1Changed(bool pressed);
+    void joyButton2Changed(bool pressed);
+    void joyButton3Changed(bool pressed);
+    void joyButton4Changed(bool pressed);
+    void joyButton5Changed(bool pressed);
+    void joyButton6Changed(bool pressed);
+    void joyButton7Changed(bool pressed);
+    void joyButton8Changed(bool pressed);
 
 signals:
-	void joyButton1Event(bool pressed);
-	void joyButton2Event(bool pressed);
-	void joyButton3Event(bool pressed);
-	void joyButton4Event(bool pressed);
-	void joyButton5Event(bool pressed);
-	void joyButton6Event(bool pressed);
-	void joyButton7Event(bool pressed);
-	void joyButton8Event(bool pressed);
+    void joyButton1Event(bool pressed);
+    void joyButton2Event(bool pressed);
+    void joyButton3Event(bool pressed);
+    void joyButton4Event(bool pressed);
+    void joyButton5Event(bool pressed);
+    void joyButton6Event(bool pressed);
+    void joyButton7Event(bool pressed);
+    void joyButton8Event(bool pressed);
 
 private:
-	void completeConnections();
-	unsigned int pickupKey(QLabel *label);
-	int buttonAssignationToComboBox(padKey k);
-	padKey comboBoxToButtonAssignation(int);
-	QString homeDirectory;
-	OsmoseConfigurationFile *ocf;
+    void completeConnections();
+    unsigned int pickupKey(QLabel *label);
+    int buttonAssignationToComboBox(padKey k);
+    padKey comboBoxToButtonAssignation(int);
+    QString homeDirectory;
+    OsmoseConfigurationFile *ocf;
 };
 
-#endif	// QOSMOSECONFIGURATION_H
+#endif // QOSMOSECONFIGURATION_H

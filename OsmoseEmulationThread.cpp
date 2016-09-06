@@ -38,12 +38,12 @@
  */
 OsmoseEmulationThread::OsmoseEmulationThread(QGLImage *qglimage, char * romName, OsmoseConfigurationFile *conf, pthread_mutex_t *ocm) : EmulationThread(qglimage)
 {
-	configuration = conf;
-	setRefreshFrequency(60.0f);
-	frameCounter = 0;
-	mode = 1;
-	osmose_core_mutex = ocm;
-	core = new OsmoseCore(romName, videoBuffer, configuration, osmose_core_mutex);
+    configuration = conf;
+    setRefreshFrequency(60.0f);
+    frameCounter = 0;
+    mode = 1;
+    osmose_core_mutex = ocm;
+    core = new OsmoseCore(romName, videoBuffer, configuration, osmose_core_mutex);
 }
 
 
@@ -52,7 +52,7 @@ OsmoseEmulationThread::OsmoseEmulationThread(QGLImage *qglimage, char * romName,
  */
 OsmoseEmulationThread::~OsmoseEmulationThread()
 {
-	delete core;
+    delete core;
 }
 
 
@@ -62,7 +62,7 @@ OsmoseEmulationThread::~OsmoseEmulationThread()
  */
 void OsmoseEmulationThread::emulateOneFrame()
 {
-	core->run_frame();
+    core->run_frame();
 }
 
 
@@ -72,7 +72,7 @@ void OsmoseEmulationThread::emulateOneFrame()
  */
 void OsmoseEmulationThread::resetEmulation()
 {
-	core->reset();
+    core->reset();
 }
 
 
@@ -81,34 +81,35 @@ void OsmoseEmulationThread::resetEmulation()
  * conversion from Emulator key mapping and user configuration occurs
  * here.
  *
- * Param 1 : SMS/GG key.
+ * Param 1: SMS/GG key.
  *
- * Return : None.
+ * Return: None.
  */
 void OsmoseEmulationThread::keyPressed(padKey key)
 {
-	switch(key)
-	{
-		case P1UP: 		core->P1UpChanged(true); 	break;
-		case P1DOWN: 	core->P1DownChanged(true);	break;
-		case P1LEFT:	core->P1LeftChanged(true);	break;
-		case P1RIGHT:	core->P1RightChanged(true);	break;
-		case P1BUTTON_A:core->P1AButtonChanged(true);break;
-		case P1BUTTON_B:core->P1BButtonChanged(true);break;
+    switch(key)
+    {
+        case P1UP:       core->P1UpChanged(true);      break;
+        case P1DOWN:     core->P1DownChanged(true);    break;
+        case P1LEFT:     core->P1LeftChanged(true);    break;
+        case P1RIGHT:    core->P1RightChanged(true);   break;
+        case P1BUTTON_A: core->P1AButtonChanged(true); break;
+        case P1BUTTON_B: core->P1BButtonChanged(true); break;
 
-		case P2UP: 		core->P2UpChanged(true); 	break;
-		case P2DOWN: 	core->P2DownChanged(true);	break;
-		case P2LEFT:	core->P2LeftChanged(true);	break;
-		case P2RIGHT:	core->P2RightChanged(true);	break;
-		case P2BUTTON_A:core->P2AButtonChanged(true);break;
-		case P2BUTTON_B:core->P2BButtonChanged(true);break;
-		case PAUSE_NMI:	core->PauseButtonChanged(true);break;
-		case START_GG:	core->StartButtonChanged(true);break;
-		case SCREENSHOT: core->captureScreen();
+        case P2UP:       core->P2UpChanged(true);      break;
+        case P2DOWN:     core->P2DownChanged(true);    break;
+        case P2LEFT:     core->P2LeftChanged(true);    break;
+        case P2RIGHT:    core->P2RightChanged(true);   break;
+        case P2BUTTON_A: core->P2AButtonChanged(true); break;
+        case P2BUTTON_B: core->P2BButtonChanged(true); break;
 
-		case UNKNOWN : break;
-		default: break;
-	}
+        case PAUSE_NMI:  core->PauseButtonChanged(true); break;
+        case START_GG:   core->StartButtonChanged(true); break;
+        case SCREENSHOT: core->captureScreen();
+
+        case UNKNOWN: break;
+        default: break;
+    }
 }
 
 
@@ -117,30 +118,31 @@ void OsmoseEmulationThread::keyPressed(padKey key)
  * conversion from Emulator key mapping and user configuration occurs
  * here.
  *
- * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
+ * Param 1: QT key() value of the QKeyEvent that signal keyPressed.
  *
- * Return : None.
+ * Return: None.
  */
 void OsmoseEmulationThread::keyReleased(padKey key)
 {
-	switch(key)
-	{
-		case P1UP:		core->P1UpChanged(false);	break;
-		case P1DOWN:	core->P1DownChanged(false);	break;
-		case P1LEFT:	core->P1LeftChanged(false);	break;
-		case P1RIGHT:	core->P1RightChanged(false);break;
-		case P1BUTTON_A:core->P1AButtonChanged(false);break;
-		case P1BUTTON_B:core->P1BButtonChanged(false);break;
+    switch(key)
+    {
+        case P1UP:       core->P1UpChanged(false);      break;
+        case P1DOWN:     core->P1DownChanged(false);    break;
+        case P1LEFT:     core->P1LeftChanged(false);    break;
+        case P1RIGHT:    core->P1RightChanged(false);   break;
+        case P1BUTTON_A: core->P1AButtonChanged(false); break;
+        case P1BUTTON_B: core->P1BButtonChanged(false); break;
 
-		case P2UP: 		core->P2UpChanged(false); 	break;
-		case P2DOWN: 	core->P2DownChanged(false);	break;
-		case P2LEFT:	core->P2LeftChanged(false);	break;
-		case P2RIGHT:	core->P2RightChanged(false);	break;
-		case P2BUTTON_A:core->P2AButtonChanged(false);break;
-		case P2BUTTON_B:core->P2BButtonChanged(false);break;
-		case PAUSE_NMI:	core->PauseButtonChanged(false);break;
-		case START_GG:	core->StartButtonChanged(false);break;
-		case UNKNOWN : break;
-		default: break;
-	}
+        case P2UP:       core->P2UpChanged(false);      break;
+        case P2DOWN:     core->P2DownChanged(false);    break;
+        case P2LEFT:     core->P2LeftChanged(false);    break;
+        case P2RIGHT:    core->P2RightChanged(false);   break;
+        case P2BUTTON_A: core->P2AButtonChanged(false); break;
+        case P2BUTTON_B: core->P2BButtonChanged(false); break;
+
+        case PAUSE_NMI:  core->PauseButtonChanged(false); break;
+        case START_GG:   core->StartButtonChanged(false); break;
+        case UNKNOWN: break;
+        default: break;
+    }
 }

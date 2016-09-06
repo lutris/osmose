@@ -40,23 +40,23 @@
 #define ANSI_TERMINAL_COLORS_H
 
 #ifdef USE_ISO_IEC_6429
-#define BLACK(str)		"\033[0;30;49;1m"<<str<<"\033[0m"
-#define RED(str)		"\033[0;31;49;1m"<<str<<"\033[0m"
-#define GREEN(str)		"\033[0;32;49;1m"<<str<<"\033[0m"
-#define YELLOW(str)		"\033[0;33;49;1m"<<str<<"\033[0m"
-#define BLUE(str)		"\033[0;34;49;1m"<<str<<"\033[0m"
-#define MAGENTA(str)		"\033[0;35;49;1m"<<str<<"\033[0m"
-#define CYAN(str)		"\033[0;36;49;1m"<<str<<"\033[0m"
-#define WHITE(str)		"\033[0;37;49;1m"<<str<<"\033[0m"
+#define BLACK(str)    "\033[0;30;49;1m"<<str<<"\033[0m"
+#define RED(str)      "\033[0;31;49;1m"<<str<<"\033[0m"
+#define GREEN(str)    "\033[0;32;49;1m"<<str<<"\033[0m"
+#define YELLOW(str)   "\033[0;33;49;1m"<<str<<"\033[0m"
+#define BLUE(str)     "\033[0;34;49;1m"<<str<<"\033[0m"
+#define MAGENTA(str)  "\033[0;35;49;1m"<<str<<"\033[0m"
+#define CYAN(str)     "\033[0;36;49;1m"<<str<<"\033[0m"
+#define WHITE(str)    "\033[0;37;49;1m"<<str<<"\033[0m"
 #else
-#define BLACK(str)		str
-#define RED(str)		str
-#define GREEN(str)		str
-#define YELLOW(str)		str
-#define BLUE(str)		str
-#define MAGENTA(str)		str
-#define CYAN(str)		str
-#define WHITE(str)		str
+#define BLACK(str)    str
+#define RED(str)      str
+#define GREEN(str)    str
+#define YELLOW(str)   str
+#define BLUE(str)     str
+#define MAGENTA(str)  str
+#define CYAN(str)     str
+#define WHITE(str)    str
 #endif
 
 #endif // ANSI_TERMINAL_COLORS_H

@@ -49,46 +49,46 @@
 
 class QGLImage : public QGLWidget
 {
-	Q_OBJECT;
+    Q_OBJECT;
 
 public:
-	QGLImage(QWidget *parent = 0, int w = 320, int h = 240, QGL::FormatOptions f = QGL::DirectRendering);
-	~QGLImage();
-	void blit(unsigned int *source);
-	int getTextureWidth() { return textureWidth;}
-	int getTextureHeight() { return textureHeight;}
-	bool isBilinearFiltering() { return bilinearFiltering;}
-	bool isNearestNeighboorFiltering() { return (!bilinearFiltering);}
+    QGLImage(QWidget *parent = 0, int w = 320, int h = 240, QGL::FormatOptions f = QGL::DirectRendering);
+    ~QGLImage();
+    void blit(unsigned int *source);
+    int getTextureWidth() { return textureWidth;}
+    int getTextureHeight() { return textureHeight;}
+    bool isBilinearFiltering() { return bilinearFiltering;}
+    bool isNearestNeighboorFiltering() { return (!bilinearFiltering);}
 
 public slots:
-	void resolutionChanged(int newx, int newy);
-	void bilinearFilteringOn();
-	void nearestNeighboorFilteringOn();
+    void resolutionChanged(int newx, int newy);
+    void bilinearFilteringOn();
+    void nearestNeighboorFilteringOn();
 
 
 protected:
-	void resizeGL(int width, int height);
-	void paintGL();
-	void initializeGL();
+    void resizeGL(int width, int height);
+    void paintGL();
+    void initializeGL();
 
 private:
-	void setupViewport(int w, int h);
-	int viewPortWidth;
-	int viewPortHeight;
-	int textureWidth;
-	int textureHeight;
-	int adjustedTextureWidth;
-	int adjustedTextureHeight;
-	float glTextCoordX;
-	float glTextCoordY;
-	bool bilinearFiltering;
+    void setupViewport(int w, int h);
+    int viewPortWidth;
+    int viewPortHeight;
+    int textureWidth;
+    int textureHeight;
+    int adjustedTextureWidth;
+    int adjustedTextureHeight;
+    float glTextCoordX;
+    float glTextCoordY;
+    bool bilinearFiltering;
 
-	// Texture used to render the Quad.
-	QMutex textureBufferMutex;
-	GLuint textureName[1];
-	unsigned int *textureBuffer;
-	void adjustTextureDimension(int w, int h);
-	int getNearestGreaterPowerOfTwo(int size);
+    // Texture used to render the Quad.
+    QMutex textureBufferMutex;
+    GLuint textureName[1];
+    unsigned int *textureBuffer;
+    void adjustTextureDimension(int w, int h);
+    int getNearestGreaterPowerOfTwo(int size);
 };
 
-#endif	// QGLIMAGE_H
+#endif // QGLIMAGE_H

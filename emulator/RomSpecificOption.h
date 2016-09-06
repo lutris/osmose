@@ -39,10 +39,10 @@
 
 enum
 {
-    CODE_MASTER_MAPPER 	= 0x1,
-    KOREAN_MAPPER		= 0x2,
-    VIDEO_PAL			= 0x4,
-    INTERRUPT_HACK	   	= 0x8,
+    CODE_MASTER_MAPPER  = 0x1,
+    KOREAN_MAPPER       = 0x2,
+    VIDEO_PAL           = 0x4,
+    INTERRUPT_HACK      = 0x8,
     SPORT_PADDLE_INPUT  = 0x10,
     JAPANESE_MACHINE    = 0x20
 };

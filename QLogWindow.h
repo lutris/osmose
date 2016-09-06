@@ -45,23 +45,23 @@ class QLogWindow : public QWidget, private Ui::LogWindow
 Q_OBJECT
 
 public:
-	~QLogWindow();
-	static QLogWindow *getInstance(QWidget *parent = 0);
-	void appendLog(string &);
+    ~QLogWindow();
+    static QLogWindow *getInstance(QWidget *parent = 0);
+    void appendLog(string &);
     void appendLog(const char *);
-	void addSeparator();
+    void addSeparator();
 
 protected slots:
-	void hideWindow();
-	void clearLogs();
+    void hideWindow();
+    void clearLogs();
 
 protected:
 
 private:
-	static QLogWindow *self;
-	QLogWindow(QWidget *parent = 0);
-	QString getTimePrefix();
+    static QLogWindow *self;
+    QLogWindow(QWidget *parent = 0);
+    QString getTimePrefix();
 
 };
 
-#endif	// QLOGWINDOW_H
+#endif // QLOGWINDOW_H

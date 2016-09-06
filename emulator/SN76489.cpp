@@ -39,7 +39,7 @@ const u16 SN76489::volume_table[16] = {892*5, 892*5, 892*5, 760*5, 623*5, 497*5,
 
 #define MAX_OUTPUT 0x7FFF
 /*--------------------------------------------------------------*/
-/* Constructor.						 	*/
+/* Constructor.                                                 */
 /*--------------------------------------------------------------*/
 SN76489::SN76489(u32 chip_frequency, u32 samplingRate)
 {
@@ -59,7 +59,7 @@ void SN76489::writePort(u8 value)
 {
     u8 channel;
 
-    if (value & BIT7)	// Latch
+    if (value & BIT7) // Latch
     {
         lastRegister_ = (value >> 4) & 0x7;
         channel = lastRegister_ >> 1;
@@ -72,7 +72,7 @@ void SN76489::writePort(u8 value)
         }
         else
         {
-            /* Like said in Maxim's doc, immediately update tone registers.*/
+            // Like said in Maxim's doc, immediately update tone registers.
             freqDiv_[channel] = (freqDiv_[channel] & 0x3F0) | (value & 0xF);
 
             /*
@@ -89,7 +89,7 @@ void SN76489::writePort(u8 value)
 #endif
         }
     }
-    else		// Data byte write
+    else // Data byte write
     {
         channel = lastRegister_ >> 1;
         if (lastRegister_ & BIT0) // If true, it's volume register.
@@ -120,7 +120,7 @@ void SN76489::writePort(u8 value)
 #endif
         LFSR_ = NOISE_INITIAL_STATE;
         // Channel 3: writing 4bits 'tone' register.
-        /* Only two bits are used with this Channel. */
+        // Only two bits are used with this Channel.
         switch (value & 0x3)
         {
             case 0x0:
@@ -141,19 +141,19 @@ void SN76489::writePort(u8 value)
                 break;
         }
 
-        /* Select WhiteNoise/Periodic Noise from Noise BIT2. */
+        // Select WhiteNoise/Periodic Noise from Noise BIT2.
         whiteNoise_ = (value & BIT2);
     }
 }
 
 
 /*-------------------------------------------------------------*/
-/* This method resets the PSG to it's initial values            */
+/* This method resets the PSG to it's initial values           */
 /*-------------------------------------------------------------*/
 void SN76489::reset()
 {
     lastRegister_ = 0;
-    whiteNoise_   = true;		// Default Periodic Noise.
+    whiteNoise_   = true; // Default Periodic Noise.
     follow_tone2_frequency_ = false;
     LFSR_ = WHITE_NOISE_FEEDBACK;
 
@@ -178,7 +178,7 @@ void SN76489::getWave(u8 *s, s32 len)
 
 /*-------------------------------------------------------------*/
 /* This method returns parity of the given value.              */
-/* Given by Maxim's SN76489 Documentation.		       */
+/* Given by Maxim's SN76489 Documentation.                     */
 /*-------------------------------------------------------------*/
 u8 SN76489::parity(u16 val)
 {
@@ -199,7 +199,7 @@ bool SN76489::run(u32 cycles)
     {
         s16 snd = 0;
 
-        /* Compute half periods for all channels. */
+        // Compute half periods for all channels.
         for (u32 channel = 0; channel < 4; channel++)
         {
             half_period_[channel] = freqDiv_[channel] << 10;
@@ -209,7 +209,7 @@ bool SN76489::run(u32 cycles)
             }
         }
 
-        /* Generate output for 3 channels (0 or 1) */
+        // Generate output for 3 channels (0 or 1)
         for (u32 channel = 0; channel < 3; channel++)
         {
             period_counter_[channel] += update_step_;
@@ -220,7 +220,7 @@ bool SN76489::run(u32 cycles)
             }
         }
 
-        /* Generate output for Noise generator. */
+        // Generate output for Noise generator.
         period_counter_[3] += update_step_;
         if (period_counter_[3] >= half_period_[3])
         {
@@ -229,12 +229,12 @@ bool SN76489::run(u32 cycles)
             channel_output_[3] =(LFSR_ & 1);
         }
 
-        /* Now, generate samples for channels A, B and C. */
+        // Now, generate samples for channels A, B and C.
         for (u32 channel = 0; channel < 3; channel++)
         {
             s16 polarity;
 
-            /* If freqdiv is 0 or 1 the channel output is always 1 */
+            // If freqdiv is 0 or 1 the channel output is always 1
             if (freqDiv_[channel] <= 1) channel_output_[channel] = 1;
 
             if (channel_output_[channel]) polarity = 1;
@@ -243,14 +243,13 @@ bool SN76489::run(u32 cycles)
             snd += polarity * volume_table[volume_[channel]];
         }
 
-        /* Now, generate samples for Noise generator. */
+        // Now, generate samples for Noise generator.
         if (channel_output_[3] == 1)
         {
             snd += volume_table[volume_[3]];
         }
 
-        /*if (!Fifo_->write ( snd / 2)) return false; is better. No saturation.*/
-        if (!Fifo_->write ( snd )) return false;
+        if (!Fifo_->write ( snd )) return false; // Prevent saturation
         last_sample_ = snd;
         cycles--;
     }
@@ -264,7 +263,7 @@ bool SN76489::saveState( ofstream &ofs)
 {
     SN76489SaveState s;
 
-    s.lastRegister_ = lastRegister_;     // Last written register
+    s.lastRegister_ = lastRegister_; // Last written register
     for (u8 i=0; i < 4; i++) s.volume_[i] = volume_[i];
     for (u8 i=0; i < 4; i++) s.freqDiv_[i] = freqDiv_[i];
     for (u8 i=0; i < 4; i++) s.half_period_[i] = half_period_[i];
@@ -286,7 +285,7 @@ bool SN76489::loadState( ifstream &ifs)
     ifs.read((char *)&s, sizeof(s));
     if (!ifs.good()) return false;
 
-    lastRegister_ = s.lastRegister_;     // Last written register
+    lastRegister_ = s.lastRegister_; // Last written register
     for (u8 i=0; i < 4; i++) volume_[i] = s.volume_[i];
     for (u8 i=0; i < 4; i++) freqDiv_[i] = s.freqDiv_[i];
     for (u8 i=0; i < 4; i++) half_period_[i] = s.half_period_[i];

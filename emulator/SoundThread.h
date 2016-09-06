@@ -49,38 +49,38 @@ class SoundThread : public Thread
 
 enum SoundThreadState
 {
-	Playing,
-	Paused,
-	Stopped
+    Playing,
+    Paused,
+    Stopped
 };
 
 public:
-	SoundThread(const char *devName, FIFOSoundBuffer *);
-	void stop();
-	void pause();
-	void resume();
+    SoundThread(const char *devName, FIFOSoundBuffer *);
+    void stop();
+    void pause();
+    void resume();
 
-	~SoundThread();
+    ~SoundThread();
 
 protected:
 
-	void* run(void *p);
+    void* run(void *p);
 
 private:
 
-	char deviceName[DEVICE_NAME_LENGTH];
-	snd_pcm_t *playback_handle;
-	short samplebuffer[4096];
-	snd_pcm_hw_params_t *hw_params;
-	snd_pcm_sw_params_t *sw_params;
-	snd_pcm_sframes_t frames_to_deliver;
+    char deviceName[DEVICE_NAME_LENGTH];
+    snd_pcm_t *playback_handle;
+    short samplebuffer[4096];
+    snd_pcm_hw_params_t *hw_params;
+    snd_pcm_sw_params_t *sw_params;
+    snd_pcm_sframes_t frames_to_deliver;
 
-	void initAlsa();
-	void play();
-	int playback_callback (snd_pcm_sframes_t nframes);
-	SoundThreadState state;
-	pthread_mutex_t mutex;
-	FIFOSoundBuffer *sndFIFO;
+    void initAlsa();
+    void play();
+    int playback_callback (snd_pcm_sframes_t nframes);
+    SoundThreadState state;
+    pthread_mutex_t mutex;
+    FIFOSoundBuffer *sndFIFO;
 };
 
-#endif	// SOUNDTHREAD_H
+#endif    // SOUNDTHREAD_H

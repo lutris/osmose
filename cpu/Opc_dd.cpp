@@ -673,102 +673,102 @@ void Z80::Opc_ddxx_f9()
 
 Z80::Opc_handler Z80::Opc_ddxx[256] =
 {
-    &Z80::invalid_opcode,	/* 0xdd00 */
-    &Z80::invalid_opcode,	/* 0xdd01 */
-    &Z80::invalid_opcode,	/* 0xdd02 */
-    &Z80::invalid_opcode,	/* 0xdd03 */
-    &Z80::invalid_opcode,	/* 0xdd04 */
-    &Z80::invalid_opcode,	/* 0xdd05 */
-    &Z80::invalid_opcode,	/* 0xdd06 */
-    &Z80::invalid_opcode,	/* 0xdd07 */
-    &Z80::invalid_opcode,	/* 0xdd08 */
+    &Z80::invalid_opcode,    /* 0xdd00 */
+    &Z80::invalid_opcode,    /* 0xdd01 */
+    &Z80::invalid_opcode,    /* 0xdd02 */
+    &Z80::invalid_opcode,    /* 0xdd03 */
+    &Z80::invalid_opcode,    /* 0xdd04 */
+    &Z80::invalid_opcode,    /* 0xdd05 */
+    &Z80::invalid_opcode,    /* 0xdd06 */
+    &Z80::invalid_opcode,    /* 0xdd07 */
+    &Z80::invalid_opcode,    /* 0xdd08 */
     &Z80::Opc_ddxx_09,
-    &Z80::invalid_opcode,	/* 0xdd0a */
-    &Z80::invalid_opcode,	/* 0xdd0b */
-    &Z80::invalid_opcode,	/* 0xdd0c */
-    &Z80::invalid_opcode,	/* 0xdd0d */
-    &Z80::invalid_opcode,	/* 0xdd0e */
-    &Z80::invalid_opcode,	/* 0xdd0f */
-    &Z80::invalid_opcode,	/* 0xdd10 */
-    &Z80::invalid_opcode,	/* 0xdd11 */
-    &Z80::invalid_opcode,	/* 0xdd12 */
-    &Z80::invalid_opcode,	/* 0xdd13 */
-    &Z80::invalid_opcode,	/* 0xdd14 */
-    &Z80::invalid_opcode,	/* 0xdd15 */
-    &Z80::invalid_opcode,	/* 0xdd16 */
-    &Z80::invalid_opcode,	/* 0xdd17 */
-    &Z80::invalid_opcode,	/* 0xdd18 */
+    &Z80::invalid_opcode,    /* 0xdd0a */
+    &Z80::invalid_opcode,    /* 0xdd0b */
+    &Z80::invalid_opcode,    /* 0xdd0c */
+    &Z80::invalid_opcode,    /* 0xdd0d */
+    &Z80::invalid_opcode,    /* 0xdd0e */
+    &Z80::invalid_opcode,    /* 0xdd0f */
+    &Z80::invalid_opcode,    /* 0xdd10 */
+    &Z80::invalid_opcode,    /* 0xdd11 */
+    &Z80::invalid_opcode,    /* 0xdd12 */
+    &Z80::invalid_opcode,    /* 0xdd13 */
+    &Z80::invalid_opcode,    /* 0xdd14 */
+    &Z80::invalid_opcode,    /* 0xdd15 */
+    &Z80::invalid_opcode,    /* 0xdd16 */
+    &Z80::invalid_opcode,    /* 0xdd17 */
+    &Z80::invalid_opcode,    /* 0xdd18 */
     &Z80::Opc_ddxx_19,
-    &Z80::invalid_opcode,	/* 0xdd1a */
-    &Z80::invalid_opcode,	/* 0xdd1b */
-    &Z80::invalid_opcode,	/* 0xdd1c */
-    &Z80::invalid_opcode,	/* 0xdd1d */
-    &Z80::invalid_opcode,	/* 0xdd1e */
-    &Z80::invalid_opcode,	/* 0xdd1f */
-    &Z80::invalid_opcode,	/* 0xdd20 */
+    &Z80::invalid_opcode,    /* 0xdd1a */
+    &Z80::invalid_opcode,    /* 0xdd1b */
+    &Z80::invalid_opcode,    /* 0xdd1c */
+    &Z80::invalid_opcode,    /* 0xdd1d */
+    &Z80::invalid_opcode,    /* 0xdd1e */
+    &Z80::invalid_opcode,    /* 0xdd1f */
+    &Z80::invalid_opcode,    /* 0xdd20 */
     &Z80::Opc_ddxx_21,
     &Z80::Opc_ddxx_22,
     &Z80::Opc_ddxx_23,
     &Z80::Opc_ddxx_24,
     &Z80::Opc_ddxx_25,
     &Z80::Opc_ddxx_26,
-    &Z80::invalid_opcode,	/* 0xdd27 */
-    &Z80::invalid_opcode,	/* 0xdd28 */
+    &Z80::invalid_opcode,    /* 0xdd27 */
+    &Z80::invalid_opcode,    /* 0xdd28 */
     &Z80::Opc_ddxx_29,
     &Z80::Opc_ddxx_2a,
     &Z80::Opc_ddxx_2b,
     &Z80::Opc_ddxx_2c,
     &Z80::Opc_ddxx_2d,
     &Z80::Opc_ddxx_2e,
-    &Z80::invalid_opcode,	/* 0xdd2f */
-    &Z80::invalid_opcode,	/* 0xdd30 */
-    &Z80::invalid_opcode,	/* 0xdd31 */
-    &Z80::invalid_opcode,	/* 0xdd32 */
-    &Z80::invalid_opcode,	/* 0xdd33 */
+    &Z80::invalid_opcode,    /* 0xdd2f */
+    &Z80::invalid_opcode,    /* 0xdd30 */
+    &Z80::invalid_opcode,    /* 0xdd31 */
+    &Z80::invalid_opcode,    /* 0xdd32 */
+    &Z80::invalid_opcode,    /* 0xdd33 */
     &Z80::Opc_ddxx_34,
     &Z80::Opc_ddxx_35,
     &Z80::Opc_ddxx_36,
-    &Z80::invalid_opcode,	/* 0xdd37 */
-    &Z80::invalid_opcode,	/* 0xdd38 */
+    &Z80::invalid_opcode,    /* 0xdd37 */
+    &Z80::invalid_opcode,    /* 0xdd38 */
     &Z80::Opc_ddxx_39,
-    &Z80::invalid_opcode,	/* 0xdd3a */
-    &Z80::invalid_opcode,	/* 0xdd3b */
-    &Z80::invalid_opcode,	/* 0xdd3c */
-    &Z80::invalid_opcode,	/* 0xdd3d */
-    &Z80::invalid_opcode,	/* 0xdd3e */
-    &Z80::invalid_opcode,	/* 0xdd3f */
-    &Z80::invalid_opcode,	/* 0xdd40 */
-    &Z80::invalid_opcode,	/* 0xdd41 */
-    &Z80::invalid_opcode,	/* 0xdd42 */
-    &Z80::invalid_opcode,	/* 0xdd43 */
+    &Z80::invalid_opcode,    /* 0xdd3a */
+    &Z80::invalid_opcode,    /* 0xdd3b */
+    &Z80::invalid_opcode,    /* 0xdd3c */
+    &Z80::invalid_opcode,    /* 0xdd3d */
+    &Z80::invalid_opcode,    /* 0xdd3e */
+    &Z80::invalid_opcode,    /* 0xdd3f */
+    &Z80::invalid_opcode,    /* 0xdd40 */
+    &Z80::invalid_opcode,    /* 0xdd41 */
+    &Z80::invalid_opcode,    /* 0xdd42 */
+    &Z80::invalid_opcode,    /* 0xdd43 */
     &Z80::Opc_ddxx_44,
     &Z80::Opc_ddxx_45,
     &Z80::Opc_ddxx_46,
-    &Z80::invalid_opcode,	/* 0xdd47 */
-    &Z80::invalid_opcode,	/* 0xdd48 */
-    &Z80::invalid_opcode,	/* 0xdd49 */
-    &Z80::invalid_opcode,	/* 0xdd4a */
-    &Z80::invalid_opcode,	/* 0xdd4b */
+    &Z80::invalid_opcode,    /* 0xdd47 */
+    &Z80::invalid_opcode,    /* 0xdd48 */
+    &Z80::invalid_opcode,    /* 0xdd49 */
+    &Z80::invalid_opcode,    /* 0xdd4a */
+    &Z80::invalid_opcode,    /* 0xdd4b */
     &Z80::Opc_ddxx_4c,
     &Z80::Opc_ddxx_4d,
     &Z80::Opc_ddxx_4e,
-    &Z80::invalid_opcode,	/* 0xdd4f */
-    &Z80::invalid_opcode,	/* 0xdd50 */
-    &Z80::invalid_opcode,	/* 0xdd51 */
-    &Z80::invalid_opcode,	/* 0xdd52 */
-    &Z80::invalid_opcode,	/* 0xdd53 */
+    &Z80::invalid_opcode,    /* 0xdd4f */
+    &Z80::invalid_opcode,    /* 0xdd50 */
+    &Z80::invalid_opcode,    /* 0xdd51 */
+    &Z80::invalid_opcode,    /* 0xdd52 */
+    &Z80::invalid_opcode,    /* 0xdd53 */
     &Z80::Opc_ddxx_54,
     &Z80::Opc_ddxx_55,
     &Z80::Opc_ddxx_56,
-    &Z80::invalid_opcode,	/* 0xdd57 */
-    &Z80::invalid_opcode,	/* 0xdd58 */
-    &Z80::invalid_opcode,	/* 0xdd59 */
-    &Z80::invalid_opcode,	/* 0xdd5a */
-    &Z80::invalid_opcode,	/* 0xdd5b */
+    &Z80::invalid_opcode,    /* 0xdd57 */
+    &Z80::invalid_opcode,    /* 0xdd58 */
+    &Z80::invalid_opcode,    /* 0xdd59 */
+    &Z80::invalid_opcode,    /* 0xdd5a */
+    &Z80::invalid_opcode,    /* 0xdd5b */
     &Z80::Opc_ddxx_5c,
     &Z80::Opc_ddxx_5d,
     &Z80::Opc_ddxx_5e,
-    &Z80::invalid_opcode,	/* 0xdd5f */
+    &Z80::invalid_opcode,    /* 0xdd5f */
     &Z80::Opc_ddxx_60,
     &Z80::Opc_ddxx_61,
     &Z80::Opc_ddxx_62,
@@ -791,142 +791,142 @@ Z80::Opc_handler Z80::Opc_ddxx[256] =
     &Z80::Opc_ddxx_73,
     &Z80::Opc_ddxx_74,
     &Z80::Opc_ddxx_75,
-    &Z80::invalid_opcode,	/* 0xdd76 */
+    &Z80::invalid_opcode,    /* 0xdd76 */
     &Z80::Opc_ddxx_77,
-    &Z80::invalid_opcode,	/* 0xdd78 */
-    &Z80::invalid_opcode,	/* 0xdd79 */
-    &Z80::invalid_opcode,	/* 0xdd7a */
-    &Z80::invalid_opcode,	/* 0xdd7b */
+    &Z80::invalid_opcode,    /* 0xdd78 */
+    &Z80::invalid_opcode,    /* 0xdd79 */
+    &Z80::invalid_opcode,    /* 0xdd7a */
+    &Z80::invalid_opcode,    /* 0xdd7b */
     &Z80::Opc_ddxx_7c,
     &Z80::Opc_ddxx_7d,
     &Z80::Opc_ddxx_7e,
-    &Z80::invalid_opcode,	/* 0xdd7f */
-    &Z80::invalid_opcode,	/* 0xdd80 */
-    &Z80::invalid_opcode,	/* 0xdd81 */
-    &Z80::invalid_opcode,	/* 0xdd82 */
-    &Z80::invalid_opcode,	/* 0xdd83 */
+    &Z80::invalid_opcode,    /* 0xdd7f */
+    &Z80::invalid_opcode,    /* 0xdd80 */
+    &Z80::invalid_opcode,    /* 0xdd81 */
+    &Z80::invalid_opcode,    /* 0xdd82 */
+    &Z80::invalid_opcode,    /* 0xdd83 */
     &Z80::Opc_ddxx_84,
     &Z80::Opc_ddxx_85,
     &Z80::Opc_ddxx_86,
-    &Z80::invalid_opcode,	/* 0xdd87 */
-    &Z80::invalid_opcode,	/* 0xdd88 */
-    &Z80::invalid_opcode,	/* 0xdd89 */
-    &Z80::invalid_opcode,	/* 0xdd8a */
-    &Z80::invalid_opcode,	/* 0xdd8b */
+    &Z80::invalid_opcode,    /* 0xdd87 */
+    &Z80::invalid_opcode,    /* 0xdd88 */
+    &Z80::invalid_opcode,    /* 0xdd89 */
+    &Z80::invalid_opcode,    /* 0xdd8a */
+    &Z80::invalid_opcode,    /* 0xdd8b */
     &Z80::Opc_ddxx_8c,
     &Z80::Opc_ddxx_8d,
     &Z80::Opc_ddxx_8e,
-    &Z80::invalid_opcode,	/* 0xdd8f */
-    &Z80::invalid_opcode,	/* 0xdd90 */
-    &Z80::invalid_opcode,	/* 0xdd91 */
-    &Z80::invalid_opcode,	/* 0xdd92 */
-    &Z80::invalid_opcode,	/* 0xdd93 */
+    &Z80::invalid_opcode,    /* 0xdd8f */
+    &Z80::invalid_opcode,    /* 0xdd90 */
+    &Z80::invalid_opcode,    /* 0xdd91 */
+    &Z80::invalid_opcode,    /* 0xdd92 */
+    &Z80::invalid_opcode,    /* 0xdd93 */
     &Z80::Opc_ddxx_94,
     &Z80::Opc_ddxx_95,
     &Z80::Opc_ddxx_96,
-    &Z80::invalid_opcode,	/* 0xdd97 */
-    &Z80::invalid_opcode,	/* 0xdd98 */
-    &Z80::invalid_opcode,	/* 0xdd99 */
-    &Z80::invalid_opcode,	/* 0xdd9a */
-    &Z80::invalid_opcode,	/* 0xdd9b */
+    &Z80::invalid_opcode,    /* 0xdd97 */
+    &Z80::invalid_opcode,    /* 0xdd98 */
+    &Z80::invalid_opcode,    /* 0xdd99 */
+    &Z80::invalid_opcode,    /* 0xdd9a */
+    &Z80::invalid_opcode,    /* 0xdd9b */
     &Z80::Opc_ddxx_9c,
     &Z80::Opc_ddxx_9d,
     &Z80::Opc_ddxx_9e,
-    &Z80::invalid_opcode,	/* 0xdd9f */
-    &Z80::invalid_opcode,	/* 0xdda0 */
-    &Z80::invalid_opcode,	/* 0xdda1 */
-    &Z80::invalid_opcode,	/* 0xdda2 */
-    &Z80::invalid_opcode,	/* 0xdda3 */
+    &Z80::invalid_opcode,    /* 0xdd9f */
+    &Z80::invalid_opcode,    /* 0xdda0 */
+    &Z80::invalid_opcode,    /* 0xdda1 */
+    &Z80::invalid_opcode,    /* 0xdda2 */
+    &Z80::invalid_opcode,    /* 0xdda3 */
     &Z80::Opc_ddxx_a4,
     &Z80::Opc_ddxx_a5,
     &Z80::Opc_ddxx_a6,
-    &Z80::invalid_opcode,	/* 0xdda7 */
-    &Z80::invalid_opcode,	/* 0xdda8 */
-    &Z80::invalid_opcode,	/* 0xdda9 */
-    &Z80::invalid_opcode,	/* 0xddaa */
-    &Z80::invalid_opcode,	/* 0xddab */
+    &Z80::invalid_opcode,    /* 0xdda7 */
+    &Z80::invalid_opcode,    /* 0xdda8 */
+    &Z80::invalid_opcode,    /* 0xdda9 */
+    &Z80::invalid_opcode,    /* 0xddaa */
+    &Z80::invalid_opcode,    /* 0xddab */
     &Z80::Opc_ddxx_ac,
     &Z80::Opc_ddxx_ad,
     &Z80::Opc_ddxx_ae,
-    &Z80::invalid_opcode,	/* 0xddaf */
-    &Z80::invalid_opcode,	/* 0xddb0 */
-    &Z80::invalid_opcode,	/* 0xddb1 */
-    &Z80::invalid_opcode,	/* 0xddb2 */
-    &Z80::invalid_opcode,	/* 0xddb3 */
+    &Z80::invalid_opcode,    /* 0xddaf */
+    &Z80::invalid_opcode,    /* 0xddb0 */
+    &Z80::invalid_opcode,    /* 0xddb1 */
+    &Z80::invalid_opcode,    /* 0xddb2 */
+    &Z80::invalid_opcode,    /* 0xddb3 */
     &Z80::Opc_ddxx_b4,
     &Z80::Opc_ddxx_b5,
     &Z80::Opc_ddxx_b6,
-    &Z80::invalid_opcode,	/* 0xddb7 */
-    &Z80::invalid_opcode,	/* 0xddb8 */
-    &Z80::invalid_opcode,	/* 0xddb9 */
-    &Z80::invalid_opcode,	/* 0xddba */
-    &Z80::invalid_opcode,	/* 0xddbb */
+    &Z80::invalid_opcode,    /* 0xddb7 */
+    &Z80::invalid_opcode,    /* 0xddb8 */
+    &Z80::invalid_opcode,    /* 0xddb9 */
+    &Z80::invalid_opcode,    /* 0xddba */
+    &Z80::invalid_opcode,    /* 0xddbb */
     &Z80::Opc_ddxx_bc,
     &Z80::Opc_ddxx_bd,
     &Z80::Opc_ddxx_be,
-    &Z80::invalid_opcode,	/* 0xddbf */
-    &Z80::invalid_opcode,	/* 0xddc0 */
-    &Z80::invalid_opcode,	/* 0xddc1 */
-    &Z80::invalid_opcode,	/* 0xddc2 */
-    &Z80::invalid_opcode,	/* 0xddc3 */
-    &Z80::invalid_opcode,	/* 0xddc4 */
-    &Z80::invalid_opcode,	/* 0xddc5 */
-    &Z80::invalid_opcode,	/* 0xddc6 */
-    &Z80::invalid_opcode,	/* 0xddc7 */
-    &Z80::invalid_opcode,	/* 0xddc8 */
-    &Z80::invalid_opcode,	/* 0xddc9 */
-    &Z80::invalid_opcode,	/* 0xddca */
+    &Z80::invalid_opcode,    /* 0xddbf */
+    &Z80::invalid_opcode,    /* 0xddc0 */
+    &Z80::invalid_opcode,    /* 0xddc1 */
+    &Z80::invalid_opcode,    /* 0xddc2 */
+    &Z80::invalid_opcode,    /* 0xddc3 */
+    &Z80::invalid_opcode,    /* 0xddc4 */
+    &Z80::invalid_opcode,    /* 0xddc5 */
+    &Z80::invalid_opcode,    /* 0xddc6 */
+    &Z80::invalid_opcode,    /* 0xddc7 */
+    &Z80::invalid_opcode,    /* 0xddc8 */
+    &Z80::invalid_opcode,    /* 0xddc9 */
+    &Z80::invalid_opcode,    /* 0xddca */
     &Z80::exec_ddcb,
-    &Z80::invalid_opcode,	/* 0xddcc */
-    &Z80::invalid_opcode,	/* 0xddcd */
-    &Z80::invalid_opcode,	/* 0xddce */
-    &Z80::invalid_opcode,	/* 0xddcf */
-    &Z80::invalid_opcode,	/* 0xddd0 */
-    &Z80::invalid_opcode,	/* 0xddd1 */
-    &Z80::invalid_opcode,	/* 0xddd2 */
-    &Z80::invalid_opcode,	/* 0xddd3 */
-    &Z80::invalid_opcode,	/* 0xddd4 */
-    &Z80::invalid_opcode,	/* 0xddd5 */
-    &Z80::invalid_opcode,	/* 0xddd6 */
-    &Z80::invalid_opcode,	/* 0xddd7 */
-    &Z80::invalid_opcode,	/* 0xddd8 */
-    &Z80::invalid_opcode,	/* 0xddd9 */
-    &Z80::invalid_opcode,	/* 0xddda */
-    &Z80::invalid_opcode,	/* 0xdddb */
-    &Z80::invalid_opcode,	/* 0xdddc */
-    &Z80::invalid_opcode,	/* 0xdddd */
-    &Z80::invalid_opcode,	/* 0xddde */
-    &Z80::invalid_opcode,	/* 0xdddf */
-    &Z80::invalid_opcode,	/* 0xdde0 */
+    &Z80::invalid_opcode,    /* 0xddcc */
+    &Z80::invalid_opcode,    /* 0xddcd */
+    &Z80::invalid_opcode,    /* 0xddce */
+    &Z80::invalid_opcode,    /* 0xddcf */
+    &Z80::invalid_opcode,    /* 0xddd0 */
+    &Z80::invalid_opcode,    /* 0xddd1 */
+    &Z80::invalid_opcode,    /* 0xddd2 */
+    &Z80::invalid_opcode,    /* 0xddd3 */
+    &Z80::invalid_opcode,    /* 0xddd4 */
+    &Z80::invalid_opcode,    /* 0xddd5 */
+    &Z80::invalid_opcode,    /* 0xddd6 */
+    &Z80::invalid_opcode,    /* 0xddd7 */
+    &Z80::invalid_opcode,    /* 0xddd8 */
+    &Z80::invalid_opcode,    /* 0xddd9 */
+    &Z80::invalid_opcode,    /* 0xddda */
+    &Z80::invalid_opcode,    /* 0xdddb */
+    &Z80::invalid_opcode,    /* 0xdddc */
+    &Z80::invalid_opcode,    /* 0xdddd */
+    &Z80::invalid_opcode,    /* 0xddde */
+    &Z80::invalid_opcode,    /* 0xdddf */
+    &Z80::invalid_opcode,    /* 0xdde0 */
     &Z80::Opc_ddxx_e1,
-    &Z80::invalid_opcode,	/* 0xdde2 */
+    &Z80::invalid_opcode,    /* 0xdde2 */
     &Z80::Opc_ddxx_e3,
-    &Z80::invalid_opcode,	/* 0xdde4 */
+    &Z80::invalid_opcode,    /* 0xdde4 */
     &Z80::Opc_ddxx_e5,
-    &Z80::invalid_opcode,	/* 0xdde6 */
-    &Z80::invalid_opcode,	/* 0xdde7 */
-    &Z80::invalid_opcode,	/* 0xdde8 */
+    &Z80::invalid_opcode,    /* 0xdde6 */
+    &Z80::invalid_opcode,    /* 0xdde7 */
+    &Z80::invalid_opcode,    /* 0xdde8 */
     &Z80::Opc_ddxx_e9,
-    &Z80::invalid_opcode,	/* 0xddea */
-    &Z80::invalid_opcode,	/* 0xddeb */
-    &Z80::invalid_opcode,	/* 0xddec */
-    &Z80::invalid_opcode,	/* 0xdded */
-    &Z80::invalid_opcode,	/* 0xddee */
-    &Z80::invalid_opcode,	/* 0xddef */
-    &Z80::invalid_opcode,	/* 0xddf0 */
-    &Z80::invalid_opcode,	/* 0xddf1 */
-    &Z80::invalid_opcode,	/* 0xddf2 */
-    &Z80::invalid_opcode,	/* 0xddf3 */
-    &Z80::invalid_opcode,	/* 0xddf4 */
-    &Z80::invalid_opcode,	/* 0xddf5 */
-    &Z80::invalid_opcode,	/* 0xddf6 */
-    &Z80::invalid_opcode,	/* 0xddf7 */
-    &Z80::invalid_opcode,	/* 0xddf8 */
+    &Z80::invalid_opcode,    /* 0xddea */
+    &Z80::invalid_opcode,    /* 0xddeb */
+    &Z80::invalid_opcode,    /* 0xddec */
+    &Z80::invalid_opcode,    /* 0xdded */
+    &Z80::invalid_opcode,    /* 0xddee */
+    &Z80::invalid_opcode,    /* 0xddef */
+    &Z80::invalid_opcode,    /* 0xddf0 */
+    &Z80::invalid_opcode,    /* 0xddf1 */
+    &Z80::invalid_opcode,    /* 0xddf2 */
+    &Z80::invalid_opcode,    /* 0xddf3 */
+    &Z80::invalid_opcode,    /* 0xddf4 */
+    &Z80::invalid_opcode,    /* 0xddf5 */
+    &Z80::invalid_opcode,    /* 0xddf6 */
+    &Z80::invalid_opcode,    /* 0xddf7 */
+    &Z80::invalid_opcode,    /* 0xddf8 */
     &Z80::Opc_ddxx_f9,
-    &Z80::invalid_opcode,	/* 0xddfa */
-    &Z80::invalid_opcode,	/* 0xddfb */
-    &Z80::invalid_opcode,	/* 0xddfc */
-    &Z80::invalid_opcode,	/* 0xddfd */
-    &Z80::invalid_opcode,	/* 0xddfe */
-    &Z80::invalid_opcode	/* 0xddff */
+    &Z80::invalid_opcode,    /* 0xddfa */
+    &Z80::invalid_opcode,    /* 0xddfb */
+    &Z80::invalid_opcode,    /* 0xddfc */
+    &Z80::invalid_opcode,    /* 0xddfd */
+    &Z80::invalid_opcode,    /* 0xddfe */
+    &Z80::invalid_opcode     /* 0xddff */
 };

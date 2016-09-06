@@ -43,12 +43,12 @@ extern Options opt;
 
 /*--------------------------------------------------------------------*/
 /* Class constructor. It immediately load a given rom, and updates    */
-/* Memory mapper variables.					      */
+/* Memory mapper variables.                                           */
 /*--------------------------------------------------------------------*/
 MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
 {
-	configuration = conf;
-    save_bbr       = false;
+    configuration = conf;
+    save_bbr = false;
     string n = string(rom_file);
     string ext;
     int last_separator_index = -1;
@@ -60,7 +60,7 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
     }
     else
     {
-		string error_message = "Invalid ROM name.\nValid name is at least one letter, and extension. Ex: a.sms or b.zip";
+        string error_message = "Invalid ROM name.\nValid name is at least one letter, and extension. Ex: a.sms or b.zip";
         throw error_message;
     }
 
@@ -68,16 +68,16 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
     if (ext == "sms" || ext == "SMS")
     {
         rom_crc = LoadSMSRom(rom_file);
-		string msg = "Switching emulator to SMS mode.";
-		QLogWindow::getInstance()->appendLog(msg);
+        string msg = "Switching emulator to SMS mode.";
+        QLogWindow::getInstance()->appendLog(msg);
     }
     else
         if (ext == ".gg" || ext == ".GG") // Load GAMEGEAR unzipped file.
         {
             rom_crc = LoadSMSRom(rom_file);
             opt.MachineType = GAMEGEAR;
-			string msg = "Switching emulator to GAMEGEAR mode.";
-			QLogWindow::getInstance()->appendLog(msg);
+            string msg = "Switching emulator to GAMEGEAR mode.";
+            QLogWindow::getInstance()->appendLog(msg);
         }
         else
             if (ext == "zip" || ext == "ZIP")
@@ -86,14 +86,14 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
             }
             else
             {
-				string error_message = "Unknown file extension:" + ext + ". \nKnown extensions supported by Osmose are: .sms .gg or .zip";
-				throw error_message;
+                string error_message = "Unknown file extension:" + ext + ". \nKnown extensions supported by Osmose are: .sms .gg or .zip";
+                throw error_message;
             }
 
-    /* Print the ROM CRC. */
+    // Print the ROM CRC.
     //cout << "CRC32 = 0x"<< hex << setfill('0') << setw(8) << rom_crc << endl;
 
-    /* Now check in RomSpecificDataBase if we need specific option to run the rom. */
+    // Now check in RomSpecificDataBase if we need specific option to run the rom.
     SpecificRomOptionDatabase::getOptions( rom_crc, &opt );
 
     // Now extract the rom name.
@@ -112,57 +112,57 @@ MemoryMapper::MemoryMapper(const char *rom_file, OsmoseConfigurationFile *conf)
     // Allocate Central RAM (0xC000-0xDFFF mirrored)
     ram = new unsigned char[0x2000];
 
-	// Clear this RAM.
-	for (int i=0; i<0x2000; i++)
-	{
-		ram[i] = 0;
-	}
+    // Clear this RAM.
+    for (int i=0; i<0x2000; i++)
+    {
+        ram[i] = 0;
+    }
 
 
     // Allocate 32Ko RAM banks, (2*16 opt banks) for games that use it.
     sram = new unsigned char[0x8000];
 
-	bool restored_old_bbr = false;
+    bool restored_old_bbr = false;
 
-	// Are there any battery backed memory save ?
-	ostringstream oss;
-	oss << configuration->getBBRPath() << "/" << rom_name << ".bbr";
+    // Are there any battery backed memory save?
+    ostringstream oss;
+    oss << configuration->getBBRPath() << "/" << rom_name << ".bbr";
 
-	ifstream file(oss.str().c_str(), ios::in | ios::binary);
-	if (file.is_open() == true )
-	{
-		// Now load 2*16Ko banks.
-		file.read((char *)sram,0x8000);
-		file.close();
-		restored_old_bbr = true;
-		string msg ="Restored Battery Backed Ram (.bbr) file:"+ oss.str();
-		QLogWindow::getInstance()->appendLog(msg);
-	}
+    ifstream file(oss.str().c_str(), ios::in | ios::binary);
+    if (file.is_open() == true )
+    {
+        // Now load 2*16Ko banks.
+        file.read((char *)sram,0x8000);
+        file.close();
+        restored_old_bbr = true;
+        string msg ="Restored Battery Backed Ram (.bbr) file:"+ oss.str();
+        QLogWindow::getInstance()->appendLog(msg);
+    }
 
-	if (restored_old_bbr != true)
-	{
-		// No battery backed memory, clear this Optional RAM.
-		for (int i=0; i<0x8000; i++)
-		{
-			sram[i] = 0x0;
-		}
-	}
+    if (restored_old_bbr != true)
+    {
+        // No battery backed memory, clear this Optional RAM.
+        for (int i=0; i<0x8000; i++)
+        {
+            sram[i] = 0x0;
+        }
+    }
 
     //dump_smem(0, 16*20);
     // Allocate 8Ko of ram for writes in rom.
     null_rom = new unsigned char[0x2000];
 
-    /* Init wr8_method pointer on default sega mapper. */
+    // Init wr8_method pointer on default sega mapper.
     wr8_method = &MemoryMapper::wr8_sega_mapper;
     mapperType = SegaMapper;
 
-    /* Rom is loaded, reset the MemoryMapper. */
+    // Rom is loaded, reset the MemoryMapper.
     reset();
 }
 
 /*------------------------------------------------------------*/
 /* This method reset paging to it's supposed initial value:   */
-/* page 0 on first rom bank, page1 on bank1 and so on.	      */
+/* page 0 on first rom bank, page1 on bank1 and so on.        */
 /*------------------------------------------------------------*/
 void MemoryMapper::reset()
 {
@@ -225,11 +225,11 @@ void MemoryMapper::reset()
     wr_area_type[5] = Null;
     block_in_wr_area[5] = 0;
 
-    write_map[6] = &ram[0];	 // 0xC000-0xDFFF
+    write_map[6] = &ram[0]; // 0xC000-0xDFFF
     wr_area_type[6] = Ram;
     block_in_wr_area[6] = 0;
 
-    write_map[7] = &ram[0];	 // 0xE000-0xFFFF mirror of 0xC000-0xDFFF
+    write_map[7] = &ram[0]; // 0xE000-0xFFFF mirror of 0xC000-0xDFFF
     wr_area_type[7] = Ram;
     block_in_wr_area[7] = 0;
 
@@ -241,10 +241,10 @@ void MemoryMapper::reset()
 }
 
 /*------------------------------------------------------------*/
-/* This is a debugging purpose function. 		      */
+/* This is a debugging purpose function.                      */
 /* Note that this method will dump banks without any banking  */
 /* purpose. It's not affected by paging. To dump paged bank   */
-/* use dump_page method.				      */
+/* use dump_page method.                                      */
 /*------------------------------------------------------------*/
 void MemoryMapper::dump(unsigned char bank_n)
 {
@@ -269,9 +269,9 @@ void MemoryMapper::dump(unsigned char bank_n)
 }
 
 /*------------------------------------------------------------*/
-/* This is a debugging purpose function. 		      */
+/* This is a debugging purpose function.                      */
 /* Note that this method will dump banks with banking purpose.*/
-/* It dumps data mapped into pages.			      */
+/* It dumps data mapped into pages.                           */
 /*------------------------------------------------------------*/
 void MemoryMapper::dump_page(unsigned char bank_n)
 {
@@ -295,7 +295,7 @@ void MemoryMapper::dump_page(unsigned char bank_n)
 }
 
 /*------------------------------------------------------------*/
-/* This is a debugging purpose function. 		      */
+/* This is a debugging purpose function.                      */
 /* Note that this method will memory using env rd functions.  */
 /*------------------------------------------------------------*/
 void MemoryMapper::dump_mem(unsigned add, unsigned short nb_line)
@@ -313,7 +313,7 @@ void MemoryMapper::dump_mem(unsigned add, unsigned short nb_line)
 }
 
 /*------------------------------------------------------------*/
-/* This is a debugging purpose function. 		      */
+/* This is a debugging purpose function.                      */
 /* Note that this method will memory using env rd functions.  */
 /*------------------------------------------------------------*/
 void MemoryMapper::dump_smem(unsigned add, unsigned short nb_line)
@@ -333,8 +333,8 @@ void MemoryMapper::dump_smem(unsigned add, unsigned short nb_line)
 
 /*------------------------------------------------------------*/
 /* This method wraps write to the selected wr8 method         */
-/* The pointer must be initialised with setMemoryMapper		  */
-/* to use non default mapper.								  */
+/* The pointer must be initialised with setMemoryMapper       */
+/* to use non default mapper.                                 */
 /*------------------------------------------------------------*/
 void MemoryMapper::wr8(unsigned address, unsigned char value)
 {
@@ -343,10 +343,10 @@ void MemoryMapper::wr8(unsigned address, unsigned char value)
 
 /*------------------------------------------------------------*/
 /* This method handle every write operations done by the CPU  */
-/* accordingly to korean memory mapper.						  */
-/* It handles bank switching, RAM/ROM writes.  	              */
-/*							                                  */
-/* Note that address is already anded with 0xFFFF	          */
+/* accordingly to korean memory mapper.                       */
+/* It handles bank switching, RAM/ROM writes.                 */
+/*                                                            */
+/* Note that address is already anded with 0xFFFF             */
 /*------------------------------------------------------------*/
 void MemoryMapper::wr8_sega_mapper(unsigned address, unsigned char value)
 {
@@ -361,11 +361,11 @@ void MemoryMapper::wr8_sega_mapper(unsigned address, unsigned char value)
 
 /*------------------------------------------------------------*/
 /* This method handle every write operations done by the CPU  */
-/* accordingly to codeemaster memory mapper.				  */
-/* It handles bank switching, RAM/ROM writes.  	              */
-/* write at 0x8000 changes rom banking.                        */
-/*							                                  */
-/* Note that address is already anded with 0xFFFF	          */
+/* accordingly to codeemaster memory mapper.                  */
+/* It handles bank switching, RAM/ROM writes.                 */
+/* write at 0x8000 changes rom banking.                       */
+/*                                                            */
+/* Note that address is already anded with 0xFFFF             */
 /*------------------------------------------------------------*/
 void MemoryMapper::wr8_codemaster_mapper(unsigned address, unsigned char value)
 {
@@ -382,11 +382,11 @@ void MemoryMapper::wr8_codemaster_mapper(unsigned address, unsigned char value)
 
 /*------------------------------------------------------------*/
 /* This method handle every write operations done by the CPU  */
-/* accordingly to korean memory mapper.				  */
-/* It handles bank switching, RAM/ROM writes.  	              */
+/* accordingly to korean memory mapper.                       */
+/* It handles bank switching, RAM/ROM writes.                 */
 /* write at 0xA000 changes rom banking page 2.                */
-/*							                                  */
-/* Note that address is already anded with 0xFFFF	          */
+/*                                                            */
+/* Note that address is already anded with 0xFFFF             */
 /*------------------------------------------------------------*/
 void MemoryMapper::wr8_korean_mapper(unsigned address, unsigned char value)
 {
@@ -399,7 +399,7 @@ void MemoryMapper::wr8_korean_mapper(unsigned address, unsigned char value)
     {
         int page = value % bank16Ko_nbr;
 
-        /* Keep copy of 0xA000 paging reg, swap banks.*/
+        // Keep copy of 0xA000 paging reg, swap banks.
         paging_regs[0] = value;
 
         read_map[4] = &cartridge[(page<<14)];
@@ -423,13 +423,13 @@ void MemoryMapper::wr8_korean_mapper(unsigned address, unsigned char value)
 
 /*------------------------------------------------------------*/
 /* This method handle every read operations done by the CPU.  */
-/* It handles bank switching, RAM/ROM reads.  	              */
-/* Note that address is already anded with 0xFFFF	      */
+/* It handles bank switching, RAM/ROM reads.                  */
+/* Note that address is already anded with 0xFFFF             */
 /*------------------------------------------------------------*/
 unsigned char MemoryMapper::rd8(unsigned  address)
 {
     unsigned char r=0;
-    int bnk = address>> 13; 		// bnk is 0-7.
+    int bnk = address>> 13; // bnk is 0-7.
 
     if (address < 0x400)
     {
@@ -444,19 +444,19 @@ unsigned char MemoryMapper::rd8(unsigned  address)
 
 
 /*------------------------------------------------------------*/
-/* This method is in charge of memory mapping.  	      */
-/* reg is the mapping register from FFFC-FFFF		      */
-/* Value is the value written to this register.		      */
+/* This method is in charge of memory mapping.                */
+/* reg is the mapping register from FFFC-FFFF                 */
+/* Value is the value written to this register.               */
 /*------------------------------------------------------------*/
 void MemoryMapper::write_standard_paging_reg(int reg, unsigned char value)
 {
     int page;
     page = (value % bank16Ko_nbr);
-    paging_regs[reg] = value;	// Save paging registers.
+    paging_regs[reg] = value; // Save paging registers.
 
     switch (reg)
     {
-            // 0xFFFC is written.
+        // 0xFFFC is written.
         case 0:
             if (value & 8) // If true, An additionnal 32 Ko ram is mapped at 0x8000-BFFF
             {
@@ -556,13 +556,13 @@ void MemoryMapper::write_standard_paging_reg(int reg, unsigned char value)
 /*------------------------------------------------------------*/
 /* This method is in charge of codemaster memory mapping.     */
 /* To use this mapping, emu must be called with -cm option.   */
-/* Value is the value written to this register.		      */
+/* Value is the value written to this register.               */
 /*------------------------------------------------------------*/
 void MemoryMapper::write_codemaster_paging_reg(unsigned char value)
 {
     int page = value % bank16Ko_nbr;
 
-    /* Keep a copy of 0x8000, swap banks. */
+    // Keep a copy of 0x8000, swap banks.
     paging_regs[0] = value;
     read_map[4] = &cartridge[(page<<14)];
     rd_area_type[4] = Cartridge;
@@ -590,7 +590,7 @@ unsigned char MemoryMapper::getRSR()
 }
 
 /*------------------------------------------------------------*/
-/* This method returns bank selector apped at 0xFFFD   	      */
+/* This method returns bank selector apped at 0xFFFD          */
 /*------------------------------------------------------------*/
 unsigned char MemoryMapper::getFFFD()
 {
@@ -598,7 +598,7 @@ unsigned char MemoryMapper::getFFFD()
 }
 
 /*------------------------------------------------------------*/
-/* This method returns bank selector apped at 0xFFFE   	      */
+/* This method returns bank selector apped at 0xFFFE          */
 /*------------------------------------------------------------*/
 unsigned char MemoryMapper::getFFFE()
 {
@@ -606,7 +606,7 @@ unsigned char MemoryMapper::getFFFE()
 }
 
 /*------------------------------------------------------------*/
-/* This method returns bank selector apped at 0xFFFF   	      */
+/* This method returns bank selector apped at 0xFFFF          */
 /*------------------------------------------------------------*/
 unsigned char MemoryMapper::getFFFF()
 {
@@ -632,8 +632,8 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
     unzFile myZip = NULL;
     unz_global_info zip_global_info;
     unz_file_info zip_file_info;
-    unsigned char *dummy;		// Used to skip first 512 bytes.
-    char filename[256];			// Name of compressed file.
+    unsigned char *dummy; // Used to skip first 512 bytes.
+    char filename[256]; // Name of compressed file.
     unsigned int file_nbr = 0;
     int ret;
     bool smsArchiveFound = false;
@@ -655,8 +655,8 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
     {
         if (zip_global_info.number_entry != 1)
         {
-			string msg ="Warning Found more than one file in archive.";
-			QLogWindow::getInstance()->appendLog(msg);
+            string msg ="Warning Found more than one file in archive.";
+            QLogWindow::getInstance()->appendLog(msg);
         }
     }
     else
@@ -686,30 +686,30 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
             // Check Extension: should be .sms .gg .GG or .SMS to be accepted.
             if ((strncasecmp(&filename[strlen(filename)-4],".sms", 4)== 0))
             {
-				string msg ="File in zip archive is ";
-				msg = msg + filename;
-				QLogWindow::getInstance()->appendLog(msg);
+                string msg ="File in zip archive is ";
+                msg = msg + filename;
+                QLogWindow::getInstance()->appendLog(msg);
                 smsArchiveFound = true;
                 opt.MachineType = SMS;
-				msg ="Switching emulator to SMS mode.";
-				QLogWindow::getInstance()->appendLog(msg);
+                msg ="Switching emulator to SMS mode.";
+                QLogWindow::getInstance()->appendLog(msg);
             }
             if ((strncasecmp(&filename[strlen(filename)-3],".gg", 3)== 0))
             {
-				string msg ="File in zip archive is ";
-				msg = msg + filename;
-				QLogWindow::getInstance()->appendLog(msg);
+                string msg ="File in zip archive is ";
+                msg = msg + filename;
+                QLogWindow::getInstance()->appendLog(msg);
                 smsArchiveFound = true;
                 opt.MachineType = GAMEGEAR;
-				msg ="Switching emulator to GAMEGEAR mode.";
-				QLogWindow::getInstance()->appendLog(msg);
+                msg ="Switching emulator to GAMEGEAR mode.";
+                QLogWindow::getInstance()->appendLog(msg);
             }
             file_nbr++;
         }
         else
         {
-			string error_msg = "unzGetCurrentFileInfo() call failed.";
-			throw error_msg;
+            string error_msg = "unzGetCurrentFileInfo() call failed.";
+            throw error_msg;
         }
 
         if (smsArchiveFound != true && file_nbr <  zip_global_info.number_entry)
@@ -717,8 +717,8 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
             ret = unzGoToNextFile (myZip);
             if (ret != UNZ_OK)
             {
-				string error_msg = "unzGoToNextFile() call failed.";
-				throw error_msg;
+                string error_msg = "unzGoToNextFile() call failed.";
+                throw error_msg;
             }
         }
 
@@ -727,29 +727,29 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
 
     if (smsArchiveFound != true)
     {
-		string error_msg = "The .zip archive does not contain '.sms' or .'gg' file, aborting.";
-		throw error_msg;
+        string error_msg = "The .zip archive does not contain '.sms' or .'gg' file, aborting.";
+        throw error_msg;
     }
 
     // Now open rom file, prepare for reading.
     ret = unzOpenCurrentFile(myZip);
     if (ret != UNZ_OK)
     {
-		string error_msg = "Unable to open file from zip archive.";
-		throw error_msg;
+        string error_msg = "Unable to open file from zip archive.";
+        throw error_msg;
     }
 
     // Some rom seems to have a 512byte header. Skip it.
     // unzip package doesn't handle seek. So read buffer to skip it.
     if ((rom_size %1024) == 512)
     {
-		string msg ="512 bytes ROM header Skipped.";
-		QLogWindow::getInstance()->appendLog(msg);
+        string msg ="512 bytes ROM header Skipped.";
+        QLogWindow::getInstance()->appendLog(msg);
         ret = unzReadCurrentFile(myZip, dummy, 512);
         if (ret < 0)
         {
-			string error_msg = "Unable read 512 bytes from zip archive.";
-			throw error_msg;
+            string error_msg = "Unable read 512 bytes from zip archive.";
+            throw error_msg;
         }
         rom_size -= 512;
     }
@@ -763,8 +763,8 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
     if (bank_nbr < 8) bank_nbr = 8;
     bank16Ko_nbr = bank_nbr /2;
 
-	ostringstream oss;
-	oss << "Cartdrige contains " << (int)bank16Ko_nbr << " 16Ko banks.";
+    ostringstream oss;
+    oss << "Cartdrige contains " << (int)bank16Ko_nbr << " 16Ko banks.";
     QLogWindow::getInstance()->appendLog(oss.str().c_str());
     // Allocate RAM for the whole cartridge.
     if (rom_size < 65536)
@@ -783,8 +783,8 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
     ret = unzReadCurrentFile(myZip, cartridge, rom_size);
     if (ret <0)      // ret < 0 mean IO error.
     {
-		string error_msg = "Unable to load cartridge from zip archive.";
-		throw error_msg;
+        string error_msg = "Unable to load cartridge from zip archive.";
+        throw error_msg;
     }
 
     unzClose(myZip);
@@ -800,22 +800,22 @@ unsigned int MemoryMapper::LoadZippedRom(const char *rom_file)
 /*------------------------------------------------------------*/
 unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
 {
-    /* Open ROM with file pointer at the end of ROM. */
+    // Open ROM with file pointer at the end of ROM.
     ifstream file(rom_file, ios::in | ios::binary | ios::ate);
     if (file.is_open() == false )
     {
-		string error_msg = "Unable to load cartridge from " + string(rom_file) + " archive file.";
-		throw error_msg;
+        string error_msg = "Unable to load cartridge from " + string(rom_file) + " archive file.";
+        throw error_msg;
     }
 
     // Get the ROM size.
     rom_size = file.tellg();
 
-    /* Some rom seems to have a 512byte header. Skip it. */
+    // Some rom seems to have a 512byte header. Skip it.
     if ((rom_size %1024) == 512)
     {
-		string msg = "512 bytes ROM header Skipped.";
-		QLogWindow::getInstance()->appendLog(msg);
+        string msg = "512 bytes ROM header Skipped.";
+        QLogWindow::getInstance()->appendLog(msg);
         file.seekg(512, ios::beg);
         rom_size -= 512;
     }
@@ -832,8 +832,8 @@ unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
     if (bank_nbr < 8) bank_nbr = 8;
     bank16Ko_nbr = bank_nbr /2;
 
-	ostringstream oss;
-	oss << "Cartdrige contains " << (int)bank16Ko_nbr << " 16Ko banks.";
+    ostringstream oss;
+    oss << "Cartdrige contains " << (int)bank16Ko_nbr << " 16Ko banks.";
     QLogWindow::getInstance()->appendLog(oss.str().c_str());
 
     // Allocate RAM for the whole cartridge.
@@ -853,8 +853,8 @@ unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
     file.read((char*)cartridge, rom_size);
     if (file.good()== false)
     {
-		string error_msg = "Unable to load .sms file !";
-		throw error_msg;
+        string error_msg = "Unable to load .sms file!";
+        throw error_msg;
     }
     file.close();
 
@@ -863,17 +863,17 @@ unsigned int MemoryMapper::LoadSMSRom(const char *rom_file)
 }
 
 /*------------------------------------------------------------*/
-/* This method displays roms size in mb or kb.		      */
+/* This method displays roms size in mb or kb.                */
 /*------------------------------------------------------------*/
 void MemoryMapper::DisplayROMSize()
 {
-	ostringstream oss;
+    ostringstream oss;
 
-	/* 128 is equivalent (romsize*8)/1024 */
+    // 128 is equivalent (romsize*8)/1024
     if ((rom_size/128)> 1024)
     {
-		oss << "ROM size is " << rom_size << " bytes (" << ((rom_size*8)/(1024*1024))<< " mbits).";
-	}
+        oss << "ROM size is " << rom_size << " bytes (" << ((rom_size*8)/(1024*1024))<< " mbits).";
+    }
     else
     {
         oss << "ROM size is " << rom_size << " bytes (" << ((rom_size * 8)/1024)<< " kbits).";
@@ -883,7 +883,7 @@ void MemoryMapper::DisplayROMSize()
 
 /*------------------------------------------------------------*/
 /* This method return Rom name, based on Rom name, but with   */
-/* no extension.					      */
+/* no extension.                                              */
 /*------------------------------------------------------------*/
 string MemoryMapper::getROMName()
 {
@@ -898,17 +898,17 @@ void MemoryMapper::save_battery_backed_memory(string filename)
         ofstream file(filename.c_str(), ios::out | ios::binary);
         if (file.is_open() == false )
         {
-			string msg = "Unable to create .bbr file !";
-			QLogWindow::getInstance()->appendLog(msg);
-			return;
+            string msg = "Unable to create .bbr file!";
+            QLogWindow::getInstance()->appendLog(msg);
+            return;
         }
 
         // Now save 2*16Ko banks.
         file.write((const char*)sram,0x8000);
         file.flush();
         file.close();
-		string msg = "Battery Backed Ram saved.";
-		QLogWindow::getInstance()->appendLog(msg);
+        string msg = "Battery Backed Ram saved.";
+        QLogWindow::getInstance()->appendLog(msg);
     }
 }
 
@@ -962,11 +962,11 @@ void MemoryMapper::setMapperType(Mapper m)
             break;
     }
 
-    /* Keep a copy for save states. */
+    // Keep a copy for save states.
     mapperType = m;
 }
 
-/* Implemetntation of ImplementsSaveState. */
+/* Implementation of ImplementsSaveState. */
 bool MemoryMapper::saveState( ofstream &ofs)
 {
     MemoryMapperSaveState mss;
@@ -988,15 +988,15 @@ bool MemoryMapper::saveState( ofstream &ofs)
 //    cout << "Saved paging_regs[2] =" << (unsigned int)paging_regs[2] << endl;
 //    cout << "Saved paging_regs[3] =" << (unsigned int)paging_regs[3] << endl;
 
-    /* Save 8Ko Ram from 0xC000-0xDFFF. */
+    // Save 8Ko Ram from 0xC000-0xDFFF.
     ofs.write((char *)&ram[0], 0x2000);
     if (!ofs.good()) return false;
 
-    /* Save 32Ko Battery Backed Memory. */
+    // Save 32Ko Battery Backed Memory.
     ofs.write((char *)&sram[0], 0x8000);
     if (!ofs.good()) return false;
 
-    /* Save Paging Registers. */
+    // Save Paging Registers.
     ofs.write((char *)&mss, sizeof(mss));
     if (!ofs.good()) return false;
     return true;
@@ -1006,15 +1006,15 @@ bool MemoryMapper::loadState( ifstream &ifs)
 {
     MemoryMapperSaveState mss;
 
-    /* Load 8Ko Ram from 0xC000-0xDFFF. */
+    // Load 8Ko Ram from 0xC000-0xDFFF.
     ifs.read((char *)&ram[0], 0x2000);
     if (!ifs.good()) return false;
 
-    /* Load 32Ko Battery Backed Memory. */
+    // Load 32Ko Battery Backed Memory.
     ifs.read((char *)&sram[0], 0x8000);
     if (!ifs.good()) return false;
 
-    /* Load Paging Registers. */
+    // Load Paging Registers.
     ifs.read((char *)&mss, sizeof(mss));
     if (!ifs.good()) return false;
 
@@ -1048,19 +1048,19 @@ bool MemoryMapper::loadState( ifstream &ifs)
                 break;
 
             case Null:
-                // Everything is readable !
-				{
-					string msg ="Warning : Wrong area_type for read_map !";
-					QLogWindow::getInstance()->appendLog(msg);
+                // Everything is readable!
+                {
+                    string msg ="Warning: Wrong area_type for read_map!";
+                    QLogWindow::getInstance()->appendLog(msg);
                 }
-				break;
+                break;
 
             default:
-				{
-					string message ="Warning : Unknown area_type for read_map !";
-					QLogWindow::getInstance()->appendLog(message);
+                {
+                    string message ="Warning: Unknown area_type for read_map!";
+                    QLogWindow::getInstance()->appendLog(message);
                 }
-				break;
+                break;
         }
         read_map[i] = base_ptr + (block_in_rd_area[i] * 0x2000);
     }
@@ -1072,10 +1072,10 @@ bool MemoryMapper::loadState( ifstream &ifs)
         switch (wr_area_type[i])
         {
             case Cartridge:
-                // Cartridge are read only !
-				{
-					string msg ="Warning : Wrong area_type for write_map !";
-					QLogWindow::getInstance()->appendLog(msg);
+                // Cartridge are read only!
+                {
+                    string msg ="Warning: Wrong area_type for write_map!";
+                    QLogWindow::getInstance()->appendLog(msg);
                 }
                 break;
 
@@ -1092,9 +1092,9 @@ bool MemoryMapper::loadState( ifstream &ifs)
                 break;
 
             default:
-				{
-					string msg ="Warning : Unknown area_type for write_map !";
-					QLogWindow::getInstance()->appendLog(msg);
+                {
+                    string msg ="Warning: Unknown area_type for write_map!";
+                    QLogWindow::getInstance()->appendLog(msg);
                 }
                 break;
         }
@@ -1108,4 +1108,3 @@ bool MemoryMapper::loadState( ifstream &ifs)
 //    cout << "Loaded paging_regs[3] =" << (unsigned int)paging_regs[3] << endl;
     return true;
 }
-

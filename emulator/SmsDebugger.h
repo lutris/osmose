@@ -83,22 +83,22 @@ class SmsDebugger : public DebugEventListener
 
         MemoryMapper   *mem;
         SmsEnvironment *env;
-        VDP	           *v;
+        VDP            *v;
         IOMapper       *iom;
-        Z80Dasm 	   *dasm;
-        Z80 	       *cpu;
+        Z80Dasm        *dasm;
+        Z80            *cpu;
 
     private:
 
         int  scanlineBreakpoint;
-        bool any_breakpoint;	      /* Flag to avoid bp search.	 */
-        bool end_session;		      /* Have we leaved the debugger ?   */
+        bool any_breakpoint;              // Flag to avoid bp search.
+        bool end_session;                 // Have we left the debugger?
         bool breakpoint_on_irq;
         bool breakpoint_on_enable_interrupt;
         bool breakpoint_on_disable_interrupt;
         bool cpu_steping;
-        int breakpoints[MAX_BREAKPOINTS]; /* INTeger chose to allow -1 value */
-        unsigned int bp_index;	      /* Index in circular buffer of bp. */
+        int breakpoints[MAX_BREAKPOINTS]; // INTeger chosen to allow -1 value
+        unsigned int bp_index;            // Index in circular buffer of bp.
         void help();
         void dpr();
         void dvdpr();

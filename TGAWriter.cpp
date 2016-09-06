@@ -35,49 +35,49 @@
 
 TGAWriter::TGAWriter(const char *filename, int width, int height)
 {
-	/* Initialise TGA Header with the given informations.*/
-	header.identsize = 0;
-	header.colourmaptype = 0;	/* No palette.  */
-	header.imagetype = 2;		/* RGB picture. */
-	header.colourmapstart = 0;	/* No colormap. */
-	header.colourmaplength =0;
-	header.colourmapbits = 0;
-	header.xstart = 0;
-	header.ystart = 0;
-	header.width = width;
-	header.height = height;
-	header.bits = 24;			/* 24Bits RGB.  */
-	header.descriptor = 0;
+    // Initialise TGA Header with the given informations.
+    header.identsize = 0;
+    header.colourmaptype = 0;  // No palette.
+    header.imagetype = 2;      // RGB picture.
+    header.colourmapstart = 0; // No colormap.
+    header.colourmaplength =0;
+    header.colourmapbits = 0;
+    header.xstart = 0;
+    header.ystart = 0;
+    header.width = width;
+    header.height = height;
+    header.bits = 24;          // 24Bits RGB.
+    header.descriptor = 0;
 
-	tgaFile = new ofstream(filename, ios::binary | ios::out);
-	isOk_ = tgaFile->is_open();
-	tgaFile->write((char *)&header, sizeof(TGAHeader));
-	cacheIndex = 0;
+    tgaFile = new ofstream(filename, ios::binary | ios::out);
+    isOk_ = tgaFile->is_open();
+    tgaFile->write((char *)&header, sizeof(TGAHeader));
+    cacheIndex = 0;
 }
 
 
 TGAWriter::~TGAWriter()
 {
-	flushCache();
-	tgaFile->close();
+    flushCache();
+    tgaFile->close();
 }
 
 void TGAWriter::writePixel(unsigned char r, unsigned char g,unsigned char b)
 {
-	if (cacheIndex > INTERNAL_CACHE_SIZE -3)
-	{
-		flushCache();
-	}
-	cache[cacheIndex++] = b;
-	cache[cacheIndex++] = g;
-	cache[cacheIndex++] = r;
+    if (cacheIndex > INTERNAL_CACHE_SIZE -3)
+    {
+        flushCache();
+    }
+    cache[cacheIndex++] = b;
+    cache[cacheIndex++] = g;
+    cache[cacheIndex++] = r;
 }
 
 void TGAWriter::flushCache()
 {
-	if (cacheIndex != 0)
-	{
-		tgaFile->write((char *)cache, cacheIndex);
-	}
-	cacheIndex = 0;
+    if (cacheIndex != 0)
+    {
+        tgaFile->write((char *)cache, cacheIndex);
+    }
+    cacheIndex = 0;
 }

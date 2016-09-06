@@ -50,14 +50,14 @@ using namespace std;
 
 extern EmulatorOptions emu_opt;
 
-/* Uncomment this to display sprites */
+// Uncomment this to display sprites
 #define DISPLAY_SPRITES
 
-#define VDP_REGISTER_NBR        16
+#define VDP_REGISTER_NBR 16
 
-/* Destination component when data port is written */
-#define D_VRAM                        0
-#define D_CRAM                        1
+// Destination component when data port is written
+#define D_VRAM 0
+#define D_CRAM 1
 
 #define REG0 regs [0]
 #define REG1 regs [1]
@@ -71,7 +71,7 @@ extern EmulatorOptions emu_opt;
 #define REG9 regs [9]
 #define REG10 regs [10]
 
-/*Uncomment this to have VDP access trace */
+// Uncomment this to have VDP access trace
 //#define VDP_VERBOSE
 
 typedef struct
@@ -83,7 +83,7 @@ typedef struct
     unsigned char  vdp_status;
     unsigned char  v_counter;
     int line;
-    unsigned char     i_counter;
+    unsigned char  i_counter;
     unsigned char  rd_data_port_buffer;
     bool irq_line_pending;
     bool vsynch_irq_pending;
@@ -111,7 +111,7 @@ class VDP : public DebugEventThrower, public ImplementsSaveState
         void dumpVRAM(unsigned int, int nb_lines);      // Dump VDP VRAM.
         void dumpCRAM();                                // Dump VDP CRAM.
         void update(unsigned int *s, bool drawline);    // Update VDP.
-        unsigned short getVRAMAddr();		            // Get VDP pointer.
+        unsigned short getVRAMAddr();                   // Get VDP pointer.
         bool getIrqLinePending() {return irq_line_pending;}
         unsigned int   line_buffer [256];              // Line buffer for tile/sprite priority.
         unsigned char  tile_mask   [256];              // Pixels above sprites are marked here.
@@ -124,10 +124,10 @@ class VDP : public DebugEventThrower, public ImplementsSaveState
         unsigned char  regs[VDP_REGISTER_NBR];         // VDP Registers.
         unsigned char  vdp_status;                     // used with portBF read.
         unsigned char  v_counter;                      // Vertical scanline ctr.
-        unsigned char *v_cnt;		           		   // point ntsc/pal vcount values.
+        unsigned char *v_cnt;                          // point ntsc/pal vcount values.
         int line;                                      // Line actually drawn.
         unsigned char     i_counter;                   // Interrupt Line counter.
-        unsigned char  rd_data_port_buffer;		   	   // Buffer used in read data port.
+        unsigned char  rd_data_port_buffer;            // Buffer used in read data port.
         bool irq_line_pending;
         bool vsynch_irq_pending;
         bool irqAsserted(){return sms_irq;}
@@ -136,27 +136,27 @@ class VDP : public DebugEventThrower, public ImplementsSaveState
         /* Implemetntation of ImplementsSaveState. */
         bool saveState( ofstream &ofs);
         bool loadState( ifstream &ifs);
-		void setNTSC(bool);
+        void setNTSC(bool);
 
     protected:
 
-        unsigned char  latch;                          	// Latch for address.
-        unsigned short addr;                           	// VDP address pointer.
-        unsigned char  cmd_type;			   			// VRAM Wr/Rd, VDP Wr Reg or CRAM Wr.
-        bool           cmd_flag;                       	// Flag for 2 bytes cmd.
-        unsigned char r_col[4];			   				// Precalc Red possible values.
-        unsigned char g_col[4];			   				// Precalc Green possible values.
-        unsigned char b_col[4];			   				// Precalc Blue possible values.
+        unsigned char  latch;                              // Latch for address.
+        unsigned short addr;                               // VDP address pointer.
+        unsigned char  cmd_type;                           // VRAM Wr/Rd, VDP Wr Reg or CRAM Wr.
+        bool           cmd_flag;                           // Flag for 2 bytes cmd.
+        unsigned char r_col[4];                            // Precalc Red possible values.
+        unsigned char g_col[4];                            // Precalc Green possible values.
+        unsigned char b_col[4];                            // Precalc Blue possible values.
 
         void updateIRQAssertion();
-        void writeRegs(unsigned char r,unsigned char v);        // Called on write regs.
-        virtual void traceBackGroundLine(unsigned int *s);	    // Draw one line.
-        void displaySpritesLine();                              // Used in traceBackGroundLine.
+        void writeRegs(unsigned char r,unsigned char v);   // Called on write regs.
+        virtual void traceBackGroundLine(unsigned int *s); // Draw one line.
+        void displaySpritesLine();                         // Used in traceBackGroundLine.
         unsigned int colorSMS8BitsToColor32Bits(unsigned char c); // Color convertor Helper.
         unsigned int colorGG12BitsToColor32Bits(unsigned short data);
 
     private:
-        bool sms_irq;                                  	// Set when VDP gen. an irq.
+        bool sms_irq;                                      // Set when VDP gen. an irq.
         Z80 *cpu;
 };
 #endif

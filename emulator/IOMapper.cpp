@@ -40,18 +40,18 @@ IOMapper::IOMapper(VDP & v, SN76489 & p) : vdp( v ), psg( p )
 }
 
 /*----------------------------------------------------------------------*/
-/* This method resets ports.						*/
+/* This method resets ports.                                            */
 /*----------------------------------------------------------------------*/
 void IOMapper::reset()
 {
     if (opt.inputType == DEFAULT_PAD)
     {
-        port3F = 0xFF;	// Active low
+        port3F = 0xFF; // Active low
     }
     else
-        if	 (opt.inputType == PADDLE)
+        if (opt.inputType == PADDLE)
         {
-            port3F = 0x30;	// 00110000b
+            port3F = 0x30; // 00110000b
         }
     port3E = 0xA4;
     portPAD1 = 0xFF;
@@ -62,8 +62,8 @@ void IOMapper::reset()
 
 
 /*----------------------------------------------------------------------*/
-/* Based on Charles MacDonald documentation, this method dispatches	*/
-/* port write, depending on A7, A6 and A0 address line.			*/
+/* Based on Charles MacDonald documentation, this method dispatches     */
+/* port write, depending on A7, A6 and A0 address line.                 */
 /*----------------------------------------------------------------------*/
 void IOMapper::out8(unsigned port, unsigned char value)
 {
@@ -151,7 +151,7 @@ void IOMapper::out8(unsigned port, unsigned char value)
 
             if (value & BIT4)
             {
-                cout << "Work Ram Disable (For battery backed RAM ?)." << endl;
+                cout << "Work Ram Disable (For battery backed RAM?)." << endl;
             }
             else
             {
@@ -208,7 +208,7 @@ void IOMapper::out8(unsigned port, unsigned char value)
             vdp.writeCtrlPort( value );
             return;
         }
-        else		// Write on VDP Data Port 0xBE
+        else // Write on VDP Data Port 0xBE
         {
 #ifdef VDP_VERBOSE
             cout << "VDP_DATA port 0xBE written with value " << hex << setw(2) << setfill('0') << (int)value << endl;
@@ -224,8 +224,8 @@ void IOMapper::out8(unsigned port, unsigned char value)
 }
 
 /*----------------------------------------------------------------------*/
-/* Based on Charles MacDonald documentation, this method dispatches	*/
-/* port read, depending on A7, A6 and A0 address line.			*/
+/* Based on Charles MacDonald documentation, this method dispatches     */
+/* port read, depending on A7, A6 and A0 address line.                  */
 /*----------------------------------------------------------------------*/
 unsigned char IOMapper::in8(unsigned port)
 {
@@ -242,14 +242,14 @@ unsigned char IOMapper::in8(unsigned port)
 
     if (port <= 0x7F)
     {
-        if (port & BIT0) 	// Read H counter port.
+        if (port & BIT0) // Read H counter port.
         {
 //#ifdef VDP_VERBOSE
             cout << "NOT IMPLEMENTED: VDP port H COUNTER 0x7F read."<< endl;
 //#endif
             return 0xFF;
         }
-        else 			// Read on VDP Vertical counter
+        else // Read on VDP Vertical counter
         {
 #ifdef VDP_VERBOSE
             cout << "VDP, port V COUNTER 0x7E read."<< endl;
@@ -258,7 +258,7 @@ unsigned char IOMapper::in8(unsigned port)
         }
     }
 
-    if (port <= 0xBF)		// Read VDP status flag
+    if (port <= 0xBF) // Read VDP status flag
     {
         if (port & BIT0)
         {
@@ -267,7 +267,7 @@ unsigned char IOMapper::in8(unsigned port)
 #endif
             return vdp.readStatusFlag();
         }
-        else			// Read VDP Data port
+        else // Read VDP Data port
         {
 #ifdef VDP_VERBOSE
             cout << "CRAM/VRAM read."<< endl;

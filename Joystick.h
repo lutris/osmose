@@ -48,9 +48,9 @@
 
 using namespace std;
 
-#define MAX_DEVNAME_LEN	128
-#define MAX_JOYID_LEN	128
-#define DEFAULT_POLLING_PERIOD	  3
+#define MAX_DEVNAME_LEN 128
+#define MAX_JOYID_LEN 128
+#define DEFAULT_POLLING_PERIOD 3
 
 
 /**
@@ -60,10 +60,10 @@ using namespace std;
 class JoystickListener
 {
 public:
-	virtual void buttonChanged(unsigned int button, bool pressed) = 0; /* True when pressed */
+    virtual void buttonChanged(unsigned int button, bool pressed) = 0; /* True when pressed */
     virtual void xAxisChanged(int value) = 0;
-	virtual void yAxisChanged(int value) = 0;
-	virtual void joystickError() = 0;
+    virtual void yAxisChanged(int value) = 0;
+    virtual void joystickError() = 0;
 };
 
 class Joystick : public Thread
@@ -76,30 +76,30 @@ public:
     void setListener(JoystickListener *lstnr) { listener = lstnr; }
     void setPollingPeriod(int ms);
     int  getPollingPeriod() { return pollingPeriod; }
-	unsigned int getAxisNumber() { return (unsigned int)axisNbr; }
-	unsigned int getButtonNumber() { return (unsigned int)buttonNbr; }
-	unsigned int getDriverVersion() {return driverVersion; }
+    unsigned int getAxisNumber() { return (unsigned int)axisNbr; }
+    unsigned int getButtonNumber() { return (unsigned int)buttonNbr; }
+    unsigned int getDriverVersion() {return driverVersion; }
     ~Joystick();
 
 protected:
 
-	void *run(void *);
+    void *run(void *);
 
 private:
 
-	char deviceName[MAX_DEVNAME_LEN];
+    char deviceName[MAX_DEVNAME_LEN];
     char joystickID[MAX_JOYID_LEN];
     int  joystickFD;
-	unsigned char axisNbr;
-	unsigned char buttonNbr;
-	unsigned int  driverVersion; // Unused-Major-Minor-Lower 8 bits packed.
+    unsigned char axisNbr;
+    unsigned char buttonNbr;
+    unsigned int  driverVersion; // Unused-Major-Minor-Lower 8 bits packed.
 
     JoystickListener *listener;
     int pollingPeriod;
-	bool done;
+    bool done;
 
-	bool readDevice(struct js_event *jse);
+    bool readDevice(struct js_event *jse);
 
 };
 
-#endif	// JOYSTICK_H
+#endif // JOYSTICK_H

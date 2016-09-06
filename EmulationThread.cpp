@@ -46,15 +46,15 @@
  */
 EmulationThread::EmulationThread(QGLImage *qglimage) : screen(qglimage)
 {
-	// Allocate buffer of the texture size.
-	videoBuffer = NULL;
-	QObject::connect(this, SIGNAL(newResolution(int, int)), qglimage, SLOT(resolutionChanged(int, int)));
-	setResolution(qglimage->getTextureWidth(), qglimage->getTextureHeight());
-	emulationState = EMULATION_STOPPED;
+    // Allocate buffer of the texture size.
+    videoBuffer = NULL;
+    QObject::connect(this, SIGNAL(newResolution(int, int)), qglimage, SLOT(resolutionChanged(int, int)));
+    setResolution(qglimage->getTextureWidth(), qglimage->getTextureHeight());
+    emulationState = EMULATION_STOPPED;
 
-	// Set default refresh slow arbitrary frequency.
-	setRefreshFrequency(1.0f);
-	done = false;
+    // Set default refresh slow arbitrary frequency.
+    setRefreshFrequency(1.0f);
+    done = false;
 }
 
 /**
@@ -62,71 +62,71 @@ EmulationThread::EmulationThread(QGLImage *qglimage) : screen(qglimage)
  */
 EmulationThread::~EmulationThread()
 {
-	delete []videoBuffer;
+    delete []videoBuffer;
 }
 
 /**
  * This method overrides QThread run(). It's the thread main method.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::run()
 {
-	struct timeval t0, t1;
-	struct timespec rqtp, rmtp;
-	unsigned int deltaT_micros, remainingT;
+    struct timeval t0, t1;
+    struct timespec rqtp, rmtp;
+    unsigned int deltaT_micros, remainingT;
 
-	while(!done)
-	{
-		emulationStateQMutex.lockForRead();
-		switch(emulationState)
-		{
-			case EMULATION_STOPPED:
-				// Free QMutex.
-				emulationStateQMutex.unlock();
+    while(!done)
+    {
+        emulationStateQMutex.lockForRead();
+        switch(emulationState)
+        {
+            case EMULATION_STOPPED:
+                // Free QMutex.
+                emulationStateQMutex.unlock();
 
-				// Sleep 20ms.
-				rqtp.tv_sec = 0;
-				rqtp.tv_nsec = 20 * 1000 * 1000; // 20 millisecond.
-				nanosleep(&rqtp, &rmtp);
-			break;
+                // Sleep 20ms.
+                rqtp.tv_sec = 0;
+                rqtp.tv_nsec = 20 * 1000 * 1000; // 20 millisecond.
+                nanosleep(&rqtp, &rmtp);
+            break;
 
-			case EMULATION_RUNNING:
-				// Free QMutex.
-				emulationStateQMutex.unlock();
+            case EMULATION_RUNNING:
+                // Free QMutex.
+                emulationStateQMutex.unlock();
 
-				// Execute one emulation frame, blit texture into openGL
-				// and calculate the duration of these operations.
-				gettimeofday(&t0, NULL);
-				emulateOneFrame();
-				screen->blit(videoBuffer);
-				gettimeofday(&t1, NULL);
+                // Execute one emulation frame, blit texture into openGL
+                // and calculate the duration of these operations.
+                gettimeofday(&t0, NULL);
+                emulateOneFrame();
+                screen->blit(videoBuffer);
+                gettimeofday(&t1, NULL);
 
-				// Compute duration.
-				deltaT_micros = ((t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec));
+                // Compute duration.
+                deltaT_micros = ((t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec));
 
-				// Compute remaining time to achieve the good regreshing period.
-				remainingT = (deltaT_micros < refreshingPeriod) ? refreshingPeriod - deltaT_micros : 1;
+                // Compute remaining time to achieve the good regreshing period.
+                remainingT = (deltaT_micros < refreshingPeriod) ? refreshingPeriod - deltaT_micros : 1;
 
-				// Sleep the remaining time.
-				rqtp.tv_sec = 0;
-				rqtp.tv_nsec = remainingT * 1000; // microsecond to nanoseconds
-				nanosleep(&rqtp, &rmtp);
-				//cout << "Loop takes :" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;
-			break;
+                // Sleep the remaining time.
+                rqtp.tv_sec = 0;
+                rqtp.tv_nsec = remainingT * 1000; // microsecond to nanoseconds
+                nanosleep(&rqtp, &rmtp);
+                //cout << "Loop takes:" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;
+            break;
 
-			case EMULATION_ABORTED:
-				done = true;
-				emulationStateQMutex.unlock();
-			break;
+            case EMULATION_ABORTED:
+                done = true;
+                emulationStateQMutex.unlock();
+            break;
 
-			default:
-				// Free QMutex.
-				emulationStateQMutex.unlock();
+            default:
+                // Free QMutex.
+                emulationStateQMutex.unlock();
 
-			break;
-		}
-	}
+            break;
+        }
+    }
 }
 
 
@@ -134,13 +134,13 @@ void EmulationThread::run()
  * This method will abort Emulation. This will cause the emulation thread
  * to die.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::abortEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	emulationState = EMULATION_ABORTED;
+    QWriteLocker lock(&emulationStateQMutex);
+    emulationState = EMULATION_ABORTED;
 }
 
 
@@ -148,13 +148,13 @@ void EmulationThread::abortEmulation()
  * This method will start Emulation. If emulation is already started, it
  * does nothing.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::startEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	emulationState = EMULATION_RUNNING;
+    QWriteLocker lock(&emulationStateQMutex);
+    emulationState = EMULATION_RUNNING;
 }
 
 
@@ -162,33 +162,33 @@ void EmulationThread::startEmulation()
  * This method will suspends Emulation. To continue, one should call
  * resume() method.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::pauseEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	emulationState = EMULATION_STOPPED;
+    QWriteLocker lock(&emulationStateQMutex);
+    emulationState = EMULATION_STOPPED;
 }
 
 /**
  * This method will resume Emulation that has previously been stopped
  * using pauseEmulation();
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::resumeEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	startEmulation();
+    QWriteLocker lock(&emulationStateQMutex);
+    startEmulation();
 }
 
 /**
  * This method will reset/restart Emulation. It's equivalent to a
  * hardware reset.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::resetEmulation()
@@ -197,22 +197,22 @@ void EmulationThread::resetEmulation()
 
 /**
  * This method set the refreshing period of the emulation thread.
- * Important note : The QThread::run method will call repeatly the
+ * Important note: The QThread::run method will call repeatly the
  * emulateOneFrame() methods which should perform emulation stuff for
  * exactly one frame. The execution time of emulateOneFrame() is
  * calculated, and the remaining time to reach the refreshing period
  * is wasted in nanosleep.
  *
- * Param 1 : The refresh frequency in Hertz of the emulation. This value
+ * Param 1: The refresh frequency in Hertz of the emulation. This value
  * should be the display original emulated refresh display.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::setRefreshFrequency(float f)
 {
-	float t = (1.0 / f);
-	refreshingPeriod = (t * 1000000.0f); // to microseconds
-	//cout << "refreshingPeriod = " << refreshingPeriod << " microsec." << endl;
+    float t = (1.0 / f);
+    refreshingPeriod = (t * 1000000.0f); // to microseconds
+    //cout << "refreshingPeriod = " << refreshingPeriod << " microsec." << endl;
 }
 
 /**
@@ -221,20 +221,20 @@ void EmulationThread::setRefreshFrequency(float f)
  * deleted and reallocated, and a signal emitted to inform QGLimage of this
  * event.
  *
- * Param 1 : new texture width.
+ * Param 1: new texture width.
  *
- * Param 2 : new texture height.
+ * Param 2: new texture height.
  *
- * Return : None.
+ * Return: None.
  *
  */
 void EmulationThread::setResolution(int w, int h)
 {
-	delete []videoBuffer;
-	int s = w * h;
-	videoBuffer = new unsigned int[s];
-	memset(videoBuffer, 0, s * sizeof(unsigned int));
-	emit newResolution(w, h);
+    delete []videoBuffer;
+    int s = w * h;
+    videoBuffer = new unsigned int[s];
+    memset(videoBuffer, 0, s * sizeof(unsigned int));
+    emit newResolution(w, h);
 }
 
 /**
@@ -243,9 +243,9 @@ void EmulationThread::setResolution(int w, int h)
  * To implement a different behaviour from the default one, simply override
  * this method.
  *
- * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
+ * Param 1: QT key() value of the QKeyEvent that signal keyPressed.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::keyPressed(padKey)
 {
@@ -259,9 +259,9 @@ void EmulationThread::keyPressed(padKey)
  * To implement a different behaviour from the default one, simply override
  * this method.
  *
- * Param 1 : QT key() value of the QKeyEvent that signal keyPressed.
+ * Param 1: QT key() value of the QKeyEvent that signal keyPressed.
  *
- * Return : None.
+ * Return: None.
  */
 void EmulationThread::keyReleased(padKey)
 {

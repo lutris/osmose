@@ -75,71 +75,71 @@ class OsmoseCore : public DebugEventThrower
 
     public:
 
-        OsmoseCore(const char *rom_f, unsigned int *output, OsmoseConfigurationFile *c, pthread_mutex_t *ocm);	// Constructor.
+        OsmoseCore(const char *rom_f, unsigned int *output, OsmoseConfigurationFile *c, pthread_mutex_t *ocm); // Constructor.
         ~OsmoseCore();
-		void run_frame();				// Run one Frame.
+        void run_frame(); // Run one Frame.
 
         void Reshape(int x, int y);
-        void reset();					// Reset all components.
+        void reset(); // Reset all components.
 
-		void P1UpChanged(bool pressed);
-		void P1DownChanged(bool pressed);
-		void P1LeftChanged(bool pressed);
-		void P1RightChanged(bool pressed);
-		void P1AButtonChanged(bool pressed);
-		void P1BButtonChanged(bool pressed);
-		void P2UpChanged(bool pressed);
-		void P2DownChanged(bool pressed);
-		void P2LeftChanged(bool pressed);
-		void P2RightChanged(bool pressed);
-		void P2AButtonChanged(bool pressed);
-		void P2BButtonChanged(bool pressed);
-		void PauseButtonChanged(bool pressed);
-		void StartButtonChanged(bool pressed);
-		bool captureScreen();
-		bool captureTiles();
-		bool startRecordingSounds();
-		void stopRecordingSounds();
-		bool saveSaveState(int slot);
+        void P1UpChanged(bool pressed);
+        void P1DownChanged(bool pressed);
+        void P1LeftChanged(bool pressed);
+        void P1RightChanged(bool pressed);
+        void P1AButtonChanged(bool pressed);
+        void P1BButtonChanged(bool pressed);
+        void P2UpChanged(bool pressed);
+        void P2DownChanged(bool pressed);
+        void P2LeftChanged(bool pressed);
+        void P2RightChanged(bool pressed);
+        void P2AButtonChanged(bool pressed);
+        void P2BButtonChanged(bool pressed);
+        void PauseButtonChanged(bool pressed);
+        void StartButtonChanged(bool pressed);
+        bool captureScreen();
+        bool captureTiles();
+        bool startRecordingSounds();
+        void stopRecordingSounds();
+        bool saveSaveState(int slot);
         bool loadSaveState(int slot);
 
-		void forceMemoryMapper(Mapper m);
-		void forceNTSCTiming(bool);
+        void forceMemoryMapper(Mapper m);
+        void forceNTSCTiming(bool);
 
-		private:
+        private:
 
         unsigned int        *buffer;     // SMS screen, without modification 256x192.
         string               game_name;  // Used as prefix for screenshot, sound shot and save states.
-        VDP                 *v;	     	 // Video Display Processor object.
+        VDP                 *v;          // Video Display Processor object.
         MemoryMapper        *mem;        // Memory mapper Object.
         SmsEnvironment      *env;        // Z80 Cpu environment.
         IOMapper            *iom;        // Input/Output mapper Object.
-        Z80                 *cpu;	     // Our Z80 core.
+        Z80                 *cpu;        // Our Z80 core.
         WaveWriter          *wavW;       // Sound ripper.
         float               gain;        // gain level.
 
 #ifdef BUILT_IN_DEBUGGER
-        unsigned int   old_cycles;	    // Used for cycle count.
-        Z80Dasm        *dasm;	     	// Z80 disasembler object.
-        SmsDebugger    *dbg;	     	// Sms Debugger.
-        bool           exec_f;          // Continue cpu exec Flag.
+        unsigned int   old_cycles;       // Used for cycle count.
+        Z80Dasm        *dasm;            // Z80 disasembler object.
+        SmsDebugger    *dbg;             // Sms Debugger.
+        bool           exec_f;           // Continue cpu exec Flag.
 #endif
 
-        bool nmi;					// nmi flag, used with keyboard pause.
-        bool sound_shot_toggle;		// Flag, for start/stop recording sound.
-        int  screenshotNbr;			// Screenshot number appended to save.
-        int  tileshotNbr;			// Tile rip  number appended to save.
-        int  soundshotNbr;			// Sound rip  number appended to save.
-        const char *rom_filename;	// Pointer to argv[1].
+        bool nmi;                        // nmi flag, used with keyboard pause.
+        bool sound_shot_toggle;          // Flag, for start/stop recording sound.
+        int  screenshotNbr;              // Screenshot number appended to save.
+        int  tileshotNbr;                // Tile rip  number appended to save.
+        int  soundshotNbr;               // Sound rip  number appended to save.
+        const char *rom_filename;        // Pointer to argv[1].
 
         bool snd_started;
 
-        void save_bbr();				// Save Battery Backed Ram.
+        void save_bbr();                 // Save Battery Backed Ram.
 
         void displayTiles(unsigned int *s, VDP *vd, int tile, int x, int y);
-		SoundThread *sndThread;
-		OsmoseConfigurationFile *configuration;
-		pthread_mutex_t *osmose_core_mutex;
+        SoundThread *sndThread;
+        OsmoseConfigurationFile *configuration;
+        pthread_mutex_t *osmose_core_mutex;
 };
 
 #endif
