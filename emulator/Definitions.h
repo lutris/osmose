@@ -34,8 +34,8 @@
 #define DEFINITIONS_H_
 
 /*
-	Uncomment and rebuild project for integrated debugger
-   	Don't forget to uncomment OPT_OBJS line in Makefile before compiling.
+Uncomment and rebuild project for integrated debugger
+Don't forget to uncomment OPT_OBJS line in Makefile before compiling.
 */
 //#define BUILT_IN_DEBUGGER
 
@@ -48,10 +48,10 @@
 #define DELAY_BETWEEN_FRAME        50
 
 /* SDL Sound buffer size for samples. */
-#define SAMPLE_SIZE                1024      // Sample duration is 23ms
+#define SAMPLE_SIZE                1024 // Sample duration is 23ms
 
 /**/
-#define SND_TOGGLE                 0.4026717557251908  // rest of 367.5/262.
+#define SND_TOGGLE                 0.4026717557251908 // rest of 367.5/262.
 
 /* Uncomment this line for verbose information on PSG/VDP access */
 //#define PSG_VERBOSE

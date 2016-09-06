@@ -46,15 +46,15 @@
  */
 EmulationThread::EmulationThread(QGLImage *qglimage) : screen(qglimage)
 {
-	// Allocate buffer of the texture size.
-	videoBuffer = NULL;
-	QObject::connect(this, SIGNAL(newResolution(int, int)), qglimage, SLOT(resolutionChanged(int, int)));
-	setResolution(qglimage->getTextureWidth(), qglimage->getTextureHeight());
-	emulationState = EMULATION_STOPPED;
+    // Allocate buffer of the texture size.
+    videoBuffer = NULL;
+    QObject::connect(this, SIGNAL(newResolution(int, int)), qglimage, SLOT(resolutionChanged(int, int)));
+    setResolution(qglimage->getTextureWidth(), qglimage->getTextureHeight());
+    emulationState = EMULATION_STOPPED;
 
-	// Set default refresh slow arbitrary frequency.
-	setRefreshFrequency(1.0f);
-	done = false;
+    // Set default refresh slow arbitrary frequency.
+    setRefreshFrequency(1.0f);
+    done = false;
 }
 
 /**
@@ -62,7 +62,7 @@ EmulationThread::EmulationThread(QGLImage *qglimage) : screen(qglimage)
  */
 EmulationThread::~EmulationThread()
 {
-	delete []videoBuffer;
+    delete []videoBuffer;
 }
 
 /**
@@ -72,61 +72,61 @@ EmulationThread::~EmulationThread()
  */
 void EmulationThread::run()
 {
-	struct timeval t0, t1;
-	struct timespec rqtp, rmtp;
-	unsigned int deltaT_micros, remainingT;
+    struct timeval t0, t1;
+    struct timespec rqtp, rmtp;
+    unsigned int deltaT_micros, remainingT;
 
-	while(!done)
-	{
-		emulationStateQMutex.lockForRead();
-		switch(emulationState)
-		{
-			case EMULATION_STOPPED:
-				// Free QMutex.
-				emulationStateQMutex.unlock();
+    while(!done)
+    {
+        emulationStateQMutex.lockForRead();
+        switch(emulationState)
+        {
+            case EMULATION_STOPPED:
+                // Free QMutex.
+                emulationStateQMutex.unlock();
 
-				// Sleep 20ms.
-				rqtp.tv_sec = 0;
-				rqtp.tv_nsec = 20 * 1000 * 1000; // 20 millisecond.
-				nanosleep(&rqtp, &rmtp);
-			break;
+                // Sleep 20ms.
+                rqtp.tv_sec = 0;
+                rqtp.tv_nsec = 20 * 1000 * 1000; // 20 millisecond.
+                nanosleep(&rqtp, &rmtp);
+            break;
 
-			case EMULATION_RUNNING:
-				// Free QMutex.
-				emulationStateQMutex.unlock();
+            case EMULATION_RUNNING:
+                // Free QMutex.
+                emulationStateQMutex.unlock();
 
-				// Execute one emulation frame, blit texture into openGL
-				// and calculate the duration of these operations.
-				gettimeofday(&t0, NULL);
-				emulateOneFrame();
-				screen->blit(videoBuffer);
-				gettimeofday(&t1, NULL);
+                // Execute one emulation frame, blit texture into openGL
+                // and calculate the duration of these operations.
+                gettimeofday(&t0, NULL);
+                emulateOneFrame();
+                screen->blit(videoBuffer);
+                gettimeofday(&t1, NULL);
 
-				// Compute duration.
-				deltaT_micros = ((t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec));
+                // Compute duration.
+                deltaT_micros = ((t1.tv_sec * 1000000 + t1.tv_usec) - (t0.tv_sec * 1000000 + t0.tv_usec));
 
-				// Compute remaining time to achieve the good regreshing period.
-				remainingT = (deltaT_micros < refreshingPeriod) ? refreshingPeriod - deltaT_micros : 1;
+                // Compute remaining time to achieve the good regreshing period.
+                remainingT = (deltaT_micros < refreshingPeriod) ? refreshingPeriod - deltaT_micros : 1;
 
-				// Sleep the remaining time.
-				rqtp.tv_sec = 0;
-				rqtp.tv_nsec = remainingT * 1000; // microsecond to nanoseconds
-				nanosleep(&rqtp, &rmtp);
-				//cout << "Loop takes :" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;
-			break;
+                // Sleep the remaining time.
+                rqtp.tv_sec = 0;
+                rqtp.tv_nsec = remainingT * 1000; // microsecond to nanoseconds
+                nanosleep(&rqtp, &rmtp);
+                //cout << "Loop takes :" << deltaT_micros << " microseconds, sleeping "<< remainingT << " microseconds "<< endl;
+            break;
 
-			case EMULATION_ABORTED:
-				done = true;
-				emulationStateQMutex.unlock();
-			break;
+            case EMULATION_ABORTED:
+                done = true;
+                emulationStateQMutex.unlock();
+            break;
 
-			default:
-				// Free QMutex.
-				emulationStateQMutex.unlock();
+            default:
+                // Free QMutex.
+                emulationStateQMutex.unlock();
 
-			break;
-		}
-	}
+            break;
+        }
+    }
 }
 
 
@@ -139,8 +139,8 @@ void EmulationThread::run()
  */
 void EmulationThread::abortEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	emulationState = EMULATION_ABORTED;
+    QWriteLocker lock(&emulationStateQMutex);
+    emulationState = EMULATION_ABORTED;
 }
 
 
@@ -153,8 +153,8 @@ void EmulationThread::abortEmulation()
  */
 void EmulationThread::startEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	emulationState = EMULATION_RUNNING;
+    QWriteLocker lock(&emulationStateQMutex);
+    emulationState = EMULATION_RUNNING;
 }
 
 
@@ -167,8 +167,8 @@ void EmulationThread::startEmulation()
  */
 void EmulationThread::pauseEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	emulationState = EMULATION_STOPPED;
+    QWriteLocker lock(&emulationStateQMutex);
+    emulationState = EMULATION_STOPPED;
 }
 
 /**
@@ -180,8 +180,8 @@ void EmulationThread::pauseEmulation()
  */
 void EmulationThread::resumeEmulation()
 {
-	QWriteLocker lock(&emulationStateQMutex);
-	startEmulation();
+    QWriteLocker lock(&emulationStateQMutex);
+    startEmulation();
 }
 
 /**
@@ -210,9 +210,9 @@ void EmulationThread::resetEmulation()
  */
 void EmulationThread::setRefreshFrequency(float f)
 {
-	float t = (1.0 / f);
-	refreshingPeriod = (t * 1000000.0f); // to microseconds
-	//cout << "refreshingPeriod = " << refreshingPeriod << " microsec." << endl;
+    float t = (1.0 / f);
+    refreshingPeriod = (t * 1000000.0f); // to microseconds
+    //cout << "refreshingPeriod = " << refreshingPeriod << " microsec." << endl;
 }
 
 /**
@@ -230,11 +230,11 @@ void EmulationThread::setRefreshFrequency(float f)
  */
 void EmulationThread::setResolution(int w, int h)
 {
-	delete []videoBuffer;
-	int s = w * h;
-	videoBuffer = new unsigned int[s];
-	memset(videoBuffer, 0, s * sizeof(unsigned int));
-	emit newResolution(w, h);
+    delete []videoBuffer;
+    int s = w * h;
+    videoBuffer = new unsigned int[s];
+    memset(videoBuffer, 0, s * sizeof(unsigned int));
+    emit newResolution(w, h);
 }
 
 /**

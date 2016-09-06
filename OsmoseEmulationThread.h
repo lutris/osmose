@@ -44,22 +44,22 @@
 class OsmoseEmulationThread : public EmulationThread
 {
 public:
-	OsmoseEmulationThread(QGLImage *qglimage, char *romName, OsmoseConfigurationFile *conf, pthread_mutex_t *ocm);
-	~OsmoseEmulationThread();
-	void emulateOneFrame();
-	void resetEmulation();
-	void keyPressed(padKey key);
-	void keyReleased(padKey key);
-	OsmoseCore *getCore() {return core;}
+    OsmoseEmulationThread(QGLImage *qglimage, char *romName, OsmoseConfigurationFile *conf, pthread_mutex_t *ocm);
+    ~OsmoseEmulationThread();
+    void emulateOneFrame();
+    void resetEmulation();
+    void keyPressed(padKey key);
+    void keyReleased(padKey key);
+    OsmoseCore *getCore() {return core;}
 
 protected:
 
 private:
-	int frameCounter;
-	int mode;
-	OsmoseCore *core;
-	OsmoseConfigurationFile *configuration;
-	pthread_mutex_t *osmose_core_mutex;
+    int frameCounter;
+    int mode;
+    OsmoseCore *core;
+    OsmoseConfigurationFile *configuration;
+    pthread_mutex_t *osmose_core_mutex;
 };
 
-#endif	// OSMOSE_EMULATION_THREAD_H
+#endif // OSMOSE_EMULATION_THREAD_H

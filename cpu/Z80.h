@@ -42,27 +42,27 @@
 //#define OPCODES_STATS
 
 /* Flag related constants */
-#define     SF 0x80		/* Sign 	*/
-#define     ZF 0x40		/* Zero 	*/
-#define     YF 0x20		/* Undoc flag 	*/
-#define     HF 0x10		/* Half carry 	*/
-#define     XF 0x08		/* Undoc flag 	*/
-#define     VF 0x04		/* Overflow 	*/
-#define     PF 0x04		/* Parity	*/
-#define     NF 0x02		/* Add subtract */
-#define     CF 0x01		/* Carry 	*/
+#define SF 0x80 // Sign
+#define ZF 0x40 // Zero
+#define YF 0x20 // Undoc flag
+#define HF 0x10 // Half carry
+#define XF 0x08 // Undoc flag
+#define VF 0x04 // Overflow
+#define PF 0x04 // Parity
+#define NF 0x02 // Add subtract
+#define CF 0x01 // Carry
 
 /* Save state data structure. */
 typedef struct
 {
-    u8 A,F,B,C,D,E,H,L,I,R;     /* Generals registers. 		*/
-    u8 A1,F1,B1,C1,D1,E1,H1,L1; /* Alternat ' registers. 	*/
-    u8 Rbit7;                   /* Use to store bit 7 of R  */
-    u8 IM;                      /* Interrupt mode */
-    u16 PC,IX,IY,SP;            /* PC,Stack, indexes registers. 	*/
-    bool IFF1,IFF2;             /* NMI/IRQ interrupt flip flop. */
-    bool cpuHalted;             /* CPU state vs Halt instruction.*/
-    u32 cycleCount;             /* Increase when running CPU. 	 */
+    u8 A,F,B,C,D,E,H,L,I,R;     // Generals registers.
+    u8 A1,F1,B1,C1,D1,E1,H1,L1; // Alternat ' registers.
+    u8 Rbit7;                   // Use to store bit 7 of R
+    u8 IM;                      // Interrupt mode
+    u16 PC,IX,IY,SP;            // PC,Stack, indexes registers.
+    bool IFF1,IFF2;             // NMI/IRQ interrupt flip flop.
+    bool cpuHalted;             // CPU state vs Halt instruction.
+    u32 cycleCount;             // Increase when running CPU.
 } Z80SaveState;
 
 
@@ -140,23 +140,23 @@ class Z80Environment
 class Z80 : public DebugEventThrower, public ImplementsSaveState
 {
     public:
-        Z80Environment& env;        /* Z80Environment reference. */
-        u8 A,F,B,C,D,E,H,L,I,R;     /* Generals registers. 		*/
-        u8 A1,F1,B1,C1,D1,E1,H1,L1; /* Alternat ' registers. 	*/
-        u8 Rbit7;                   /* Use to store bit 7 of R  */
-        u8 IM;                      /* Interrupt mode */
-        u16 PC,IX,IY,SP;            /* PC,Stack, indexes registers. 	*/
-        u16 IXd, IYd;               /* Used for XY+d addressing mode. */
-        bool IFF1,IFF2;             /* NMI/IRQ interrupt flip flop. */
-        bool cpuHalted;             /* CPU state vs Halt instruction.*/
-        u32 cycleCount;             /* Increase when running CPU. 	 */
-        Z80 ( Z80Environment & );   /* Constructor with Z80Environment reference*/
-        ~Z80();                     /* Destructor. */
-        void reset();               /* Reset Z80.*/
-        void nmi();                 /* Generate CPU NMI.*/
-        bool interrupt(u8 data);    /* Generate CPU interrupt.*/
-        u32 run(u32 cycles);         /* Execute  n cycles. */
-        void step();                /* Execute one instruction */
+        Z80Environment& env;        // Z80Environment reference.
+        u8 A,F,B,C,D,E,H,L,I,R;     // Generals registers.
+        u8 A1,F1,B1,C1,D1,E1,H1,L1; // Alternat ' registers.
+        u8 Rbit7;                   // Use to store bit 7 of R
+        u8 IM;                      // Interrupt mode
+        u16 PC,IX,IY,SP;            // PC,Stack, indexes registers.
+        u16 IXd, IYd;               // Used for XY+d addressing mode.
+        bool IFF1,IFF2;             // NMI/IRQ interrupt flip flop.
+        bool cpuHalted;             // CPU state vs Halt instruction.
+        u32 cycleCount;             // Increase when running CPU.
+        Z80 ( Z80Environment & );   // Constructor with Z80Environment reference
+        ~Z80();                     // Destructor.
+        void reset();               // Reset Z80.
+        void nmi();                 // Generate CPU NMI.
+        bool interrupt(u8 data);    // Generate CPU interrupt.
+        u32 run(u32 cycles);        // Execute  n cycles.
+        void step();                // Execute one instruction
         void setCycles(u32 c)
         {
             cycleCount = c;
@@ -232,15 +232,15 @@ class Z80 : public DebugEventThrower, public ImplementsSaveState
 #endif
     private:
 
-        void dumpSaveStateStructure(Z80SaveState &);    /* For debug purpose.*/
-        void dumpValues();                              /* Dump CPU regs etc.*/
+        void dumpSaveStateStructure(Z80SaveState &); // For debug purpose.
+        void dumpValues();                           // Dump CPU regs etc.
 
-        void exec_cb();             /* Execute opcode prefixed 0xCB. */
-        void exec_dd();             /* Execute opcode prefixed 0xDD. */
-        void exec_ddcb();           /* Execute opcode prefixed 0xDDCB. */
-        void exec_ed();             /* Execute opcode prefixed 0xED. */
-        void exec_fd();             /* Execute opcode prefixed 0xFD. */
-        void exec_fdcb();           /* Execute opcode prefixed 0xFDCB. */
+        void exec_cb();           // Execute opcode prefixed 0xCB.
+        void exec_dd();           // Execute opcode prefixed 0xDD.
+        void exec_ddcb();         // Execute opcode prefixed 0xDDCB.
+        void exec_ed();           // Execute opcode prefixed 0xED.
+        void exec_fd();           // Execute opcode prefixed 0xFD.
+        void exec_fdcb();         // Execute opcode prefixed 0xFDCB.
         bool checkInterrupt();
         void dump(u16 addr);
 
@@ -275,27 +275,27 @@ class Z80 : public DebugEventThrower, public ImplementsSaveState
         */
         u8   getBCi()
         {
-            return env.rd8(getBC());    /* read u8 in (BC) */
+            return env.rd8(getBC()); // read u8 in (BC)
         }
         void setBCi(u8 val)
         {
-            env.wr8(getBC(),val);    /* write u8 in (BC) */
+            env.wr8(getBC(),val); // write u8 in (BC)
         }
         u8   getDEi()
         {
-            return env.rd8(getDE());    /* read u8 in (DE) */
+            return env.rd8(getDE()); // read u8 in (DE)
         }
         void setDEi(u8 val)
         {
-            env.wr8(getDE(),val);    /* write u8 in (DE) */
+            env.wr8(getDE(),val); // write u8 in (DE)
         }
         u8   getHLi()
         {
-            return env.rd8(getHL());    /* read u8 in (HL) */
+            return env.rd8(getHL()); // read u8 in (HL)
         }
         void setHLi(u8 val)
         {
-            env.wr8(getHL(),val);    /* write u8 in (HL) */
+            env.wr8(getHL(),val); // write u8 in (HL)
         }
 
         /* 8 bit read/write through (IX+d) and (IY+d). Warning: PC is not incremented! */
@@ -336,51 +336,51 @@ class Z80 : public DebugEventThrower, public ImplementsSaveState
         /**
             * Basic Arithmetic CPU Operations:
             */
-        u8  inc8(u8 v);         /* increment 8bits value. */
-        u8  dec8(u8 v);         /* decrement 8bits value. */
-        u8  add8(u8 a,u8 b);    /* add 8 bits values.     */
-        u8  adc8(u8 a,u8 b);    /* add with carry 8 bits values.     */
-        u8  sbc8(u8 a,u8 b);    /* sub with carry 8 bits values.     */
-        u8  sub8(u8 a,u8 b);    /* sub  8 bits values.     */
-        u16 add16(u16 a,u16 b); /* add 16 bits values.     */
-        void sbcHL(u16 v);      /* SBC HL, REG */
-        void adcHL(u16 v);      /* ADC HL, REG */
-        void rrd();             /* RRD */
-        void rld();             /* RLD */
-        void cp8(u8 a, u8 b);   /* Compare 8bits values.   */
+        u8  inc8(u8 v);         // increment 8bits value.
+        u8  dec8(u8 v);         // decrement 8bits value.
+        u8  add8(u8 a,u8 b);    // add 8 bits values.
+        u8  adc8(u8 a,u8 b);    // add with carry 8 bits values.
+        u8  sbc8(u8 a,u8 b);    // sub with carry 8 bits values.
+        u8  sub8(u8 a,u8 b);    // sub  8 bits values.
+        u16 add16(u16 a,u16 b); // add 16 bits values.
+        void sbcHL(u16 v);      // SBC HL, REG
+        void adcHL(u16 v);      // ADC HL, REG
+        void rrd();             // RRD
+        void rld();             // RLD
+        void cp8(u8 a, u8 b);   // Compare 8bits values.
 
         /**
         * Basic Logical CPU Operations:
         */
-        u8  and8(u8 a,u8 b);    /* and 8 bits values.     */
-        u8  or8(u8 a,u8 b);     /* or 8 bits values.      */
-        u8  xor8(u8 a,u8 b);    /* xor 8 bits values.     */
+        u8  and8(u8 a,u8 b);    // and 8 bits values.
+        u8  or8(u8 a,u8 b);     // or 8 bits values.
+        u8  xor8(u8 a,u8 b);    // xor 8 bits values.
 
         /**
         * Basic Shift CPU Operations:
         */
-        u8 rlc8(u8 v);          /* (<<1) 8 bits value. */
-        u8 rrc8(u8 v);          /* (>>1) 8 bits value.*/
-        u8 rl8(u8 v);           /* (<<1) 8 bits value.*/
-        u8 rr8(u8 v);           /* (>>1) 8 bits value.*/
-        u8 sla8(u8 v);          /* .*/
-        u8 sra8(u8 v);          /* .*/
-        u8 sll8(u8 v);          /* .*/
-        u8 srl8(u8 v);          /* .*/
+        u8 rlc8(u8 v);          // (<<1) 8 bits value.
+        u8 rrc8(u8 v);          // (>>1) 8 bits value.
+        u8 rl8(u8 v);           // (<<1) 8 bits value.
+        u8 rr8(u8 v);           // (>>1) 8 bits value.
+        u8 sla8(u8 v);          // .
+        u8 sra8(u8 v);          // .
+        u8 sll8(u8 v);          // .
+        u8 srl8(u8 v);          // .
 
         /**
         * Basic Bit CPU Operations:
         */
-        void bit(u8 bit,u8 v);  /* test bit in 8 bits value.*/
-        u8   set(u8 bit,u8 v);  /* set bit in 8 bits value.*/
-        u8   res(u8 bit,u8 v);  /* reset bit in 8 bits value.*/
+        void bit(u8 bit,u8 v);  // test bit in 8 bits value.
+        u8   set(u8 bit,u8 v);  // set bit in 8 bits value.
+        u8   res(u8 bit,u8 v);  // reset bit in 8 bits value.
 
         /**
         * Basic Stack CPU Operations:
         */
-        u16  pop();              /* Pop 16 bits value.*/
-        void push(u16 v);        /* Push 16 bits value*/
-        void rst(u16 ea);        /* rst operation.*/
+        u16  pop();             // Pop 16 bits value.
+        void push(u16 v);       // Push 16 bits value
+        void rst(u16 ea);       // rst operation.
         void setFlagAfterInput(u8 r);
         void invalid_opcode();
         void invalid_prefixed_opcode();
@@ -1689,6 +1689,5 @@ class Z80 : public DebugEventThrower, public ImplementsSaveState
         static Opc_handler Opc_fdxx[256];
         static Opc_handler Opc_fdcb[256];
 };
-
 
 #endif

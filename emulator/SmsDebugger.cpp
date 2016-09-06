@@ -35,7 +35,7 @@
 #include "SmsDebugger.h"
 
 /*--------------------------------------------------------------------*/
-/* SmsDebugger class constructor.				      */
+/* SmsDebugger class constructor.                                     */
 /*--------------------------------------------------------------------*/
 SmsDebugger::SmsDebugger()
 {
@@ -51,7 +51,7 @@ SmsDebugger::SmsDebugger()
 
 /*--------------------------------------------------------------------*/
 /* This method is the debugger entry point. It read command line and  */
-/* interpret it, and call associated method.						  */
+/* interpret it, and call associated method.                          */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::enter()
 {
@@ -92,7 +92,7 @@ void SmsDebugger::enter()
 }
 
 /*--------------------------------------------------------------------*/
-/* This method displays help message.				      */
+/* This method displays help message.                                 */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::help()
 {
@@ -119,7 +119,7 @@ void SmsDebugger::help()
 }
 
 /*--------------------------------------------------------------------*/
-/* This method displays paging registers FFFC-FFFF.		      */
+/* This method displays paging registers FFFC-FFFF.                   */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::dpr()
 {
@@ -148,7 +148,7 @@ void SmsDebugger::dpr()
 }
 
 /*--------------------------------------------------------------------*/
-/* This method displays VDP registers.				      */
+/* This method displays VDP registers.                                */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::dvdpr()
 {
@@ -163,7 +163,7 @@ void SmsDebugger::dvdpr()
 }
 
 /*--------------------------------------------------------------------*/
-/* This method displays human readable VDP info.      	 	      */
+/* This method displays human readable VDP info.                      */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::vdpi()
 {
@@ -348,7 +348,7 @@ void SmsDebugger::vdpi()
 }
 
 /*--------------------------------------------------------------------*/
-/* This method displays Z80 registers		.					      */
+/* This method displays Z80 registers                                 */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::dumpRegisters()
 {
@@ -372,11 +372,11 @@ void SmsDebugger::dumpRegisters()
 }
 
 /*--------------------------------------------------------------------*/
-/* This method will remove ALL debugger breakpoints.		      */
+/* This method will remove ALL debugger breakpoints.                  */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::clearBreakpoints()
 {
-    /* Set break point to unused value */
+    // Set break point to unused value
     for (int i=0;i<MAX_BREAKPOINTS; i++)
     {
         breakpoints[i] = -1;
@@ -387,8 +387,8 @@ void SmsDebugger::clearBreakpoints()
 
 /*--------------------------------------------------------------------*/
 /* This method will add a debugger breakpoints. If the breakpoints    */
-/* number is > MAX_BREAKPOINTS, the first breakpoint will be 	      */
-/* overwritten. This is a circular buffer.			      */
+/* number is > MAX_BREAKPOINTS, the first breakpoint will be          */
+/* overwritten. This is a circular buffer.                            */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::addBreakpoint(int ad)
 {
@@ -408,7 +408,7 @@ void SmsDebugger::addBreakpoint(int ad)
 }
 
 /*--------------------------------------------------------------------*/
-/* This method will list all debugger breakpoints.		      */
+/* This method will list all debugger breakpoints.                    */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::listBreakpoints()
 {
@@ -432,7 +432,7 @@ void SmsDebugger::listBreakpoints()
 }
 
 /*--------------------------------------------------------------------*/
-/* This method exec a command with one parameter.					  */
+/* This method exec a command with one parameter.                     */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::exec_cmd(char *cmd, int param1)
 {
@@ -490,7 +490,7 @@ void SmsDebugger::exec_cmd(char *cmd, int param1)
 
     if (strcmp(cmd,"s")==0 )
     {
-        /* Trace one instruction */
+        // Trace one instruction
         cpu_steping = true;
         end_session = true;
         return;
@@ -509,7 +509,7 @@ void SmsDebugger::exec_cmd(char *cmd, int param1)
 
     if (strcmp(cmd,"u")==0 )
     {
-        /* unassemble 16 instructions from PC. */
+        // unassemble 16 instructions from PC.
         param1 = cpu->PC;
         for (int i=0;i<16;i++)
         {
@@ -518,7 +518,7 @@ void SmsDebugger::exec_cmd(char *cmd, int param1)
         printf("\n");
         return;
     }
-    /* Dump 16 block of 16 bytes memory from PC. */
+    // Dump 16 block of 16 bytes memory from PC.
     if (strcmp(cmd,"d")==0 )
     {
         mem->dump_mem(cpu->PC, 16);
@@ -546,13 +546,13 @@ void SmsDebugger::exec_cmd(char *cmd, int param1)
 }
 
 /*--------------------------------------------------------------------*/
-/* This method exec a command with two parameters.					  */
+/* This method exec a command with two parameters.                    */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::exec_cmd(char *cmd, int param1, int  param2)
 {
     if (strcmp(cmd,"u")==0 )
     {
-        /* unassemble 16 instructions */
+        // unassemble 16 instructions
         for (int i=0;i<16;i++)
         {
             param1 = dasm->disasm(param1);
@@ -605,11 +605,11 @@ void SmsDebugger::setScanlineBreakpoint(int scanline)
 }
 
 /*--------------------------------------------------------------------*/
-/* DebugEventListener interface implementation.						  */
+/* DebugEventListener interface implementation.                       */
 /*--------------------------------------------------------------------*/
 void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
 {
-    /* Display debugEvent message.  */
+    // Display debugEvent message.
 
     switch (event_type)
     {
@@ -644,7 +644,7 @@ void SmsDebugger::sendDebugEvent(int event_type, char *source, char *message)
             break;
 
         case DbgEvtScanlineBreakpoint:
-            /* Check scanline breakpoint.*/
+            // Check scanline breakpoint.
             if (v->line == scanlineBreakpoint)
             {
                 cout << "DBG EVT from " << source <<" : " << message << endl;

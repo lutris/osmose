@@ -57,11 +57,11 @@ using namespace std;
  */
 QGLImage::QGLImage(QWidget *parent, int w, int h, QGL::FormatOptions f) : QGLWidget(QGLFormat(f), parent)
 {
-	textureBuffer = NULL;
-	viewPortWidth = 1;
-	viewPortHeight = 1;
-	adjustTextureDimension(w, h);
-	bilinearFiltering = false;
+    textureBuffer = NULL;
+    viewPortWidth = 1;
+    viewPortHeight = 1;
+    adjustTextureDimension(w, h);
+    bilinearFiltering = false;
 }
 
 
@@ -81,8 +81,8 @@ QGLImage::~QGLImage()
  */
 void QGLImage::resolutionChanged(int newWidth, int newHeight)
 {
-	//cout << "New resolution :" << newWidth << "x" << newHeight << endl;
-	adjustTextureDimension(newWidth, newHeight);
+    //cout << "New resolution :" << newWidth << "x" << newHeight << endl;
+    adjustTextureDimension(newWidth, newHeight);
 }
 
 /**
@@ -92,9 +92,9 @@ void QGLImage::resolutionChanged(int newWidth, int newHeight)
  */
 void QGLImage::resizeGL(int width, int height)
 {
-	viewPortWidth = width;
-	viewPortHeight = height;
-	setupViewport(viewPortWidth, viewPortHeight);
+    viewPortWidth = width;
+    viewPortHeight = height;
+    setupViewport(viewPortWidth, viewPortHeight);
 }
 
 /**
@@ -104,9 +104,9 @@ void QGLImage::resizeGL(int width, int height)
  */
 void QGLImage::paintGL()
 {
-	QMutexLocker locker(& textureBufferMutex);
+    QMutexLocker locker(& textureBufferMutex);
 
-	setupViewport(viewPortWidth, viewPortHeight);
+    setupViewport(viewPortWidth, viewPortHeight);
     glLoadIdentity();
     glBindTexture(GL_TEXTURE_2D, textureName[0]);
 
@@ -135,7 +135,7 @@ void QGLImage::paintGL()
  */
 void QGLImage::initializeGL()
 {
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
     glEnable(GL_TEXTURE_2D);
 
     /* Delete previous texture if any. OGL ignores free on non alloc. textures */
@@ -144,13 +144,13 @@ void QGLImage::initializeGL()
     glBindTexture(GL_TEXTURE_2D, textureName[0]);
     if (bilinearFiltering == true)
     {
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	}
-	else
-	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+    else
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
@@ -170,13 +170,13 @@ void QGLImage::initializeGL()
  */
 void QGLImage::setupViewport(int width, int height)
 {
-	if (height==0)	height=1;
-	glViewport(0,0,width,height);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0f,width,height,0.0f,-1.0f,1.0f);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+    if (height==0) height=1;
+    glViewport(0,0,width,height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0f,width,height,0.0f,-1.0f,1.0f);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 }
 
 
@@ -195,23 +195,23 @@ void QGLImage::setupViewport(int width, int height)
  */
 void QGLImage::adjustTextureDimension(int w, int h)
 {
-	QMutexLocker locker(& textureBufferMutex);
-	textureWidth = w;
-	textureHeight = h;
+    QMutexLocker locker(& textureBufferMutex);
+    textureWidth = w;
+    textureHeight = h;
 
-	delete [] textureBuffer; 	// Legal also if textureBuffer is NULL.
-	adjustedTextureWidth  = getNearestGreaterPowerOfTwo(textureWidth);
-	adjustedTextureHeight = getNearestGreaterPowerOfTwo(textureHeight);
-	glTextCoordX = ((float)textureWidth / (float)adjustedTextureWidth);
-	glTextCoordY = ((float)textureHeight / (float)adjustedTextureHeight);
-	textureBuffer = new unsigned int[adjustedTextureWidth * adjustedTextureHeight];
+    delete [] textureBuffer; // Legal also if textureBuffer is NULL.
+    adjustedTextureWidth  = getNearestGreaterPowerOfTwo(textureWidth);
+    adjustedTextureHeight = getNearestGreaterPowerOfTwo(textureHeight);
+    glTextCoordX = ((float)textureWidth / (float)adjustedTextureWidth);
+    glTextCoordY = ((float)textureHeight / (float)adjustedTextureHeight);
+    textureBuffer = new unsigned int[adjustedTextureWidth * adjustedTextureHeight];
 
-	/*
-	cout << "texture width = "<< textureWidth << " adjusted width = " << adjustedTextureWidth << endl;
-	cout << "texture height = "<< textureHeight << " adjusted height = " << adjustedTextureHeight << endl;
-	cout << "glTextCoordX = "<< glTextCoordX << endl;
-	cout << "glTextCoordY = "<< glTextCoordY << endl;
-	*/
+    /*
+    cout << "texture width = "<< textureWidth << " adjusted width = " << adjustedTextureWidth << endl;
+    cout << "texture height = "<< textureHeight << " adjusted height = " << adjustedTextureHeight << endl;
+    cout << "glTextCoordX = "<< glTextCoordX << endl;
+    cout << "glTextCoordY = "<< glTextCoordY << endl;
+    */
 }
 
 
@@ -226,19 +226,19 @@ void QGLImage::adjustTextureDimension(int w, int h)
 
 void QGLImage::blit(unsigned int *source)
 {
-	QMutexLocker locker(& textureBufferMutex);
-	unsigned int *scaledTexture = textureBuffer;
-	int sizeLine = textureWidth * sizeof(unsigned int);
+    QMutexLocker locker(& textureBufferMutex);
+    unsigned int *scaledTexture = textureBuffer;
+    int sizeLine = textureWidth * sizeof(unsigned int);
 
-	for (int i = 0; i < textureHeight; i++)
-	{
-		memcpy(scaledTexture, source, sizeLine);
-		source += textureWidth;
-		scaledTexture += adjustedTextureWidth;
-	}
+    for (int i = 0; i < textureHeight; i++)
+    {
+        memcpy(scaledTexture, source, sizeLine);
+        source += textureWidth;
+        scaledTexture += adjustedTextureWidth;
+    }
 
-	// Ask for refresh !
-	update();
+    // Ask for refresh !
+    update();
 }
 
 
@@ -259,18 +259,18 @@ void QGLImage::blit(unsigned int *source)
  */
 int QGLImage::getNearestGreaterPowerOfTwo(int size)
 {
-	if (size <= 2) return 2;
-	if (size <= 4) return 4;
-	if (size <= 8) return 8;
-	if (size <= 16) return 16;
-	if (size <= 32) return 32;
-	if (size <= 64) return 64;
-	if (size <= 128) return 128;
-	if (size <= 256) return 256;
-	if (size <= 512) return 512;
-	if (size <= 1024) return 1024;
-	if (size <= 2048) return 2048;
-	return 4096;
+    if (size <= 2) return 2;
+    if (size <= 4) return 4;
+    if (size <= 8) return 8;
+    if (size <= 16) return 16;
+    if (size <= 32) return 32;
+    if (size <= 64) return 64;
+    if (size <= 128) return 128;
+    if (size <= 256) return 256;
+    if (size <= 512) return 512;
+    if (size <= 1024) return 1024;
+    if (size <= 2048) return 2048;
+    return 4096;
 }
 
 /**
@@ -280,11 +280,11 @@ int QGLImage::getNearestGreaterPowerOfTwo(int size)
  */
 void QGLImage::bilinearFilteringOn()
 {
-	if (bilinearFiltering != true)
-	{
-		bilinearFiltering = true;
-		initializeGL();
-	}
+    if (bilinearFiltering != true)
+    {
+        bilinearFiltering = true;
+        initializeGL();
+    }
 }
 
 /**
@@ -294,10 +294,9 @@ void QGLImage::bilinearFilteringOn()
  */
 void QGLImage::nearestNeighboorFilteringOn()
 {
-	if (bilinearFiltering == true)
-	{
-		bilinearFiltering = false;
-		initializeGL();
-	}
+    if (bilinearFiltering == true)
+    {
+        bilinearFiltering = false;
+        initializeGL();
+    }
 }
-

@@ -51,9 +51,9 @@
  */
 Thread::Thread()
 {
-	// The posix thread has not been created yet.
-	_created = false;
-	_joined  = false;
+    // The posix thread has not been created yet.
+    _created = false;
+    _joined  = false;
 }
 
 
@@ -63,16 +63,16 @@ Thread::Thread()
 Thread::~Thread()
 {
     /*
-		Posix pthread_join() says :
-		When  a	joinable  thread  terminates,  its  memory  resources  (thread
-		descriptor and stack) are not deallocated until another thread performs
-		pthread_join on it. Therefore, pthread_join must  be  called  once  for
-		each joinable thread created to avoid memory leaks.
+        Posix pthread_join() says :
+        When  a  joinable  thread  terminates,  its  memory  resources  (thread
+        descriptor and stack) are not deallocated until another thread performs
+        pthread_join on it. Therefore, pthread_join must  be  called  once  for
+        each joinable thread created to avoid memory leaks.
     */
-	if ((_created == true) && (_joined == false))
-	{
-		pthread_join(_thread, NULL);
-	}
+    if ((_created == true) && (_joined == false))
+    {
+        pthread_join(_thread, NULL);
+    }
 }
 
 /**
@@ -82,10 +82,10 @@ Thread::~Thread()
  */
 int Thread::start(void *param)
 {
-	_inputArg = param;
-	int retValue = pthread_create(&_thread, NULL, Thread::entryPoint, (void *)this);
-	_created = (retValue == 0) ? true : false;
-	return retValue;
+    _inputArg = param;
+    int retValue = pthread_create(&_thread, NULL, Thread::entryPoint, (void *)this);
+    _created = (retValue == 0) ? true : false;
+    return retValue;
 }
 
 /**
@@ -96,7 +96,7 @@ int Thread::start(void *param)
  */
 void *Thread::entryPoint(void *instance)
 {
-	Thread *myself = (Thread *)instance;
+    Thread *myself = (Thread *)instance;
     return myself->run( myself->getArg());
 }
 
@@ -107,7 +107,7 @@ void *Thread::entryPoint(void *instance)
  */
 int Thread::join(void **thread_return)
 {
-	if (_created != true) return ESRCH; /* Not started again. */
-	_joined = true;
-	return pthread_join(_thread, thread_return);
+    if (_created != true) return ESRCH; // Not started again.
+    _joined = true;
+    return pthread_join(_thread, thread_return);
 }

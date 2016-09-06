@@ -49,9 +49,3 @@ void DebugEventThrower::throwDebugEvent(int type,char *source, char *msg)
         cerr << "Trying to throw DebugEvent but the Thrower is not attached to the listener !" << endl;
     }
 }
-
-
-
-
-
-

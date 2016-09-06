@@ -186,26 +186,26 @@ void Z80::dump( u16 addr )
  */
 u8 Z80::inc8( u8 v )
 {
-    v++;                        /* Inc value, wrap on 8 bits 	*/
-    F &= CF;                    /* Clear all used flags 	*/
-    F |= ( v &0x80 );           /* Save S flag (bit sign)	*/
-    if ( v == 0 ) F |= ZF;      /* If v is zero Set Zero bit.	*/
-    if ( v == 0x80 ) F |= VF;   /* Set Overflow flag		*/
-    if ( !( v &0xf )) F |= 0x10; /* Half flag if Carry from bit 3*/
-//    F |= ( v &( YF | XF ));     /* undocumented flag bits 5+3 */
+    v++;                         // Inc value, wrap on 8 bits
+    F &= CF;                     // Clear all used flags
+    F |= ( v &0x80 );            // Save S flag (bit sign)
+    if ( v == 0 ) F |= ZF;       // If v is zero Set Zero bit.
+    if ( v == 0x80 ) F |= VF;    // Set Overflow flag
+    if ( !( v &0xf )) F |= 0x10; // Half flag if Carry from bit 3
+//  F |= ( v &( YF | XF ));      // undocumented flag bits 5+3
     return ( v );
 }
 
 
 u8 Z80::dec8( u8 v )
 {
-    v--;                              /* Dec value, wrap on 8 bit	*/
-    F = ( F &CF ) | NF;               /* Clear all used flags set N */
-    F |= ( v &SF );                   /* Save S flag (bit sign)	*/
-    if ( v == 0 ) F |= ZF;            /* If v is zero Set Zero bit.	*/
-    if ( v == 0x7f ) F |= VF;         /* Set overflow flag		*/
-    if (( v &0x0f ) == 0x0f ) F |= HF; /* Half carry 		*/
-//    F |= ( v &( YF | XF ));           /* undocumented flag bits 5+3 */
+    v--;                               // Dec value, wrap on 8 bit
+    F = ( F &CF ) | NF;                // Clear all used flags set N
+    F |= ( v &SF );                    // Save S flag (bit sign)
+    if ( v == 0 ) F |= ZF;             // If v is zero Set Zero bit.
+    if ( v == 0x7f ) F |= VF;          // Set overflow flag
+    if (( v &0x0f ) == 0x0f ) F |= HF; // Half carry
+//  F |= ( v &( YF | XF ));            // undocumented flag bits 5+3
     return ( v );
 }
 
@@ -217,52 +217,52 @@ u8 Z80::dec8( u8 v )
 u8 Z80::add8( u8 a, u8 b )
 {
     u16 tmp1 = (( a + b ));
-    F = ( tmp1 &0x80 );                        /* Set sign */
-    F |= ( tmp1 >> 8 );                        /* Set Carry */
-    tmp1 &= 0xff;                              /* 8bit wrap */
-    if (( tmp1 ^ a ^ b ) &0x10 ) F |= HF;      /* Set Half flag */
-    if ( ~( a ^ b ) &( a ^ F ) &0x80 ) F |= VF; /* Set VF flag  F already has sign.*/
-    if ( tmp1 == 0 ) F |= ZF;                  /* Set Zero Flag */
-//    F |= ( tmp1 &( YF | XF ));                 /* undocumented flag bits 5+3 */
+    F = ( tmp1 &0x80 );                         // Set sign
+    F |= ( tmp1 >> 8 );                         // Set Carry
+    tmp1 &= 0xff;                               // 8bit wrap
+    if (( tmp1 ^ a ^ b ) &0x10 ) F |= HF;       // Set Half flag
+    if ( ~( a ^ b ) &( a ^ F ) &0x80 ) F |= VF; // Set VF flag  F already has sign.
+    if ( tmp1 == 0 ) F |= ZF;                   // Set Zero Flag
+//  F |= ( tmp1 &( YF | XF ));                  // undocumented flag bits 5+3
     return tmp1;
 }
 
 u8 Z80::adc8( u8 a, u8 b )
 {
     u16 tmp1 = (( a + b ) + ( F &CF ));
-    F = ( tmp1 &0x80 );                          /* Save sign */
-    F |= (( tmp1 ) >> 8 );                       /* Set Carry */
-    tmp1 &= 0xff;                                /* 8bit wrap */
-    if ( tmp1 == 0 ) F |= ZF;                    /* Set Zero Flag */
-    if ((( a ^ b ^ tmp1 ) &0x10 ) != 0 ) F |= HF; /* Set Half flag */
-    if ( ~( a ^ b ) &( a ^ F ) &0x80 ) F |= VF;  /* Set VF flag  F already has sign.*/
-//    F |= ( tmp1 &( YF | XF ));                   /* undocumented flag bits 5+3 */
+    F = ( tmp1 &0x80 );                           // Save sign
+    F |= (( tmp1 ) >> 8 );                        // Set Carry
+    tmp1 &= 0xff;                                 // 8bit wrap
+    if ( tmp1 == 0 ) F |= ZF;                     // Set Zero Flag
+    if ((( a ^ b ^ tmp1 ) &0x10 ) != 0 ) F |= HF; // Set Half flag
+    if ( ~( a ^ b ) &( a ^ F ) &0x80 ) F |= VF;   // Set VF flag  F already has sign.
+//  F |= ( tmp1 &( YF | XF ));                    // undocumented flag bits 5+3
     return tmp1;
 }
 
 u8 Z80::sbc8( u8 a, u8 b )
 {
     u16 tmp1 = a - b - ( F &CF );
-    F = ( tmp1 &0x80 ) | NF;      /* save sign, set NF */
-    F |= (( tmp1 &0x100 ) >> 8 ); /* save carry */
+    F = ( tmp1 &0x80 ) | NF;      // save sign, set NF
+    F |= (( tmp1 &0x100 ) >> 8 ); // save carry
     if ((( a ^ b ^ tmp1 ) &0x10 ) != 0 ) F |= HF;
     if ((( b ^ a ) &( a ^ tmp1 ) &0x80 ) != 0 ) F |= VF;
     tmp1 &= 0xff;
     if ( tmp1 == 0 ) F |= ZF;
-//    F |= ( tmp1 &( YF | XF ));    /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF ));    // undocumented flag bits 5+3
     return tmp1;
 }
 
 u8 Z80::sub8( u8 a, u8 b )
 {
     u16 tmp1 = ( a - b );
-    F = ( tmp1 &0x80 ) | NF; /* Save sign, set N flag */
-    if ( tmp1 == 0 ) F |= ZF;    /* Set Zero Flag */
-    F |= ( tmp1 &0x100 ) >> 8; /* Set Carry */
-    if ((( b ^ a ) &( a ^ tmp1 ) &0x80 ) != 0 ) F |= VF; /* Set overflow */
-    if ((( a ^ b ^ tmp1 ) &0x10 ) != 0 ) F |= HF; /* Set Half flag */
+    F = ( tmp1 &0x80 ) | NF;   // Save sign, set N flag
+    if ( tmp1 == 0 ) F |= ZF;  // Set Zero Flag
+    F |= ( tmp1 &0x100 ) >> 8; // Set Carry
+    if ((( b ^ a ) &( a ^ tmp1 ) &0x80 ) != 0 ) F |= VF; // Set overflow
+    if ((( a ^ b ^ tmp1 ) &0x10 ) != 0 ) F |= HF; // Set Half flag
     tmp1 &= 0xff;
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -316,9 +316,9 @@ void Z80::cp8( u8 a, u8 b )
 u8 Z80::and8( u8 a, u8 b )
 {
     u8 tmp1 = ( a & b );
-    F = HF; /* Set H, clear SZ H P/V N and C */
+    F = HF; // Set H, clear SZ H P/V N and C
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return ( tmp1 );
 }
 
@@ -326,7 +326,7 @@ u8 Z80::xor8( u8 a, u8 b )
 {
     u8 tmp1 = ( a ^ b );
     F = PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -334,7 +334,7 @@ u8 Z80::or8( u8 a, u8 b )
 {
     u8 tmp1 = ( a | b );
     F = PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -344,10 +344,10 @@ u8 Z80::or8( u8 a, u8 b )
 u8 Z80::rlc8( u8 v )
 {
     u8 tmp1 = ( v << 1 );
-    F = ( v >> 7 ); /* All flags to zero, C = bit7 */
+    F = ( v >> 7 ); // All flags to zero, C = bit7
     tmp1 |= ( F &1 );
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -355,10 +355,10 @@ u8 Z80::rlc8( u8 v )
 u8 Z80::rrc8( u8 v )
 {
     u8 tmp1 = v >> 1;
-    F = ( v &1 ); /* Set Carry from bit0*/
-    tmp1 |= ( F << 7 ); /* Set outgoing bit0 in bit7 */
+    F = ( v &1 ); // Set Carry from bit0
+    tmp1 |= ( F << 7 ); // Set outgoing bit0 in bit7
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -366,9 +366,9 @@ u8 Z80::rrc8( u8 v )
 u8 Z80::rl8( u8 v )
 {
     u8 tmp1 = (( v << 1 ) | ( F &1 ));
-    F = v >> 7; /* F = bit7 */
+    F = v >> 7; // F = bit7
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -376,10 +376,10 @@ u8 Z80::rl8( u8 v )
 u8 Z80::rr8( u8 v )
 {
     u8 c = ( F & 1 );
-    F = v & 1; /* bit0 -> Carry */
-    u8 tmp1 = ( v >> 1 ) | ( c << 7 ); /* Old Carry -> bit7 */
+    F = v & 1; // bit0 -> Carry
+    u8 tmp1 = ( v >> 1 ) | ( c << 7 ); // Old Carry -> bit7
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -389,7 +389,7 @@ u8 Z80::sla8( u8 v )
     F = ( v >> 7 );
     u8 tmp1 = ( v << 1 );
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
@@ -398,30 +398,30 @@ u8 Z80::sll8( u8 v )
 {
     F = ( v >> 7 );
     u8 tmp1 = ( v << 1 );
-    tmp1 |= 1; /* The only difference with sla8 */
+    tmp1 |= 1; // The only difference with sla8
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
 
 u8 Z80::sra8( u8 v )
 {
-    F = ( v &1 ); /* Bit0 -> Carry */
+    F = ( v &1 ); // Bit0 -> Carry
     u8 tmp1 = ( v >> 1 );
-    tmp1 |= ( v &0x80 ); /* Bit7 is keep unchanged */
+    tmp1 |= ( v &0x80 ); // Bit7 is keep unchanged
     F |= PF_SF_ZF_[tmp1];
-//    F |= ( tmp1 &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( tmp1 &( YF | XF )); // undocumented flag bits 5+3
     return tmp1;
 }
 
 
 u8 Z80::srl8( u8 v )
 {
-    F = v & 1; /* Bit0 -> Carry*/
-    v >>= 1; /* Compute Value */
+    F = v & 1; // Bit0 -> Carry
+    v >>= 1; // Compute Value
     F |= PF_SF_ZF_[v];
-//    F |= ( v &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( v &( YF | XF )); // undocumented flag bits 5+3
     return v;
 }
 
@@ -434,7 +434,7 @@ void Z80::rrd()
     env.wr8( getHL(), tmp1 &0xff );
     F = F &1;
     F |= PF_SF_ZF_[A];
-//    F |= ( A &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( A &( YF | XF )); // undocumented flag bits 5+3
     cycleCount += 18;
 }
 
@@ -447,7 +447,7 @@ void Z80::rld()
     env.wr8( getHL(), tmp1 &0xff );
     F = F &1;
     F |= PF_SF_ZF_[A];
-//    F |= ( A &( YF | XF )); /* undocumented flag bits 5+3 */
+//  F |= ( A &( YF | XF )); // undocumented flag bits 5+3
     cycleCount += 18;
 }
 
@@ -459,9 +459,9 @@ void Z80::bit( u8 bit, u8 v )
     // Based on Sean Young documentation, "Z80-documented".
     F = ( F & CF ) | HF; // Clear all bits except CF, HF (always set) from F.
     if ( !( v &( 1 << bit ))) F |= ( ZF | PF ); // ZF is set if tested bit is reset.PF is like ZF.
-    if (( bit == 7 ) && !( F &ZF )) F |= SF;   // if tested bit is 7 is set, set SF
-//    if(( bit == 5 ) && !( F &ZF )) F |= YF;    // if tested bit is 5 is set, set YF UNDOC Flag
-//    if(( bit == 3 ) && !( F &ZF )) F |= XF;    // if tested bit is 3 is set, set XF UNDOC Flag
+    if (( bit == 7 ) && !( F &ZF )) F |= SF;    // if tested bit is 7 is set, set SF
+//  if(( bit == 5 ) && !( F &ZF )) F |= YF;     // if tested bit is 5 is set, set YF UNDOC Flag
+//  if(( bit == 3 ) && !( F &ZF )) F |= XF;     // if tested bit is 3 is set, set XF UNDOC Flag
 }
 
 u8 Z80::set( u8 bit, u8 v )
@@ -499,7 +499,7 @@ void Z80::rst( u16 ea )
 
 void Z80::setFlagAfterInput( u8 readed )
 {
-    F = ( F & CF ); /* Save the Carry Flag */
+    F = ( F & CF ); // Save the Carry Flag
     F |= PF_SF_ZF_[readed];
 }
 
@@ -527,9 +527,9 @@ void Z80::nop()
 /* This method generates a Non Maskable interrupt */
 void Z80::nmi()
 {
-    cpuHalted = false; /* UnHalt the cpu.			*/
-    IFF1 = false; /* Disable interrupt.			 */
-    push( PC ); /* Make call 0x66 			*/
+    cpuHalted = false; // UnHalt the cpu.
+    IFF1 = false; // Disable interrupt.
+    push( PC ); // Make call 0x66
     PC = 0x0066;
     cycleCount += 11;
 }
@@ -545,7 +545,7 @@ bool Z80::interrupt( u8 data )
 #ifdef BUILT_IN_DEBUGGER
         throwDebugEvent(DbgEvtCpuIrqAsserted, "CPU", "IRQ Asserted: CPU accepts it (DI).");
 #endif
-        /* Interrupts are enabled */
+        // Interrupts are enabled
         cpuHalted = false; // UnHalt the CPU.
         IFF1 = IFF2 = false; // Disable Maskable interrupt
         switch ( IM )
@@ -597,7 +597,7 @@ void Z80::step()
 
 u32 Z80::run( u32 wanted_cycles )
 {
-    u8 instruction;   // Current Opcode
+    u8 instruction; // Current Opcode
     u32 tc = cycleCount + wanted_cycles;
 
     while ( cycleCount < tc )
@@ -608,9 +608,9 @@ u32 Z80::run( u32 wanted_cycles )
         R++;
         if ( cpuHalted )
         {
-            /* Instead of looping doing NOP, compute How many nop to do */
-            /* and adjust cycleCount and R accordingly. NOP is 4 cycles.*/
-            /* cycleCount += 4; */
+            // Instead of looping doing NOP, compute How many nop to do
+            // and adjust cycleCount and R accordingly. NOP is 4 cycles.
+            // cycleCount += 4;
             u32 n = ((tc +3 - cycleCount) / 4);
             R += n;
             cycleCount += n * 4;
@@ -624,7 +624,7 @@ u32 Z80::run( u32 wanted_cycles )
 #endif
         }
     }
-    return cycleCount - tc; // overcycles !
+    return cycleCount - tc; // overcycles!
 }
 
 void Z80::dumpSaveStateStructure(Z80SaveState &css)
@@ -747,7 +747,7 @@ bool Z80::loadState( ifstream &ifs )
 
     //dumpSaveStateStructure(css);
 
-    /* Don't restore the values if read fails ! */
+    // Don't restore the values if read fails!
     if (!ret) return false;
 
     A = css.A;

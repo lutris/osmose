@@ -65,26 +65,26 @@ Joystick::Joystick(const char *dev_name, JoystickListener *lstnr)
     // Now get Joystick ID.
     if (::ioctl(joystickFD, JSIOCGNAME(MAX_JOYID_LEN), joystickID) < 0)
     {
-		::strncpy(joystickID, "Unknown", MAX_JOYID_LEN);
-	}
+        ::strncpy(joystickID, "Unknown", MAX_JOYID_LEN);
+    }
 
-	// Now get button number.
+    // Now get button number.
     if (::ioctl(joystickFD, JSIOCGBUTTONS, &buttonNbr) < 0)
     {
-		buttonNbr = 0;
-	}
+        buttonNbr = 0;
+    }
 
     // Now get Axis number.
     if (::ioctl(joystickFD, JSIOCGAXES, &axisNbr) < 0)
     {
-		axisNbr = 0;
-	}
+        axisNbr = 0;
+    }
 
     // Now get driver version.
     if (::ioctl(joystickFD, JSIOCGVERSION, &driverVersion) < 0)
     {
-		driverVersion = 0xFFFFFFFF;
-	}
+        driverVersion = 0xFFFFFFFF;
+    }
 
     // Keep track of listener for upcoming events.
     setListener(lstnr);
@@ -92,9 +92,9 @@ Joystick::Joystick(const char *dev_name, JoystickListener *lstnr)
     // Set default polling period.
     setPollingPeriod(DEFAULT_POLLING_PERIOD); // in milliseconds.
 
-	// Start device polling.
-	done = false;
-	this->start();
+    // Start device polling.
+    done = false;
+    this->start();
 }
 
 /**
@@ -119,16 +119,16 @@ void Joystick::setPollingPeriod(int pp_ms)
  */
 bool Joystick::readDevice(struct js_event *jse)
 {
-	int bytes_read;
+    int bytes_read;
 
     bytes_read = ::read(joystickFD, jse, sizeof(*jse));
 
-	// Handle errors !!!
-	if (bytes_read == -1)
-	{
-		return false;
-	}
-	return true;
+    // Handle errors !!!
+    if (bytes_read == -1)
+    {
+        return false;
+    }
+    return true;
 }
 
 
@@ -138,50 +138,50 @@ bool Joystick::readDevice(struct js_event *jse)
  */
 void *Joystick::run(void *)
 {
-	struct timespec rqtp, rmtp;
+    struct timespec rqtp, rmtp;
     struct js_event jse;
 
-	while(!done)
+    while(!done)
     {
-		// read the Joystick file descriptor until no more events are available.
-		while (readDevice(&jse) == true)
-		{
-			if (jse.type & 0x80) continue;	// Skip JS_EVENT_INIT (0x80) events.
-			switch(jse.type)
-			{
-				case JS_EVENT_BUTTON:
-				{
-					// Inform the listener that button event occurs.
-					bool pressed = (jse.value !=  0);
-					listener->buttonChanged(jse.number, pressed);
-				}
-				break;
+        // read the Joystick file descriptor until no more events are available.
+        while (readDevice(&jse) == true)
+        {
+            if (jse.type & 0x80) continue; // Skip JS_EVENT_INIT (0x80) events.
+            switch(jse.type)
+            {
+                case JS_EVENT_BUTTON:
+                {
+                    // Inform the listener that button event occurs.
+                    bool pressed = (jse.value !=  0);
+                    listener->buttonChanged(jse.number, pressed);
+                }
+                break;
 
-				case JS_EVENT_AXIS:
-				{
-					// Inform the listener that axis event occurs.
-					switch(jse.number)
-					{
-						case 0:
-							listener->xAxisChanged(jse.value);
-						break;
-						case 1:
-							listener->yAxisChanged(jse.value);
-						break;
-					}
-				}
-				break;
+                case JS_EVENT_AXIS:
+                {
+                    // Inform the listener that axis event occurs.
+                    switch(jse.number)
+                    {
+                        case 0:
+                            listener->xAxisChanged(jse.value);
+                        break;
+                        case 1:
+                            listener->yAxisChanged(jse.value);
+                        break;
+                    }
+                }
+                break;
 
-				default:
-				break;
-			}
-		} // No more event to handle.
+                default:
+                break;
+            }
+        } // No more event to handle.
 
 
-		// Sleep for the polling period.
-		rqtp.tv_sec = 0;
-		rqtp.tv_nsec = pollingPeriod * 1000 * 1000;
-		nanosleep(&rqtp, &rmtp);
+        // Sleep for the polling period.
+        rqtp.tv_sec = 0;
+        rqtp.tv_nsec = pollingPeriod * 1000 * 1000;
+        nanosleep(&rqtp, &rmtp);
     }
     return NULL;
 }
@@ -193,8 +193,7 @@ void *Joystick::run(void *)
  */
 Joystick::~Joystick()
 {
-	done = true;
-	this->join(NULL);
+    done = true;
+    this->join(NULL);
     ::close(joystickFD);
 }
-

@@ -39,18 +39,18 @@
 #include <iomanip>
 #include "AnsiColorTerminal.h"
 
-#define WAVE_BUFFER_SIZE	5*22050	// 5 second buffer.
+#define WAVE_BUFFER_SIZE 5*22050 // 5 second buffer.
 
 using namespace std;
 
 typedef struct
 {
     char           chunkID[4];
-    int           chunkSize;
+    int            chunkSize;
     short          wFormatTag;
     unsigned short wChannels;
-    unsigned int  dwSamplesPerSec;
-    unsigned int  dwAvgBytesPerSec;
+    unsigned int   dwSamplesPerSec;
+    unsigned int   dwAvgBytesPerSec;
     unsigned short wBlockAlign;
     unsigned short wBitsPerSample;
 } FormatChunk;
@@ -58,8 +58,8 @@ typedef struct
 typedef struct
 {
     char           chunkID[4];
-    int           chunkSize;
-    short         *waveformData;
+    int            chunkSize;
+    short          *waveformData;
 } DataChunk;
 
 class WaveWriter
@@ -67,12 +67,12 @@ class WaveWriter
 
     public:
 
-        WaveWriter(const char *filename);	// Constructor.
-        ~WaveWriter();			// Destructor.
+        WaveWriter(const char *filename); // Constructor
+        ~WaveWriter(); // Destructor
 
         void writeData(short d);
         void close();
-		bool isOk() {return !skip_save;}
+        bool isOk() {return !skip_save;}
 
     private:
 

@@ -44,47 +44,47 @@ using namespace std;
 
 class EmulationThread : public QThread
 {
-	Q_OBJECT;
+    Q_OBJECT;
 
-	enum EmulationState
-	{
-		EMULATION_STOPPED = 0,
-		EMULATION_RUNNING,
-		EMULATION_ABORTED
-	};
+    enum EmulationState
+    {
+        EMULATION_STOPPED = 0,
+        EMULATION_RUNNING,
+        EMULATION_ABORTED
+    };
 
 public:
-	EmulationThread(QGLImage *qglimage);
-	virtual ~EmulationThread();
-	void abortEmulation();
+    EmulationThread(QGLImage *qglimage);
+    virtual ~EmulationThread();
+    void abortEmulation();
 
 public slots:
-	void pauseEmulation();
-	void resumeEmulation();
-	void startEmulation();
-	virtual void resetEmulation();
-	virtual void keyPressed(padKey key);
-	virtual void keyReleased(padKey key);
+    void pauseEmulation();
+    void resumeEmulation();
+    void startEmulation();
+    virtual void resetEmulation();
+    virtual void keyPressed(padKey key);
+    virtual void keyReleased(padKey key);
 
 
 
 signals:
-	void newResolution(int w, int h);
+    void newResolution(int w, int h);
 
 protected:
 
-	unsigned int *videoBuffer;
-	void run();
-	virtual void emulateOneFrame() = 0;
-	void setRefreshFrequency(float usec);
-	void setResolution(int w, int h);
+    unsigned int *videoBuffer;
+    void run();
+    virtual void emulateOneFrame() = 0;
+    void setRefreshFrequency(float usec);
+    void setResolution(int w, int h);
 
 private:
-	bool done;
-	QReadWriteLock emulationStateQMutex;
-	QGLImage *screen;
-	unsigned int refreshingPeriod;
-	EmulationState emulationState;
+    bool done;
+    QReadWriteLock emulationStateQMutex;
+    QGLImage *screen;
+    unsigned int refreshingPeriod;
+    EmulationState emulationState;
 };
 
-#endif	// EMULATIONTHREAD_H
+#endif // EMULATIONTHREAD_H

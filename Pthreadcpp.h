@@ -46,12 +46,12 @@
  */
 class MutexLocker
 {
-	public:
-		MutexLocker(pthread_mutex_t *mutex) {the_mutex = mutex; pthread_mutex_lock(the_mutex); }
-		~MutexLocker() {pthread_mutex_unlock(the_mutex);}
+    public:
+        MutexLocker(pthread_mutex_t *mutex) {the_mutex = mutex; pthread_mutex_lock(the_mutex); }
+        ~MutexLocker() {pthread_mutex_unlock(the_mutex);}
 
-	private:
-		pthread_mutex_t *the_mutex;
+    private:
+        pthread_mutex_t *the_mutex;
 };
 
 
@@ -75,26 +75,26 @@ class Thread
 {
 public:
 
-	Thread();
+    Thread();
     int start(void *param = NULL);
-	int join(void **retVal);
-	virtual ~Thread();
+    int join(void **retVal);
+    virtual ~Thread();
 
 protected:
 
-	virtual void* run(void *p) = 0;	/* Override this with your own. */
+    virtual void* run(void *p) = 0; // Override this with your own.
 
 private:
 
-	bool _created;
-	bool _joined;
-	pthread_t _thread;
-	void *_inputArg;
-	void *getArg() {return _inputArg;}
-	static void *entryPoint(void *);
+    bool _created;
+    bool _joined;
+    pthread_t _thread;
+    void *_inputArg;
+    void *getArg() {return _inputArg;}
+    static void *entryPoint(void *);
 };
 
 
 
 
-#endif	// PTHREADCPP_H
+#endif // PTHREADCPP_H

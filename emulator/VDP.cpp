@@ -123,7 +123,7 @@ VDP::VDP(Z80 *c, bool ntsc)
 /*-------------------------------------------------------------*/
 /* This method handles write operation on the VDP data port.   */
 /*-------------------------------------------------------------*/
-void VDP::writeDataPort(unsigned char data)        /* Port 0xBE written            */
+void VDP::writeDataPort(unsigned char data) // Port 0xBE written
 {
     cmd_flag = false;
 
@@ -154,8 +154,8 @@ void VDP::writeDataPort(unsigned char data)        /* Port 0xBE written         
 }
 
 /*---------------------------------------------------------------*/
-/* This method convert 8bit xxRRGGBB to the 32 bits :			 */
-/* 11111111BBBBBBBGGGGGGGGRRRRRRRR colors .						 */
+/* This method convert 8bit xxRRGGBB to the 32 bits :            */
+/* 11111111BBBBBBBGGGGGGGGRRRRRRRR colors .                      */
 /*---------------------------------------------------------------*/
 unsigned int VDP::colorSMS8BitsToColor32Bits(unsigned char data)
 {
@@ -164,13 +164,13 @@ unsigned int VDP::colorSMS8BitsToColor32Bits(unsigned char data)
     r = r_col[(data & 3)];
     g = g_col[(data >> 2) &3];
     b = b_col[(data >> 4) &3];
-	out = (unsigned int) (0xFF000000 | (b << 16) | (g << 8) | r);
+    out = (unsigned int) (0xFF000000 | (b << 16) | (g << 8) | r);
     return out;
 }
 
 /*---------------------------------------------------------------*/
-/* This method convert 12bit xxxxRRRRGGGGBBBB to 32 bits		 */
-/* 11111111BBBBBBBGGGGGGGGRRRRRRRR colors .						 */
+/* This method convert 12bit xxxxRRRRGGGGBBBB to 32 bits         */
+/* 11111111BBBBBBBGGGGGGGGRRRRRRRR colors .                      */
 /*---------------------------------------------------------------*/
 unsigned int VDP::colorGG12BitsToColor32Bits(unsigned short data)
 {
@@ -186,7 +186,7 @@ unsigned int VDP::colorGG12BitsToColor32Bits(unsigned short data)
 /*-------------------------------------------------------------*/
 /* This method handles read operation on the VDP data port.    */
 /*-------------------------------------------------------------*/
-unsigned char VDP::readDataPort()                /* Port 0xBE read             */
+unsigned char VDP::readDataPort() // Port 0xBE read
 {
     unsigned char r;
 
@@ -203,19 +203,19 @@ unsigned char VDP::readDataPort()                /* Port 0xBE read             *
 
 /*-------------------------------------------------------------*/
 /* This method handles write operation on the VDP control port.*/
-/* This port is at 0xBF                                               */
+/* This port is at 0xBF                                        */
 /*-------------------------------------------------------------*/
-void VDP::writeCtrlPort(unsigned char data)        /* Port 0xBF/0xBD written   */
+void VDP::writeCtrlPort(unsigned char data) // Port 0xBF/0xBD written
 {
     if (cmd_flag == false)
     {
-        cmd_flag = true;          /* We receive first byte of command word  */
+        cmd_flag = true; // We receive first byte of command word
         latch = data;
     }
     else
     {
-        cmd_flag = false;        /* We receive second byte of command word  */
-        cmd_type = data >> 6;    /* 2second byte MSB are cmd type            */
+        cmd_flag = false; // We receive second byte of command word
+        cmd_type = data >> 6; // 2second byte MSB are cmd type
         addr = ( (data & 0x3F ) << 8) | latch;
         if (cmd_type == 0)
         {
@@ -224,7 +224,7 @@ void VDP::writeCtrlPort(unsigned char data)        /* Port 0xBF/0xBD written   *
 
         }
 
-        if (cmd_type == 2)  // Cmd: 10 VDP register write */
+        if (cmd_type == 2) // Cmd: 10 VDP register write
         {
             writeRegs(data & 0xF, latch);
         }
@@ -251,7 +251,7 @@ void VDP::writeCtrlPort(unsigned char data)        /* Port 0xBF/0xBD written   *
 
 
 /*------------------------------------------------------------*/
-/* Call back when port BF/BD is read.                               */
+/* Call back when port BF/BD is read.                         */
 /*------------------------------------------------------------*/
 unsigned char VDP::readStatusFlag()
 {
@@ -278,7 +278,7 @@ unsigned short VDP::getVRAMAddr()
 
 /*------------------------------------------------------------*/
 /* This method will reset the VDP by setting latch / regs     */
-/* to Zero, supposing it's the thing to do !                      */
+/* to Zero, supposing it's the thing to do !                  */
 /*------------------------------------------------------------*/
 void VDP::reset()
 {
@@ -312,17 +312,17 @@ void VDP::reset()
         b_col[2] = 21;
         b_col[3] = 31;
 */
-		r_col[0] = 0x00;
+        r_col[0] = 0x00;
         r_col[1] = 0x55;
         r_col[2] = 0xAA;
         r_col[3] = 0xFF;
 
-		g_col[0] = 0x00;
+        g_col[0] = 0x00;
         g_col[1] = 0x55;
         g_col[2] = 0xAA;
         g_col[3] = 0xFF;
 
-		b_col[0] = 0x00;
+        b_col[0] = 0x00;
         b_col[1] = 0x55;
         b_col[2] = 0xAA;
         b_col[3] = 0xFF;
@@ -346,17 +346,17 @@ void VDP::reset()
         b_col[2] = 16;
         b_col[3] = 24;
 */
-		r_col[0] = 0x00;
+        r_col[0] = 0x00;
         r_col[1] = 0x55;
         r_col[2] = 0xAA;
         r_col[3] = 0xFF;
 
-		g_col[0] = 0x00;
+        g_col[0] = 0x00;
         g_col[1] = 0x55;
         g_col[2] = 0xAA;
         g_col[3] = 0xFF;
 
-		b_col[0] = 0x00;
+        b_col[0] = 0x00;
         b_col[1] = 0x55;
         b_col[2] = 0xAA;
         b_col[3] = 0xFF;
@@ -368,21 +368,21 @@ void VDP::reset()
         regs[i] = 0;
     }
 
-    REG2 = 0xE;         /* xxxx111x -> map default to 0x3800 in VRAM */
-    map_addr = 0x3800;  /* REG2 converted into VRAM address.             */
+    REG2 = 0xE; // xxxx111x -> map default to 0x3800 in VRAM
+    map_addr = 0x3800; // REG2 converted into VRAM address.
 
-    REG5 = 0x7E;         /* x111111x -> sit default to 0x3F00 in VRAM */
-    sit_addr = 0x3F00;  /* REG5 converted into VRAM address.             */
+    REG5 = 0x7E; // x111111x -> sit default to 0x3F00 in VRAM
+    sit_addr = 0x3F00; // REG5 converted into VRAM address.
 
-    REG10 = 0xFF;        /* No Line Interrupt */
+    REG10 = 0xFF; // No Line Interrupt
 #ifdef BUILT_IN_DEBUGGER
     irq_accepted = false;
 #endif
 }
 
 /*------------------------------------------------------------*/
-/* This is a debugging purpose function.                       */
-/* Note that this method will dump VDP VRAM.                      */
+/* This is a debugging purpose function.                      */
+/* Note that this method will dump VDP VRAM.                  */
 /*------------------------------------------------------------*/
 void VDP::dumpVRAM(unsigned int sa, int nb_lines)
 {
@@ -402,8 +402,8 @@ void VDP::dumpVRAM(unsigned int sa, int nb_lines)
 }
 
 /*------------------------------------------------------------*/
-/* This is a debugging purpose function.                       */
-/* Note that this method will dump VDP CRAM.                      */
+/* This is a debugging purpose function.                      */
+/* Note that this method will dump VDP CRAM.                  */
 /*------------------------------------------------------------*/
 void VDP::dumpCRAM()
 {
@@ -422,7 +422,7 @@ void VDP::dumpCRAM()
 
 /*------------------------------------------------------------*/
 /* This method is called on each VDP register write. Parameter*/
-/* is the index of the register in reg array.                      */
+/* is the index of the register in reg array.                 */
 /*------------------------------------------------------------*/
 void VDP::writeRegs(unsigned char r,unsigned char v)
 {
@@ -431,15 +431,15 @@ void VDP::writeRegs(unsigned char r,unsigned char v)
     switch (r)
     {
         case 0:
-            /* Change IRQ assertion if Line IRQ are enabled/disabled.*/
+            // Change IRQ assertion if Line IRQ are enabled/disabled.
             updateIRQAssertion();
             break;
         case 1:
-            /* Change IRQ assertion if VSYNC IRQ are enabled/disabled.*/
+            // Change IRQ assertion if VSYNC IRQ are enabled/disabled.
             updateIRQAssertion();
             break;
         case 2:
-            map_addr = (REG2 & 0xE) << 10; /* 0xE = 00001110b. */
+            map_addr = (REG2 & 0xE) << 10; // 0xE = 00001110b.
             break;
         case 5:
             sit_addr = (((REG5 >> 1) & 0x3F) << 8 );
@@ -473,18 +473,18 @@ void VDP::update(unsigned int *s, bool drawline)
         }
     }
 
-    /* V-Blank interrupt. */
+    // V-Blank interrupt.
     if (line == 0xC1)
     {
         vdp_status |= BIT7;
         vsynch_irq_pending = true;
     }
 
-    /* Line interrupt. */
+    // Line interrupt.
     if (line < 193)
     {
         i_counter--;
-        /* Line counter overflow. */
+        // Line counter overflow.
         if (i_counter == 0xFF)
         {
             i_counter = REG10;
@@ -497,8 +497,8 @@ void VDP::update(unsigned int *s, bool drawline)
     v_counter = v_cnt[line];
 #ifdef BUILT_IN_DEBUGGER
     /*
-    	This event is thrown on every scanline. The dedbugger will react depending
-    	on the scanline break point.
+    This event is thrown on every scanline. The dedbugger will react depending
+    on the scanline break point.
     */
     throwDebugEvent(DbgEvtScanlineBreakpoint,"VDP", "End of current Scanline.");
 #endif
@@ -506,7 +506,7 @@ void VDP::update(unsigned int *s, bool drawline)
 
 /*------------------------------------------------------------*/
 /* This method update sms_irq value depending on VDP registers*/
-/* and interrupt pending.									  */
+/* and interrupt pending.                                     */
 /*------------------------------------------------------------*/
 void VDP::updateIRQAssertion()
 {
@@ -546,10 +546,10 @@ void VDP::traceBackGroundLine(unsigned int *s)
     int current_line;
     unsigned int   p;
 
-    /* scr ptr in our SDL_Surface points line to be drawn. */
+    // scr ptr in our SDL_Surface points line to be drawn.
     scr = (unsigned int*) s + (256 * line);
 
-    /* Draw a blank line directly in screen if display is disabled. */
+    // Draw a blank line directly in screen if display is disabled.
     if (!(REG1 & BIT6))
     {
         memset(scr,0x0, 0x400); // 0x200 means 256 32bits pixels.
@@ -557,25 +557,25 @@ void VDP::traceBackGroundLine(unsigned int *s)
     }
 
 
-    /* Our destination is one 256 pixel line. */
+    // Our destination is one 256 pixel line.
     dst = line_buffer;
 
-    /* Clear our tileMask. */
+    // Clear our tileMask.
     memset(tile_mask,0x00, 0x100);
 
     /*
-    	 Note that x is never tested for >255 since it automaticaly wraps
-    	 due to it's unsigned char declaration.
+    Note that x is never tested for >255 since it automaticaly wraps
+    due to it's unsigned char declaration.
     */
 
-    /* Now, for 32 tiles... */
+    // Now, for 32 tiles...
     for (o=0; o<32;o++)
     {
-        /* x = X scroll register, y = Y scroll register. */
+        // x = X scroll register, y = Y scroll register.
         y = REG9;
         x = REG8;
 
-        /* Top 2 rows of screen not affected by horizontal scrolling. */
+        // Top 2 rows of screen not affected by horizontal scrolling.
         if ((REG0 & BIT6) && (line<=15))
         {
             x = 0;
@@ -583,10 +583,10 @@ void VDP::traceBackGroundLine(unsigned int *s)
 
         x += o *8;
 
-        /* current_line = current line + scroll register modulated to stay in screen. 192 could be OK. */
+        // current_line = current line + scroll register modulated to stay in screen. 192 could be OK.
         if ((o >= 24) && (REG0 & BIT7))
         {
-            /* Disable vertical scrolling for columns 24-31 */
+            // Disable vertical scrolling for columns 24-31
             current_line = ((line) % 224);
         }
         else
@@ -595,25 +595,25 @@ void VDP::traceBackGroundLine(unsigned int *s)
         }
 
         /*
-        	Now get VRAM index of the Tile/attrib in VDP memory.
-        	8x8 Tile at Coord x, y = (x*64) + (y /8)
-        	x * 64 because a line is 32 tiles, with 2 bytes for tile index and attribute.
-        	y /8 because a tile is made of 8 lines.
+        Now get VRAM index of the Tile/attrib in VDP memory.
+        8x8 Tile at Coord x, y = (x*64) + (y /8)
+        x * 64 because a line is 32 tiles, with 2 bytes for tile index and attribute.
+        y /8 because a tile is made of 8 lines.
         */
         pos = ((current_line>>3)<<6) + o * 2;
 
-        /* get it's tile Index. */
+        // get its tile Index.
         currentTile = VRAM[ map_addr + pos++];
 
-        /* get it's attribute. */
+        // get its attribute.
         attrib      = VRAM[ map_addr + pos++];
 
         if (attrib & BIT0)
         {
-            currentTile |=0x100;        // 9th tile index bit.
+            currentTile |=0x100; // 9th tile index bit.
         }
 
-        //    line in tile converted to VRAM ind
+        // line in tile converted to VRAM ind
         if (attrib & BIT2)
         {
             // Verticaly flipped tile.
@@ -717,7 +717,7 @@ void VDP::traceBackGroundLine(unsigned int *s)
 }
 
 /*-------------------------------------------------------------*/
-/* This method selects VDP timings vcounts.					   */
+/* This method selects VDP timings vcounts.                    */
 /*-------------------------------------------------------------*/
 void VDP::setNTSC(bool t)
 {
@@ -761,8 +761,8 @@ void VDP::displaySpritesLine()
 
     displayedSprites = 0;
 
-    /* Note that if Bit0 and Bit1 of reg1 are set, sprites are 16*32. */
-    /* Earthworm jim uses this.*/
+    // Note that if Bit0 and Bit1 of reg1 are set, sprites are 16*32.
+    // Earthworm jim uses this.
     if (REG1 & BIT0)
     {
         sprite_height  *= 2;
@@ -792,13 +792,13 @@ void VDP::displaySpritesLine()
         {
             if (displayedSprites == 8)
             {
-                vdp_status |= BIT6; /* Sprite overflow bit */
+                vdp_status |= BIT6; // Sprite overflow bit
                 break;
             }
 
             ind_spr[displayedSprites] = VRAM[(sit_addr+129)+(j<<1)];
 
-            if (REG6 & BIT2)        // 9th bit sprite nbr
+            if (REG6 & BIT2) // 9th bit sprite nbr
             {
                 ind_spr[displayedSprites] |= 0x100;
             }
@@ -811,11 +811,12 @@ void VDP::displaySpritesLine()
 
             y_spr[displayedSprites] = y;
             line_spr[displayedSprites] = line - y;
-            if (double_size) 	line_spr[displayedSprites] = (line - y)>>1;
+            if (double_size)
+                line_spr[displayedSprites] = (line - y)>>1;
             x_spr[displayedSprites] = VRAM[(sit_addr+128)+(j<<1)];
 
             // Sprites moved 8 pixels left.
-            start_spr[displayedSprites] = 0;                // First pixel in sprite line to draw.
+            start_spr[displayedSprites] = 0; // First pixel in sprite line to draw.
             if (REG0 & BIT3)
             {
                 x_spr[displayedSprites]-=8;
@@ -824,7 +825,7 @@ void VDP::displaySpritesLine()
                     start_spr[displayedSprites] = -x_spr[displayedSprites];
                 }
             }
-            width_spr[displayedSprites] = 8;    // Nbr of pixels in sprite line to draw.
+            width_spr[displayedSprites] = 8; // Nbr of pixels in sprite line to draw.
             if (x_spr[displayedSprites]>248)
             {
                 width_spr[displayedSprites] = 256 - x_spr[displayedSprites];
@@ -859,7 +860,7 @@ void VDP::displaySpritesLine()
                         line_buffer[u+1] = colors[col_index];
                         if ((spr_col[u] == 1) || (spr_col[u+1] == 1))
                         {
-                            vdp_status |= BIT5;         // Force collision to true
+                            vdp_status |= BIT5; // Force collision to true
                         }
                         spr_col[u] = 1;
                         spr_col[u+1] = 1;
@@ -873,7 +874,7 @@ void VDP::displaySpritesLine()
                         line_buffer[u] = colors[col_index];
                         if (spr_col[u] == 1)
                         {
-                            vdp_status |= BIT5;         // Force collision to true
+                            vdp_status |= BIT5; // Force collision to true
                         }
                         spr_col[u] = 1;
                     }
@@ -884,12 +885,12 @@ void VDP::displaySpritesLine()
     }
 }
 
-/* Implemetntation of ImplementsSaveState. */
+// Implemetntation of ImplementsSaveState.
 bool VDP::saveState( ofstream &ofs)
 {
     VDPSaveState vss;
 
-    /* Fill the structure. */
+    // Fill the structure.
     vss.map_addr = map_addr;
     vss.sit_addr = sit_addr;
     for (int i=0; i < VDP_REGISTER_NBR; i++) vss.regs[i] = regs[i];
@@ -906,15 +907,15 @@ bool VDP::saveState( ofstream &ofs)
     vss.cmd_type = cmd_type;
     vss.cmd_flag = cmd_flag;
 
-    /* Save VDP data. */
+    // Save VDP data.
     ofs.write((char *)&vss, sizeof(vss));
     if (!ofs.good()) return false;
 
-    /* Save 16 Ko VRAM. */
+    // Save 16 Ko VRAM.
     ofs.write((char *)&VRAM[0], 0x4000);
     if (!ofs.good()) return false;
 
-    /* Save 64 bytes CRAM. */
+    // Save 64 bytes CRAM.
     ofs.write((char *)&CRAM[0], 64);
     if (!ofs.good()) return false;
 
@@ -925,7 +926,7 @@ bool VDP::loadState( ifstream &ifs)
 {
     VDPSaveState vss;
 
-    /* Load VDP data into structure */
+    // Load VDP data into structure
     ifs.read((char *)&vss, sizeof(vss));
     if (!ifs.good()) return false;
     map_addr = vss.map_addr ;
@@ -944,11 +945,11 @@ bool VDP::loadState( ifstream &ifs)
     cmd_type = vss.cmd_type;
     cmd_flag = vss.cmd_flag;
 
-    /* Load 16 Ko VRAM. */
+    // Load 16 Ko VRAM.
     ifs.read((char *)&VRAM[0], 0x4000);
     if (!ifs.good()) return false;
 
-    /* Load 64 bytes CRAM. */
+    // Load 64 bytes CRAM.
     ifs.read((char *)&CRAM[0], 64);
     if (!ifs.good())
     {
@@ -956,7 +957,7 @@ bool VDP::loadState( ifstream &ifs)
         return false;
     }
 
-    /* Now recompute colors that are usually computed on fly.*/
+    // Now recompute colors that are usually computed on fly.
     if (opt.MachineType == SMS)
     {
         for (int i=0; i < 0x1f; i++) colors[i] = colorSMS8BitsToColor32Bits(CRAM[i]);
@@ -970,4 +971,3 @@ bool VDP::loadState( ifstream &ifs)
 
     return true;
 }
-

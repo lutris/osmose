@@ -42,13 +42,13 @@
 /* Debug Event types. */
 enum
 {
-    DbgEvtUserTrigger 			= 0,
-    DbgEvtCpuStep	  			= 1,
-    DbgEvtScanlineBreakpoint	= 2,
-    DbgEvtCpuIrqAsserted		= 3,
-    DbgEvtCpuDisableInterrupt   = 4,
+    DbgEvtUserTrigger          = 0,
+    DbgEvtCpuStep              = 1,
+    DbgEvtScanlineBreakpoint   = 2,
+    DbgEvtCpuIrqAsserted       = 3,
+    DbgEvtCpuDisableInterrupt  = 4,
     DbgEvtCpuEnableInterrupt   =  5,
-    DbgEvtGeneric				= 256
+    DbgEvtGeneric              = 256
 };
 
 class DebugEventListener
@@ -60,4 +60,3 @@ class DebugEventListener
 };
 
 #endif
-

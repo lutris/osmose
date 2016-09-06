@@ -44,11 +44,11 @@ VDP_GG::VDP_GG(Z80 *c, bool ntsc) : VDP( c, ntsc )
 /*----------------------------------------------------------------------*/
 /* This method handles write operation on the GAMEGEAR VDP data port.   */
 /*----------------------------------------------------------------------*/
-void VDP_GG::writeDataPort(unsigned char data)        /* Port 0xBE written            */
+void VDP_GG::writeDataPort(unsigned char data) // Port 0xBE written
 {
     cmd_flag = false;
 
-    rd_data_port_buffer = data; // CMD docs says that write, load buffer with it's value.
+    rd_data_port_buffer = data; // CMD docs says that write, load buffer with its value.
 
     // destination is VRAM or CRAM ?
     if (cmd_type == 3)
@@ -90,18 +90,18 @@ void VDP_GG::writeDataPort(unsigned char data)        /* Port 0xBE written      
 /*--------------------------------------------------------------*/
 void VDP_GG::traceBackGroundLine(unsigned int *s)
 {
-    unsigned int   c,pos;
+    unsigned int c,pos;
     unsigned int *dst;
     unsigned int *scr;
     unsigned short currentTile;
-    unsigned char  i, o, x, y, col_index, attrib;
+    unsigned char i, o, x, y, col_index, attrib;
     int current_line;
-    unsigned int   p;
+    unsigned int p;
 
     // scr ptr in our SDL_Surface points line to be drawn.
     scr = (unsigned int*) s + (256 * line);
 
-    /* Fill the undrawn  lines with  00.*/
+    // Fill the undrawn lines with 00.
     if ((line<24) || (line>167))
     {
         memset(scr, 0x0, 0x400);
@@ -110,19 +110,19 @@ void VDP_GG::traceBackGroundLine(unsigned int *s)
 
     dst = line_buffer;
 
-    /* Clear our tileMask. */
+    // Clear our tileMask.
     memset(tile_mask,0x00, 0x100);
 
     /*
-    	 Note that x is never tested for >255 since it automaticaly wraps
-    	 due to it's unsigned char declaration.
+    Note that x is never tested for >255 since it automaticaly wraps
+    due to it's unsigned char declaration.
     */
 
-    /* Now, for 32 tiles... */
+    // Now, for 32 tiles...
     for (o=0; o<32;o++)
     {
 
-        /* Draw a blank line directly in screen if display is disabled. */
+        // Draw a blank line directly in screen if display is disabled.
         if (!(REG1 & BIT6))
         {
             memset(scr,0x00, 0x400); // 0x400 means 256 32bits pixels.
@@ -130,22 +130,22 @@ void VDP_GG::traceBackGroundLine(unsigned int *s)
         }
 
 
-        /* x = X scroll register, y = Y scroll register. */
+        // x = X scroll register, y = Y scroll register.
         y = REG9;
         x = REG8;
 
-        /* Top 2 rows of screen not affected by horizontal scrolling. */
+        // Top 2 rows of screen not affected by horizontal scrolling.
         if ((REG0 & BIT6) && (line<=15))
         {
             x = 0;
         }
         x += o *8;
 
-        /* current_line = current line + scroll register modulated to stay in screen. 192 could be OK. */
+        // current_line = current line + scroll register modulated to stay in screen. 192 could be OK.
 
         if ((o >= 24) && (REG0 & BIT7))
         {
-            /* Disable vertical scrolling for columns 24-31 */
+            // Disable vertical scrolling for columns 24-31
             current_line = ((line) % 224);
 
         }
@@ -154,25 +154,25 @@ void VDP_GG::traceBackGroundLine(unsigned int *s)
             current_line = ((line+y) % 224);
         }
         /*
-        	Now get VRAM index of the Tile/attrib in VDP memory.
-        	8x8 Tile at Coord x, y = (x*64) + (y /8)
-        	x * 64 because a line is 32 tiles, with 2 bytes for tile index and attribute.
-        	y /8 because a tile is made of 8 lines.
+        Now get VRAM index of the Tile/attrib in VDP memory.
+        8x8 Tile at Coord x, y = (x*64) + (y /8)
+        x * 64 because a line is 32 tiles, with 2 bytes for tile index and attribute.
+        y /8 because a tile is made of 8 lines.
         */
         pos = ((current_line>>3)<<6) + o * 2;
 
-        /* get it's tile Index. */
+        // get itss tile Index.
         currentTile = VRAM[ map_addr + pos++];
 
-        /* get it's attribute. */
+        // get its attribute.
         attrib      = VRAM[ map_addr + pos++];
 
         if (attrib & BIT0)
         {
-            currentTile |=0x100;        // 9th tile index bit.
+            currentTile |=0x100; // 9th tile index bit.
         }
 
-        //    line in tile converted to VRAM ind
+        // line in tile converted to VRAM ind
         if (attrib & BIT2)
         {
             // Verticaly flipped tile.

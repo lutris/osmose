@@ -38,7 +38,7 @@
  */
 WhiteNoiseEmulationThread::WhiteNoiseEmulationThread(QGLImage *qglimage) : EmulationThread(qglimage)
 {
-	setRefreshFrequency(25.0f);
+    setRefreshFrequency(25.0f);
 }
 
 /**
@@ -54,19 +54,19 @@ WhiteNoiseEmulationThread::~WhiteNoiseEmulationThread()
  */
 void WhiteNoiseEmulationThread::emulateOneFrame()
 {
-	unsigned int col = 0;
-	for (unsigned int i = 0; i < 256 * 192; i++)
-	{
-		int hzd = rand() & 0xFF;
-		if (hzd > 0xF0)
-		{
-			col = rand() & 0xFF;
-			col = col | (col << 8) | (col << 16) | 0xFF000000;
-		}
-		else
-		{
-			col = 0xFF000000;
-		}
-		videoBuffer[i] = col;
-	}
+    unsigned int col = 0;
+    for (unsigned int i = 0; i < 256 * 192; i++)
+    {
+        int hzd = rand() & 0xFF;
+        if (hzd > 0xF0)
+        {
+            col = rand() & 0xFF;
+            col = col | (col << 8) | (col << 16) | 0xFF000000;
+        }
+        else
+        {
+            col = 0xFF000000;
+        }
+        videoBuffer[i] = col;
+    }
 }

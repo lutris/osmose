@@ -35,28 +35,28 @@
 #define KEYMAPPER_H
 #include <iostream>
 
-#define KEY_NBR	417
+#define KEY_NBR 417
 
 typedef struct
 {
-		const char *keyname;
-		unsigned int qtkey;
+    const char *keyname;
+    unsigned int qtkey;
 } key_map;
 
 class KeyMapper
 {
 public:
-	~KeyMapper();
-	static KeyMapper*  getInstance();
-	static const char* getKeyDescription(unsigned int qtkey);
+    ~KeyMapper();
+    static KeyMapper*  getInstance();
+    static const char* getKeyDescription(unsigned int qtkey);
 
 protected:
 
 private:
-	static const key_map keymap[KEY_NBR];
-	static KeyMapper *instance;
-	KeyMapper();
+    static const key_map keymap[KEY_NBR];
+    static KeyMapper *instance;
+    KeyMapper();
 
 };
 
-#endif	// KEYMAPPER_H
+#endif // KEYMAPPER_H

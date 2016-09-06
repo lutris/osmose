@@ -41,7 +41,7 @@ class IOMapper_GG : public IOMapper
 {
     public:
 
-        IOMapper_GG(VDP &, SN76489 &);		// Constructor.
+        IOMapper_GG(VDP &, SN76489 &); // Constructor.
         virtual ~IOMapper_GG() {};
         void reset();
         unsigned char in8(unsigned  address);

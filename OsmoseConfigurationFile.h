@@ -47,37 +47,37 @@ using namespace std;
 
 typedef enum
 {
-	UP = 0,
-	DOWN,
-	LEFT,
-	RIGHT,
-	BUTTON_A,
-	BUTTON_B
+    UP = 0,
+    DOWN,
+    LEFT,
+    RIGHT,
+    BUTTON_A,
+    BUTTON_B
 } padInput;
 
 typedef enum
 {
-	P1UP = 0,
-	P1DOWN,
-	P1LEFT,
-	P1RIGHT,
-	P1BUTTON_A,
-	P1BUTTON_B,
-	P2UP,
-	P2DOWN,
-	P2LEFT,
-	P2RIGHT,
-	P2BUTTON_A,
-	P2BUTTON_B,
-	START_GG,
-	PAUSE_NMI,
-	SCREENSHOT,
-	SOUNDSHOT,
-	UNKNOWN = 0x80000000
+    P1UP = 0,
+    P1DOWN,
+    P1LEFT,
+    P1RIGHT,
+    P1BUTTON_A,
+    P1BUTTON_B,
+    P2UP,
+    P2DOWN,
+    P2LEFT,
+    P2RIGHT,
+    P2BUTTON_A,
+    P2BUTTON_B,
+    START_GG,
+    PAUSE_NMI,
+    SCREENSHOT,
+    SOUNDSHOT,
+    UNKNOWN = 0x80000000
 
 } padKey;
 
-#define MAX_JOYSTICK_BUTTON		8
+#define MAX_JOYSTICK_BUTTON 8
 #define DEFAULT_JOYSTICK_DEVICE "/dev/input/js0"
 
 class OsmoseConfigurationFile
@@ -87,68 +87,68 @@ class OsmoseConfigurationFile
 
 public:
 
-	OsmoseConfigurationFile();
-	void save();
-	void load();
-	void createDefautConfigurationFile();
-	void resetToDefault();
-	padKey keyToKeyPad(int key);
+    OsmoseConfigurationFile();
+    void save();
+    void load();
+    void createDefautConfigurationFile();
+    void resetToDefault();
+    padKey keyToKeyPad(int key);
 
-	static string getHomeDirectory();
-	~OsmoseConfigurationFile();
+    static string getHomeDirectory();
+    ~OsmoseConfigurationFile();
 
-	// Button setters.
-	void setPad(int padNumber, padInput i, unsigned int key);
-	void setPause(unsigned int key){pauseButton = key;}
-	void setStart(unsigned int key){startButton = key;}
-	void assignJoyButton(int button, padKey assignation);
+    // Button setters.
+    void setPad(int padNumber, padInput i, unsigned int key);
+    void setPause(unsigned int key){pauseButton = key;}
+    void setStart(unsigned int key){startButton = key;}
+    void assignJoyButton(int button, padKey assignation);
 
-	// Path setters.
-	void setScreenshotPath(string path) {screenshotPath = path;}
-	void setSoundCapturePath(string path) {soundCapturePath = path;}
-	void setTileCapturePath(string path) {tileCapturePath = path;};
-	void setBBRPath(string path) {BBRPath = path;};
-	void setSaveStatePath(string path) {saveStatePath = path;};
+    // Path setters.
+    void setScreenshotPath(string path) {screenshotPath = path;}
+    void setSoundCapturePath(string path) {soundCapturePath = path;}
+    void setTileCapturePath(string path) {tileCapturePath = path;};
+    void setBBRPath(string path) {BBRPath = path;};
+    void setSaveStatePath(string path) {saveStatePath = path;};
 
-	// Joystick device setter :
-	void setJoystickDevice(string device) { joystickDevice = device; }
+    // Joystick device setter :
+    void setJoystickDevice(string device) { joystickDevice = device; }
 
-	// Button getters.
-	int getPad(int padNumber, padInput i);
-	int getPause() {return pauseButton;}
-	int getStart() {return startButton;}
-	padKey getJoyButtonAssignation(int button);
+    // Button getters.
+    int getPad(int padNumber, padInput i);
+    int getPause() {return pauseButton;}
+    int getStart() {return startButton;}
+    padKey getJoyButtonAssignation(int button);
 
-	// Path getters.
-	string getScreenshotPath() {return screenshotPath;}
-	string getSoundCapturePath() {return soundCapturePath;}
-	string getTileCapturePath() {return tileCapturePath;}
-	string getBBRPath() {return BBRPath;}
-	string getSaveStatePath() {return saveStatePath;}
+    // Path getters.
+    string getScreenshotPath() {return screenshotPath;}
+    string getSoundCapturePath() {return soundCapturePath;}
+    string getTileCapturePath() {return tileCapturePath;}
+    string getBBRPath() {return BBRPath;}
+    string getSaveStatePath() {return saveStatePath;}
 
-	// Joystick device getter :
-	string getJoystickDevice() { return joystickDevice; }
+    // Joystick device getter :
+    string getJoystickDevice() { return joystickDevice; }
 
 protected:
 
 private:
-	string homeDir;
+    string homeDir;
 
-	// Osmose configuration data.
-	string saveStatePath;
-	string soundCapturePath;
-	string tileCapturePath;
-	string BBRPath;
-	string screenshotPath;
-	int pad1[6];			// Keyboard Mapping for P1 pad keys: UP:DOW:LEF:RIG:A:B
-	int pad2[6];			// Keyboard Mapping for P2 pad keys: UP:DOW:LEF:RIG:A:B
-	int startButton; 		// Keyboard Mapping for Start
-	int pauseButton;		// Keyboard Mapping for Pause
-	padKey joystick0Button[MAX_JOYSTICK_BUTTON]; // Joystick button assignation.
+    // Osmose configuration data.
+    string saveStatePath;
+    string soundCapturePath;
+    string tileCapturePath;
+    string BBRPath;
+    string screenshotPath;
+    int pad1[6];        // Keyboard Mapping for P1 pad keys: UP:DOW:LEF:RIG:A:B
+    int pad2[6];        // Keyboard Mapping for P2 pad keys: UP:DOW:LEF:RIG:A:B
+    int startButton;    // Keyboard Mapping for Start
+    int pauseButton;    // Keyboard Mapping for Pause
+    padKey joystick0Button[MAX_JOYSTICK_BUTTON]; // Joystick button assignation.
 
-	void parseLine(string &l);
-	void updateItem(string &identifier, string &value);
-	string joystickDevice;
+    void parseLine(string &l);
+    void updateItem(string &identifier, string &value);
+    string joystickDevice;
 };
 
-#endif	// OSMOSECONFIGURATIONFILE_H
+#endif // OSMOSECONFIGURATIONFILE_H

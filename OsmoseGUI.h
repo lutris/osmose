@@ -53,88 +53,88 @@
 #include "QLogWindow.h"
 #include "Joystick.h"
 
-#define MENU_HEIGHT	20
+#define MENU_HEIGHT 20
 
 class OsmoseGUI : public QMainWindow, JoystickListener
 {
-	Q_OBJECT;
+    Q_OBJECT;
 
 public:
-	OsmoseGUI(QWidget * parent = 0, Qt::WindowFlags flags = 0);
-	~OsmoseGUI();
+    OsmoseGUI(QWidget * parent = 0, Qt::WindowFlags flags = 0);
+    ~OsmoseGUI();
 
-	/* JoystickListener interface */
-	void buttonChanged(unsigned int button, bool pressed); /* True when pressed */
+    /* JoystickListener interface */
+    void buttonChanged(unsigned int button, bool pressed); // True when pressed
     void xAxisChanged(int value);
-	void yAxisChanged(int value);
-	void joystickError();
-	void loadTheROM(QString name);
+    void yAxisChanged(int value);
+    void joystickError();
+    void loadTheROM(QString name);
     void toggleFullscreen();
 
 protected:
-	void closeEvent(QCloseEvent * );
-	void dropEvent(QDropEvent *e);
-	void dragEnterEvent(QDragEnterEvent *event);
+    void closeEvent(QCloseEvent * );
+    void dropEvent(QDropEvent *e);
+    void dragEnterEvent(QDragEnterEvent *event);
 
 protected slots:
-	void sizeX1();
-	void sizeX2();
-	void sizeX3();
-	void sizeX4();
-	void sizeX5();
+    void sizeX1();
+    void sizeX2();
+    void sizeX3();
+    void sizeX4();
+    void sizeX5();
     void fullscreen();
-	void loadROM();
-	void pauseResumeEmulation();
-	void resetEmulation();
-	void keyPressEvent(QKeyEvent *event);
-	void keyReleaseEvent(QKeyEvent *event);
-	void configure();
-	void saveScreenshot();
-	void saveSound();
-	void saveState();
-	void saveVDPGFX();
-	void loadState();
-	void selectSlot0();
-	void selectSlot1();
-	void selectSlot2();
-	void selectSlot3();
-	void selectSlot4();
-	void exitApplication();
+    void loadROM();
+    void pauseResumeEmulation();
+    void resetEmulation();
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
+    void configure();
+    void saveScreenshot();
+    void saveSound();
+    void saveState();
+    void saveVDPGFX();
+    void loadState();
+    void selectSlot0();
+    void selectSlot1();
+    void selectSlot2();
+    void selectSlot3();
+    void selectSlot4();
+    void exitApplication();
 
-	void setDefaultMapper();
-	void setCodeMasterMapper();
-	void setKoreanMapper();
-	void setNTSCTiming();
-	void setPALTiming();
-	void setJapanese();
-	void setEuropean();
-	void toggleIrqHack();
-	void showLogWindow();
+    void setDefaultMapper();
+    void setCodeMasterMapper();
+    void setKoreanMapper();
+    void setNTSCTiming();
+    void setPALTiming();
+    void setJapanese();
+    void setEuropean();
+    void toggleIrqHack();
+    void showLogWindow();
 
 private:
-	bool paused;
-	QGLImage *glImage;
-	EmulationThread *emuThread;
-	char *rom_name;
-	QAction *pauseResume;
-	QAction *saveSoundQAction;
-	QAction *ntscQAction;
-	QAction *palQAction;
-	QAction *japaneseQAction;
-	QAction *europeanQAction;
-	QAction *codemasterMapperQAction;
-	QAction *segaMapperQAction;
-	QAction *koreanMapperQAction;
-	QAction *irqHackQAction;
+    bool paused;
+    QGLImage *glImage;
+    EmulationThread *emuThread;
+    char *rom_name;
+    QAction *pauseResume;
+    QAction *saveSoundQAction;
+    QAction *ntscQAction;
+    QAction *palQAction;
+    QAction *japaneseQAction;
+    QAction *europeanQAction;
+    QAction *codemasterMapperQAction;
+    QAction *segaMapperQAction;
+    QAction *koreanMapperQAction;
+    QAction *irqHackQAction;
 
-	OsmoseConfigurationFile *configuration;
-	OsmoseCore *osmoseCore;
-	int saveStateSlot;
-	pthread_mutex_t osmose_core_mutex;	// OsmoseCore access mutex.
+    OsmoseConfigurationFile *configuration;
+    OsmoseCore *osmoseCore;
+    int saveStateSlot;
+    pthread_mutex_t osmose_core_mutex; // OsmoseCore access mutex.
 
-	void updateMachineMenu();
-	bool isFullscreen;
-	Joystick *js0;
+    void updateMachineMenu();
+    bool isFullscreen;
+    Joystick *js0;
 };
 
-#endif	// OsmoseGUI
+#endif // OsmoseGUI

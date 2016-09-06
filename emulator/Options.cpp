@@ -37,17 +37,17 @@
 
 // Global emulator options instance.
 Options opt;
-EmulatorOptions      emu_opt;
+EmulatorOptions emu_opt;
 
 void Options::reset()
 {
     // Setup defaut machine options.
-    WorldVersion = true;		            // Not japanese sms, Export machine.
-    MachineType = SMS;                     	// Default Machine Type.
-    inputType = DEFAULT_PAD;	            // Default PAD instead SPORT PAD.
-    acceleration = DEFAULT_ACCELERATION;	// Default Paddle acceleration.
-    ntsc = true;		                	// Default NTSC video timing.
-    mapperType = SegaMapper;		        // No codemaster mapper.
+    WorldVersion = true;                 // Not japanese sms, Export machine.
+    MachineType = SMS;                   // Default Machine Type.
+    inputType = DEFAULT_PAD;             // Default PAD instead SPORT PAD.
+    acceleration = DEFAULT_ACCELERATION; // Default Paddle acceleration.
+    ntsc = true;                         // Default NTSC video timing.
+    mapperType = SegaMapper;             // No codemaster mapper.
     irq_hack = false;
     videoFilter = NEAREST;
 }
@@ -60,6 +60,6 @@ void EmulatorOptions::reset()
     bright_palette    = true;
     default_config    = true;
     display_fps       = false;
-    tracejoy		  = false;
+    tracejoy          = false;
     memset(ini_file,0,512);
 }

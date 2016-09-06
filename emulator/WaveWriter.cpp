@@ -35,9 +35,9 @@
 #include <cstdlib>
 
 /*----------------------------------------------------------------------*/
-/* Constructor: Initialise structures ChunkFormat, Data Format, and	*/
-/* allocate buffer of WAVE_BUFFER_SIZE for file writing. When done	*/
-/* it open a file for writing and let it open, then write headers.	*/
+/* Constructor: Initialise structures ChunkFormat, Data Format, and     */
+/* allocate buffer of WAVE_BUFFER_SIZE for file writing. When done      */
+/* it open a file for writing and let it open, then write headers.      */
 /*----------------------------------------------------------------------*/
 WaveWriter::WaveWriter(const char *filename)
 {
@@ -50,12 +50,12 @@ WaveWriter::WaveWriter(const char *filename)
     format.chunkID[1] = 'm';
     format.chunkID[2] = 't';
     format.chunkID[3] = ' ';
-    format.chunkSize = 16;		// 16s bytes without chnkID/chnkSize.
-    format.wFormatTag = 1;		// No compression.
-    format.wChannels = 1;        	// Monophonic sound.
-    format.dwSamplesPerSec = 22050;	// Sample rate.
-    format.dwAvgBytesPerSec= 44100;    	// dwSamplesPerSec * wBlockAlign.
-    format.wBlockAlign = 2;		// wChannels*(wBitPerSample/8).
+    format.chunkSize = 16; // 16s bytes without chnkID/chnkSize.
+    format.wFormatTag = 1; // No compression.
+    format.wChannels = 1; // Monophonic sound.
+    format.dwSamplesPerSec = 22050; // Sample rate.
+    format.dwAvgBytesPerSec= 44100; // dwSamplesPerSec * wBlockAlign.
+    format.wBlockAlign = 2; // wChannels*(wBitPerSample/8).
     format.wBitsPerSample = 16;
 
     // Initialise our FormatChunk structure.
@@ -96,7 +96,7 @@ WaveWriter::WaveWriter(const char *filename)
 }
 
 /*----------------------------------------------------------------------*/
-/* Destructor.								*/
+/* Destructor.                                                          */
 /*----------------------------------------------------------------------*/
 WaveWriter::~WaveWriter()
 {
@@ -108,7 +108,7 @@ WaveWriter::~WaveWriter()
 
 /*----------------------------------------------------------------------*/
 /* This method will add data into wave sound buffer. If buffer is full  */
-/* it's written to the file.						*/
+/* it's written to the file.                                            */
 /*----------------------------------------------------------------------*/
 void WaveWriter::writeData(short d)
 {
@@ -128,7 +128,7 @@ void WaveWriter::writeData(short d)
 
 /*----------------------------------------------------------------------*/
 /* This method write end of buffer (if any) and close the wave file.    */
-/* Then it updates file headers to correct chunkSize value.		*/
+/* Then it updates file headers to correct chunkSize value.             */
 /*----------------------------------------------------------------------*/
 void WaveWriter::close()
 {
@@ -149,11 +149,3 @@ void WaveWriter::close()
     waveFile.write((char *)&data, sizeof(DataChunk) );
     waveFile.close();
 }
-
-
-
-
-
-
-
-

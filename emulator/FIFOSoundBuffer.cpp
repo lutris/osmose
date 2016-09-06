@@ -47,11 +47,11 @@ bool FIFOSoundBuffer::write(s16 value)
 {
     if ( spaceAvailable() )
     {
-        /* We have free space in our buffer. */
+        // We have free space in our buffer.
         data_[ generated_index_++ ] = value;
         total_generated_++;
 
-        /* Do we reach the end of the buffer ?*/
+        // Do we reach the end of the buffer?
         if (generated_index_ == data_size_)
         {
             generated_index_ = 0;
@@ -61,7 +61,7 @@ bool FIFOSoundBuffer::write(s16 value)
     else
     {
         //printf("BF\n");
-        /* The buffer is full, cancel write operation. */
+        // The buffer is full, cancel write operation.
         return false;
     }
 }
@@ -96,7 +96,7 @@ s16 FIFOSoundBuffer::read()
 void FIFOSoundBuffer::read(s16 *dst, u32 nbr)
 {
 //cout << "Asked:" << nbr << " Avail: " << numberDataAvailable() << endl;
-    /* We have enough sample, copy them ! */
+    // We have enough sample, copy them!
     for (u32 i = 0; i < nbr; i++)
     {
         dst[i] = read();
