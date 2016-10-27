@@ -34,8 +34,8 @@
 #define VERSION_H
 
 // These four definitions should be coherent!
-#define __OSMOSE_VERSION__ "Osmose 0.9.97"
+#define __OSMOSE_VERSION__ "Osmose 0.9.98"
 #define MAJOR  0
 #define MIDDLE 9
-#define MINOR  97
+#define MINOR  98
 #endif
