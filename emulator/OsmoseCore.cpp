@@ -111,7 +111,7 @@ OsmoseCore::OsmoseCore(const char *rom_f,  unsigned int *output, OsmoseConfigura
     {
         try
         {
-            sndThread = new SoundThread("plughw:0,0", p->getFIFOSoundBuffer());
+            sndThread = new SoundThread("default", p->getFIFOSoundBuffer());
             sndThread->start();  // Start thread, not playing!
             string msg = "Creating SoundThread";
             QLogWindow::getInstance()->appendLog(msg);
