@@ -146,11 +146,9 @@ int SoundThread::playback_callback (snd_pcm_sframes_t nframes)
     int err;
 
     //printf ("playback callback called with %d frames\n", (int)nframes);
-    void *channelsbuffer[1];
-    channelsbuffer[0] = &samplebuffer;
     sndFIFO->read(samplebuffer, nframes);
 
-    if ((err = snd_pcm_writen(playback_handle, (void **)channelsbuffer, nframes)) < 0)
+    if ((err = snd_pcm_writei(playback_handle, samplebuffer, nframes)) < 0)
     {
         fprintf (stderr, "write failed (%s)\n", snd_strerror (err));
     }
@@ -222,14 +220,6 @@ void SoundThread::initAlsa()
     if ((err = snd_pcm_hw_params_any (playback_handle, hw_params)) < 0)
     {
         oss << "cannot initialize hardware parameter structure: " << snd_strerror (err) << endl;
-        throw oss.str();
-    }
-
-
-    // Set Sample are NON Interleaved (mono!)
-    if ((err = snd_pcm_hw_params_set_access (playback_handle, hw_params, SND_PCM_ACCESS_RW_NONINTERLEAVED)) < 0)
-    {
-        oss << "cannot set access type: " << snd_strerror (err) << endl;
         throw oss.str();
     }
 
